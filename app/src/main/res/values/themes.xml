@@ -1,9 +1,12 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.ITindr" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+<resources>
+    <style name="Theme.ITindr" parent="Theme.Material3.Dark.NoActionBar">
     </style>
 
-    <style name="Theme.ITindr" parent="Base.Theme.ITindr" />
+    <style name="Theme.ITindr.Splash" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">#8501ff</item>
+
+        <item name="windowSplashScreenAnimatedIcon">@drawable/icon_splash_adaptive</item>
+
+        <item name="postSplashScreenTheme">@style/Theme.ITindr</item>
+    </style>
 </resources>
