@@ -12,4 +12,24 @@
     <string name="your_password">Ваш пароль</string>
     <string name="invent_password">Придумайте пароль</string>
     <string name="repeat_password">Повторите пароль</string>
+    <string name="about_yourself">О себе</string>
+    <string name="choose_photo">Выбрать фото</string>
+    <string name="name">Имя</string>
+    <string name="your_name">Ваше имя</string>
+    <string name="describe_yourself">Опишите себя</string>
+    <string name="specify_interests">Укажи интересы</string>
+    <string name="python">Python</string>
+    <string name="django">Django</string>
+    <string name="rest">REST</string>
+    <string name="swift">Swift</string>
+    <string name="obj_c">Obj-C</string>
+    <string name="react_js">React JS</string>
+    <string name="kotlin">Kotlin</string>
+    <string name="git">Git</string>
+    <string name="unity">Unity</string>
+    <string name="net">.NET</string>
+    <string name="sql">SQL</string>
+    <string name="clean_architecture">Clean Architecture</string>
+    <string name="uml">UML</string>
+    <string name="save">Сохранить</string>
 </resources>

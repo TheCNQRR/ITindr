@@ -1,0 +1,414 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <ImageView
+        android:id="@+id/background"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:contentDescription="@null"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/gradient_background" />
+
+    <TextView
+        android:id="@+id/save"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="48dp"
+        android:background="@drawable/white_shape_background"
+        android:clickable="true"
+        android:fontFamily="@font/inter_regular"
+        android:gravity="center"
+        android:text="@string/save"
+        android:textColor="@color/black"
+        android:textFontWeight="700"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        android:scrollbars="none"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/save"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="24dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="24dp">
+
+            <TextView
+                android:id="@+id/about_yourself_header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/about_yourself"
+                android:focusable="false"
+                android:textSize="40sp"
+                android:textColor="@color/white"
+                android:fontFamily="@font/inter_regular"
+                android:textFontWeight="700"
+                android:gravity="center"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="60dp"
+                android:layout_marginStart="24dp"/>
+
+            <ImageView
+                android:id="@+id/profile_picture"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/white_transparent_shape_background_24r"
+                android:clickable="true"
+                android:padding="28dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/profile_photo"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/about_yourself_header" />
+
+            <TextView
+                android:id="@+id/choose_photo"
+                android:layout_width="151dp"
+                android:layout_height="32dp"
+                android:background="@drawable/white_transparent_shape_background_8r"
+                android:clickable="true"
+                android:paddingStart="36dp"
+                android:paddingEnd="0dp"
+                android:gravity="center_vertical"
+                android:text="@string/choose_photo"
+                android:textColor="@color/white"
+                android:textFontWeight="600"
+                android:fontFamily="@font/inter_regular"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="48dp"
+                app:layout_constraintStart_toEndOf="@+id/profile_picture"
+                app:layout_constraintTop_toBottomOf="@+id/about_yourself_header" />
+
+            <ImageView
+                android:id="@+id/gallery_picture"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:clickable="true"
+                android:scaleType="centerCrop"
+                android:layout_marginStart="12dp"
+                android:src="@drawable/gallery_picture"
+                app:layout_constraintBottom_toBottomOf="@+id/choose_photo"
+                app:layout_constraintStart_toStartOf="@+id/choose_photo"
+                app:layout_constraintTop_toTopOf="@+id/choose_photo" />
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:focusable="false"
+                android:fontFamily="@font/inter_regular"
+                android:gravity="center"
+                android:text="@string/name"
+                android:textColor="@color/white"
+                android:textFontWeight="700"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/profile_picture" />
+
+            <EditText
+                android:id="@+id/your_name"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:autofillHints="emailAddress"
+                android:background="@drawable/white_transparent_shape_background_8r"
+                android:fontFamily="@font/inter_regular"
+                android:hint="@string/your_name"
+                android:inputType="text"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white_light_transparent"
+                android:textSize="16sp"
+                android:textFontWeight="400"
+                android:paddingTop="14dp"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="14dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/name"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="24dp"
+                android:layout_marginRight="24dp"
+                tools:ignore="TextContrastCheck,VisualLintTextFieldSize"/>
+
+            <TextView
+                android:id="@+id/about_yourself_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/about_yourself"
+                android:focusable="false"
+                android:textSize="16sp"
+                android:textColor="@color/white"
+                android:fontFamily="@font/inter_regular"
+                android:textFontWeight="700"
+                android:gravity="center"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/your_name"
+                android:layout_marginTop="24dp"
+                android:layout_marginStart="24dp"/>
+
+            <EditText
+                android:id="@+id/about_yourself_field"
+                android:layout_width="0dp"
+                android:layout_height="128dp"
+                android:autofillHints="@null"
+                android:background="@drawable/white_transparent_shape_background_8r"
+                android:fontFamily="@font/inter_regular"
+                android:hint="@string/describe_yourself"
+                android:inputType="textPassword"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white_light_transparent"
+                android:textSize="16sp"
+                android:textFontWeight="400"
+                android:paddingTop="14dp"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="94dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/about_yourself_text"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="24dp"
+                android:layout_marginRight="24dp"
+                tools:ignore="TextContrastCheck,VisualLintTextFieldSize"/>
+
+            <TextView
+                android:id="@+id/specify_interests"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:focusable="false"
+                android:fontFamily="@font/inter_regular"
+                android:gravity="center"
+                android:text="@string/specify_interests"
+                android:textColor="@color/white"
+                android:textFontWeight="700"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/about_yourself_field" />
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/chipGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                app:chipSpacing="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/specify_interests">
+
+                <TextView
+                    android:id="@+id/python"
+                    android:layout_width="73dp"
+                    android:layout_height="24dp"
+                    android:background="@drawable/selector_interest_background"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:fontFamily="@font/inter_regular"
+                    android:gravity="center"
+                    android:text="@string/python"
+                    android:textColor="@drawable/selector_interest_text"
+                    android:textFontWeight="700"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/django"
+                    android:layout_width="73dp"
+                    android:layout_height="24dp"
+                    android:background="@drawable/selector_interest_background"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:fontFamily="@font/inter_regular"
+                    android:gravity="center"
+                    android:text="@string/django"
+                    android:textColor="@drawable/selector_interest_text"
+                    android:textFontWeight="700"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/rest"
+                    android:layout_width="60dp"
+                    android:layout_height="24dp"
+                    android:background="@drawable/selector_interest_background"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:fontFamily="@font/inter_regular"
+                    android:gravity="center"
+                    android:text="@string/rest"
+                    android:textColor="@drawable/selector_interest_text"
+                    android:textFontWeight="700"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/swift"
+                    android:layout_width="60dp"
+                    android:layout_height="24dp"
+                    android:background="@drawable/selector_interest_background"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:fontFamily="@font/inter_regular"
+                    android:gravity="center"
+                    android:text="@string/swift"
+                    android:textColor="@drawable/selector_interest_text"
+                    android:textFontWeight="700"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/obj_c"
+                    android:layout_width="64dp"
+                    android:layout_height="24dp"
+                    android:background="@drawable/selector_interest_background"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:fontFamily="@font/inter_regular"
+                    android:gravity="center"
+                    android:text="@string/obj_c"
+                    android:textColor="@drawable/selector_interest_text"
+                    android:textFontWeight="700"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/react_js"
+                    android:layout_width="84dp"
+                    android:layout_height="24dp"
+                    android:background="@drawable/selector_interest_background"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:fontFamily="@font/inter_regular"
+                    android:gravity="center"
+                    android:text="@string/react_js"
+                    android:textColor="@drawable/selector_interest_text"
+                    android:textFontWeight="700"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/kotlin"
+                    android:layout_width="64dp"
+                    android:layout_height="24dp"
+                    android:background="@drawable/selector_interest_background"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:fontFamily="@font/inter_regular"
+                    android:gravity="center"
+                    android:text="@string/kotlin"
+                    android:textColor="@drawable/selector_interest_text"
+                    android:textFontWeight="700"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/git"
+                    android:layout_width="45dp"
+                    android:layout_height="24dp"
+                    android:background="@drawable/selector_interest_background"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:fontFamily="@font/inter_regular"
+                    android:gravity="center"
+                    android:text="@string/git"
+                    android:textColor="@drawable/selector_interest_text"
+                    android:textFontWeight="700"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/unity"
+                    android:layout_width="61dp"
+                    android:layout_height="24dp"
+                    android:background="@drawable/selector_interest_background"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:fontFamily="@font/inter_regular"
+                    android:gravity="center"
+                    android:text="@string/unity"
+                    android:textColor="@drawable/selector_interest_text"
+                    android:textFontWeight="700"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/net"
+                    android:layout_width="57dp"
+                    android:layout_height="24dp"
+                    android:background="@drawable/selector_interest_background"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:fontFamily="@font/inter_regular"
+                    android:gravity="center"
+                    android:text="@string/net"
+                    android:textColor="@drawable/selector_interest_text"
+                    android:textFontWeight="700"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/sql"
+                    android:layout_width="53dp"
+                    android:layout_height="24dp"
+                    android:background="@drawable/selector_interest_background"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:fontFamily="@font/inter_regular"
+                    android:gravity="center"
+                    android:text="@string/sql"
+                    android:textColor="@drawable/selector_interest_text"
+                    android:textFontWeight="700"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/clean_architecture"
+                    android:layout_width="154dp"
+                    android:layout_height="24dp"
+                    android:background="@drawable/selector_interest_background"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:fontFamily="@font/inter_regular"
+                    android:gravity="center"
+                    android:text="@string/clean_architecture"
+                    android:textColor="@drawable/selector_interest_text"
+                    android:textFontWeight="700"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/uml"
+                    android:layout_width="55dp"
+                    android:layout_height="24dp"
+                    android:background="@drawable/selector_interest_background"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:fontFamily="@font/inter_regular"
+                    android:gravity="center"
+                    android:text="@string/uml"
+                    android:textColor="@drawable/selector_interest_text"
+                    android:textFontWeight="700"
+                    android:textSize="14sp" />
+
+            </com.google.android.material.chip.ChipGroup>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
