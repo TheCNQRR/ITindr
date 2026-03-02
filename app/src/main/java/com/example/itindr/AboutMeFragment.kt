@@ -14,6 +14,8 @@ import androidx.fragment.app.Fragment
 import com.example.itindr.databinding.FragmentAboutMeBinding
 import com.example.itindr.util.Effects
 
+private const val ZERO = 0
+
 class AboutMeFragment : Fragment() {
     private var _binding: FragmentAboutMeBinding? = null
     private val binding get() = _binding!!
@@ -50,7 +52,7 @@ class AboutMeFragment : Fragment() {
     }
 
     private fun setupInterestsClickListeners() {
-        for (i in 0 until binding.chipGroup.childCount) {
+        for (i in ZERO until binding.chipGroup.childCount) {
             binding.chipGroup.getChildAt(i).setOnClickListener {
                 it.isSelected = !it.isSelected
             }
