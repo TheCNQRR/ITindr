@@ -30,11 +30,15 @@ class SignUpFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.signUpButton.setOnClickListener {
-            findNavController().navigate(R.id.action_signUpFragment_to_aboutMeFragment)
+            buttonEffect(it) {
+                findNavController().navigate(R.id.action_signUpFragment_to_aboutMeFragment)
+            }
         }
 
         binding.back.setOnClickListener {
-            findNavController().navigateUp()
+            buttonEffect(it) {
+                findNavController().navigateUp()
+            }
         }
 
         setupTouchListener()
@@ -50,6 +54,35 @@ class SignUpFragment : Fragment() {
                 }
             }
             false
+        }
+    }
+
+    private fun buttonEffect(view: View, onComplete: () -> Unit) {
+        view.apply {
+            animate().cancel()
+            animate().setStartDelay(0)
+
+            isClickable = false
+
+            animate()
+                .scaleX(0.9f)
+                .scaleY(0.9f)
+                .alpha(0.5f)
+                .setDuration(300)
+                .withEndAction {
+                    animate()
+                        .scaleX(1f)
+                        .scaleY(1f)
+                        .alpha(1f)
+                        .setDuration(400)
+                        .withEndAction {
+                            isClickable = true
+                        }
+                        .start()
+
+                    onComplete()
+                }
+                .start()
         }
     }
 

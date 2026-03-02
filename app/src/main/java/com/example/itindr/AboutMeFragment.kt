@@ -43,8 +43,10 @@ class AboutMeFragment : Fragment() {
         binding.aboutYourselfField.movementMethod = android.text.method.ScrollingMovementMethod.getInstance()
 
         binding.save.setOnClickListener {
-            startActivity(Intent(requireContext(), MainScreenActivity::class.java))
-            requireActivity().finish()
+            buttonEffect(it) {
+                startActivity(Intent(requireContext(), MainScreenActivity::class.java))
+                requireActivity().finish()
+            }
         }
 
         setupInterestsClickListeners()
@@ -69,6 +71,35 @@ class AboutMeFragment : Fragment() {
                 }
             }
             false
+        }
+    }
+
+    private fun buttonEffect(view: View, onComplete: () -> Unit) {
+        view.apply {
+            animate().cancel()
+            animate().setStartDelay(0)
+
+            isClickable = false
+
+            animate()
+                .scaleX(0.9f)
+                .scaleY(0.9f)
+                .alpha(0.5f)
+                .setDuration(300)
+                .withEndAction {
+                    animate()
+                        .scaleX(1f)
+                        .scaleY(1f)
+                        .alpha(1f)
+                        .setDuration(400)
+                        .withEndAction {
+                            isClickable = true
+                        }
+                        .start()
+
+                    onComplete()
+                }
+                .start()
         }
     }
 

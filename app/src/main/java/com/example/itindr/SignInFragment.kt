@@ -31,12 +31,16 @@ class SignInFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.signInButton.setOnClickListener {
-            startActivity(Intent(requireContext(), MainScreenActivity::class.java))
-            requireActivity().finish()
+            buttonEffect(it) {
+                startActivity(Intent(requireContext(), MainScreenActivity::class.java))
+                requireActivity().finish()
+            }
         }
 
         binding.back.setOnClickListener {
-            findNavController().navigateUp()
+            buttonEffect(it) {
+                findNavController().navigateUp()
+            }
         }
 
         setupTouchListener()
@@ -52,6 +56,35 @@ class SignInFragment : Fragment() {
                 }
             }
             false
+        }
+    }
+
+    private fun buttonEffect(view: View, onComplete: () -> Unit) {
+        view.apply {
+            animate().cancel()
+            animate().setStartDelay(0)
+
+            isClickable = false
+
+            animate()
+                .scaleX(0.9f)
+                .scaleY(0.9f)
+                .alpha(0.5f)
+                .setDuration(300)
+                .withEndAction {
+                    animate()
+                        .scaleX(1f)
+                        .scaleY(1f)
+                        .alpha(1f)
+                        .setDuration(400)
+                        .withEndAction {
+                            isClickable = true
+                        }
+                        .start()
+
+                    onComplete()
+                }
+                .start()
         }
     }
 
