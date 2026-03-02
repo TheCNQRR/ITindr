@@ -58,7 +58,7 @@
         android:autofillHints="emailAddress"
         android:background="@drawable/white_transparent_shape_background_8r"
         android:fontFamily="@font/inter_regular"
-        android:hint="@string/your_password"
+        android:hint="@string/your_email"
         android:inputType="textEmailAddress"
         android:textColor="@color/white"
         android:textColorHint="@color/white_light_transparent"
@@ -159,7 +159,7 @@
         tools:ignore="TextContrastCheck,VisualLintTextFieldSize"/>
 
     <TextView
-        android:id="@+id/sign_in_button"
+        android:id="@+id/sign_un_button"
         android:layout_width="0dp"
         android:layout_height="56dp"
         android:layout_marginStart="24dp"

@@ -12,6 +12,7 @@ constraintlayout = "2.2.1"
 coreSplashscreen = "1.0.0"
 detekt = "1.23.8"
 detektRules = "1.4.0"
+navigation = "2.7.7"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -26,6 +27,7 @@ androidx-core-splashscreen = { group = "androidx.core", name = "core-splashscree
 detekt-formatting = { group = "io.gitlab.arturbosch.detekt", name = "detekt-formatting", version.ref = "detekt" }
 detekt-cli = { group = "io.gitlab.arturbosch.detekt", name = "detekt-cli", version.ref = "detekt" }
 detekt-rules-compose = { group = "ru.kode", name = "detekt-rules-compose", version.ref = "detektRules" }
+navigation-fragment = { group = "androidx.navigation", name = "navigation-fragment-ktx", version.ref = "navigation" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
