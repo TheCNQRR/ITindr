@@ -1,10 +1,15 @@
 package com.example.itindr
 
+import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import androidx.fragment.app.Fragment
 import com.example.itindr.databinding.FragmentAboutMeBinding
 
@@ -21,8 +26,18 @@ class AboutMeFragment : Fragment() {
         return binding.root
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.aboutYourselfField.setOnTouchListener { v, event ->
+            if (event.action == MotionEvent.ACTION_DOWN) {
+                v.parent.requestDisallowInterceptTouchEvent(true)
+            }
+            false
+        }
+
+        binding.aboutYourselfField.movementMethod = android.text.method.ScrollingMovementMethod.getInstance()
 
         binding.save.setOnClickListener {
             startActivity(Intent(requireContext(), MainScreenActivity::class.java))
@@ -30,21 +45,40 @@ class AboutMeFragment : Fragment() {
         }
 
         setupInterestsClickListeners()
+        setupTouchListener()
     }
 
     private fun setupInterestsClickListeners() {
-        val interests = listOf(
-            binding.python, binding.django, binding.rest, binding.swift,
-            binding.objC, binding.reactJs, binding.kotlin, binding.git,
-            binding.unity, binding.net, binding.sql, binding.cleanArchitecture,
-            binding.uml
-        )
-
-        interests.forEach { textView ->
-            textView.setOnClickListener {
+        for (i in 0 until binding.chipGroup.childCount) {
+            binding.chipGroup.getChildAt(i).setOnClickListener {
                 it.isSelected = !it.isSelected
             }
         }
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    private fun setupTouchListener() {
+        binding.scrollView.setOnTouchListener { _, event ->
+            if (event.action == MotionEvent.ACTION_DOWN) {
+                val currentFocus = requireActivity().currentFocus
+                if (currentFocus is EditText) {
+                    hideKeyboardAndClearFocus(currentFocus)
+                }
+            }
+            false
+        }
+    }
+
+    private fun hideKeyboardAndClearFocus(currentFocus: EditText) {
+        val imm = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(currentFocus.windowToken, 0)
+
+        currentFocus.clearFocus()
+
+        binding.scrollView.requestFocus()
+
+        binding.yourName.clearFocus()
+        binding.aboutYourselfField.clearFocus()
     }
 
     override fun onDestroyView() {

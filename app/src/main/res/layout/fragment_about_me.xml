@@ -39,6 +39,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <ScrollView
+        android:id="@+id/scroll_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:fillViewport="true"
@@ -47,7 +48,10 @@
         app:layout_constraintBottom_toTopOf="@+id/save"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="24dp">
+        android:layout_marginBottom="24dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -179,15 +183,19 @@
                 android:background="@drawable/white_transparent_shape_background_8r"
                 android:fontFamily="@font/inter_regular"
                 android:hint="@string/describe_yourself"
-                android:inputType="text"
+                android:inputType="textMultiLine"
                 android:textColor="@color/white"
+                android:maxLines="5"
+                android:scrollbars="vertical"
+                android:overScrollMode="always"
+                android:scrollHorizontally="false"
                 android:textColorHint="@color/white_light_transparent"
                 android:textSize="16sp"
                 android:textFontWeight="400"
                 android:paddingTop="14dp"
                 android:paddingStart="16dp"
                 android:paddingEnd="16dp"
-                android:paddingBottom="94dp"
+                android:gravity="top"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/about_yourself_text"
