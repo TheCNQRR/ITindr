@@ -16,6 +16,7 @@
     <string name="choose_photo">Выбрать фото</string>
     <string name="change_photo">Изменить фото</string>
     <string name="delete_photo">Удалить фото</string>
+    <string name="your_photo">Ваше фото</string>
     <string name="name">Имя</string>
     <string name="your_name">Ваше имя</string>
     <string name="describe_yourself">Опишите себя</string>

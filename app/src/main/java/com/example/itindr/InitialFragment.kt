@@ -25,7 +25,7 @@ private const val DELAY_200 = 200L
 private const val DELAY_350 = 350L
 private const val DELAY_500 = 500L
 private const val DELAY_650 = 650L
-private const val DELAY_2000 = 2000L
+private const val DELAY_1000 = 1000L
 private const val ZERO_TRANSLATION_Y = 0f
 private const val TRANSLATION_Y = 200f
 private const val TRANSLATION_Y_NEGATIVE = -200f
@@ -116,7 +116,7 @@ class InitialFragment : Fragment() {
 
         heartAnimatorSet = AnimatorSet().apply {
             play(beat)
-            startDelay = DELAY_2000
+            startDelay = DELAY_1000
             addListener(object : AnimatorListenerAdapter() {
                 override fun onAnimationEnd(animation: Animator) {
                     if (_binding != null) start()
