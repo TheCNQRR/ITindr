@@ -13,6 +13,7 @@ import android.widget.EditText
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.itindr.databinding.FragmentSignInBinding
+import com.example.itindr.util.Effects
 
 class SignInFragment : Fragment() {
     private var _binding: FragmentSignInBinding? = null
@@ -30,17 +31,13 @@ class SignInFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.signInButton.setOnClickListener {
-            buttonEffect(it) {
-                startActivity(Intent(requireContext(), MainScreenActivity::class.java))
-                requireActivity().finish()
-            }
+        Effects.setPressEffect(binding.signInButton) {
+            startActivity(Intent(requireContext(), MainScreenActivity::class.java))
+            requireActivity().finish()
         }
 
-        binding.back.setOnClickListener {
-            buttonEffect(it) {
-                findNavController().navigateUp()
-            }
+        Effects.setPressEffect(binding.back) {
+            findNavController().navigateUp()
         }
 
         setupTouchListener()
@@ -56,35 +53,6 @@ class SignInFragment : Fragment() {
                 }
             }
             false
-        }
-    }
-
-    private fun buttonEffect(view: View, onComplete: () -> Unit) {
-        view.apply {
-            animate().cancel()
-            animate().setStartDelay(0)
-
-            isClickable = false
-
-            animate()
-                .scaleX(0.9f)
-                .scaleY(0.9f)
-                .alpha(0.5f)
-                .setDuration(300)
-                .withEndAction {
-                    animate()
-                        .scaleX(1f)
-                        .scaleY(1f)
-                        .alpha(1f)
-                        .setDuration(400)
-                        .withEndAction {
-                            isClickable = true
-                        }
-                        .start()
-
-                    onComplete()
-                }
-                .start()
         }
     }
 

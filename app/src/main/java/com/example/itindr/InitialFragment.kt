@@ -14,6 +14,7 @@ import android.view.animation.DecelerateInterpolator
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.itindr.databinding.FragmentInitialBinding
+import com.example.itindr.util.Effects
 
 class InitialFragment : Fragment() {
     private var _binding: FragmentInitialBinding? = null
@@ -22,7 +23,9 @@ class InitialFragment : Fragment() {
     private var heartAnimatorSet: AnimatorSet? = null
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View {
         _binding = FragmentInitialBinding.inflate(inflater, container, false)
         return binding.root
@@ -54,8 +57,12 @@ class InitialFragment : Fragment() {
         }
     }
 
-    private fun animateViewEntrance(view: View, delay: Long, isFromBottom: Boolean = false,
-                                    onEnd: (() -> Unit)? = null) {
+    private fun animateViewEntrance(
+        view: View,
+        delay: Long,
+        isFromBottom: Boolean = false,
+        onEnd: (() -> Unit)? = null
+    ) {
         view.alpha = 0f
         view.translationY = if (isFromBottom) 200f else -200f
         view.animate()
@@ -71,44 +78,12 @@ class InitialFragment : Fragment() {
     }
 
     private fun setListeners() {
-        binding.signUpButton.setOnClickListener {
-            buttonEffect(it) {
-                findNavController().navigate(R.id.action_initialFragment_to_signUpFragment)
-            }
+        Effects.setPressEffect(binding.signUpButton) {
+            findNavController().navigate(R.id.action_initialFragment_to_signUpFragment)
         }
-        binding.signInButton.setOnClickListener {
-            buttonEffect(it) {
-                findNavController().navigate(R.id.action_initialFragment_to_signInFragment)
-            }
-        }
-    }
 
-    private fun buttonEffect(view: View, onComplete: () -> Unit) {
-        view.apply {
-            animate().cancel()
-            animate().setStartDelay(0)
-
-            isClickable = false
-
-            animate()
-                .scaleX(0.9f)
-                .scaleY(0.9f)
-                .alpha(0.2f)
-                .setDuration(200)
-                .withEndAction {
-                    animate()
-                        .scaleX(1f)
-                        .scaleY(1f)
-                        .alpha(1f)
-                        .setDuration(200)
-                        .withEndAction {
-                            isClickable = true
-                        }
-                        .start()
-
-                    onComplete()
-                }
-                .start()
+        Effects.setPressEffect(binding.signInButton) {
+            findNavController().navigate(R.id.action_initialFragment_to_signInFragment)
         }
     }
 
