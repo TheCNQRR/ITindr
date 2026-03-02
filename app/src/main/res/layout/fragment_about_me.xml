@@ -93,6 +93,7 @@
                 android:layout_width="151dp"
                 android:layout_height="32dp"
                 android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
                 android:background="@drawable/white_transparent_shape_background_8r"
                 android:clickable="true"
                 android:fontFamily="@font/inter_regular"
@@ -102,7 +103,6 @@
                 android:text="@string/choose_photo"
                 android:textColor="@color/white"
                 android:textFontWeight="600"
-                app:layout_constraintBottom_toBottomOf="@+id/profile_picture"
                 app:layout_constraintStart_toEndOf="@+id/profile_picture"
                 app:layout_constraintTop_toTopOf="@+id/profile_picture" />
 
@@ -117,6 +117,38 @@
                 app:layout_constraintBottom_toBottomOf="@+id/choose_photo"
                 app:layout_constraintStart_toStartOf="@+id/choose_photo"
                 app:layout_constraintTop_toTopOf="@+id/choose_photo" />
+
+            <TextView
+                android:id="@+id/delete_photo"
+                android:layout_width="151dp"
+                android:layout_height="32dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="16dp"
+                android:background="@drawable/white_transparent_shape_background_8r"
+                android:clickable="true"
+                android:fontFamily="@font/inter_regular"
+                android:visibility="invisible"
+                android:gravity="center_vertical"
+                android:paddingStart="36dp"
+                android:paddingEnd="0dp"
+                android:text="@string/delete_photo"
+                android:textColor="@color/white"
+                android:textFontWeight="600"
+                app:layout_constraintStart_toEndOf="@+id/profile_picture"
+                app:layout_constraintTop_toBottomOf="@+id/choose_photo" />
+
+            <ImageView
+                android:id="@+id/trash_picture"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_marginStart="12dp"
+                android:clickable="true"
+                android:visibility="invisible"
+                android:scaleType="centerCrop"
+                android:src="@drawable/trashcan"
+                app:layout_constraintBottom_toBottomOf="@+id/delete_photo"
+                app:layout_constraintStart_toStartOf="@+id/delete_photo"
+                app:layout_constraintTop_toTopOf="@+id/delete_photo" />
 
             <TextView
                 android:id="@+id/name"
