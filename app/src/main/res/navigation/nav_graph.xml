@@ -10,10 +10,18 @@
         android:label="InitialFragment" >
         <action
             android:id="@+id/action_initialFragment_to_signUpFragment"
-            app:destination="@id/signUpFragment" />
+            app:destination="@id/signUpFragment"
+            app:enterAnim="@anim/slide_in_bottom"
+            app:exitAnim="@anim/slide_out_top"
+            app:popEnterAnim="@anim/slide_in_top"
+            app:popExitAnim="@anim/slide_out_bottom" />
         <action
             android:id="@+id/action_initialFragment_to_signInFragment"
-            app:destination="@id/signInFragment" />
+            app:destination="@id/signInFragment"
+            app:enterAnim="@anim/slide_in_bottom"
+            app:exitAnim="@anim/slide_out_top"
+            app:popEnterAnim="@anim/slide_in_top"
+            app:popExitAnim="@anim/slide_out_bottom" />
     </fragment>
 
     <fragment
@@ -22,7 +30,11 @@
         android:label="SignInFragment" >
         <action
             android:id="@+id/action_signInFragment_to_mainScreenActivity"
-            app:destination="@id/mainScreenActivity" />
+            app:destination="@id/mainScreenActivity"
+            app:enterAnim="@anim/slide_in_bottom"
+            app:exitAnim="@anim/slide_out_top"
+            app:popEnterAnim="@anim/slide_in_top"
+            app:popExitAnim="@anim/slide_out_bottom" />
     </fragment>
 
     <fragment
@@ -31,7 +43,11 @@
         android:label="SignUpFragment" >
         <action
             android:id="@+id/action_signUpFragment_to_aboutMeFragment"
-            app:destination="@id/aboutMeFragment" />
+            app:destination="@id/aboutMeFragment"
+            app:enterAnim="@anim/slide_in_bottom"
+            app:exitAnim="@anim/slide_out_top"
+            app:popEnterAnim="@anim/slide_in_top"
+            app:popExitAnim="@anim/slide_out_bottom" />
     </fragment>
 
     <fragment
@@ -40,7 +56,11 @@
         android:label="AboutMeFragment" >
         <action
             android:id="@+id/action_aboutMeFragment_to_mainScreenActivity"
-            app:destination="@id/mainScreenActivity" />
+            app:destination="@id/mainScreenActivity"
+            app:enterAnim="@anim/slide_in_bottom"
+            app:exitAnim="@anim/slide_out_top"
+            app:popEnterAnim="@anim/slide_in_top"
+            app:popExitAnim="@anim/slide_out_bottom" />
     </fragment>
 
     <activity

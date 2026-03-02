@@ -4,8 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
@@ -18,7 +16,6 @@ import com.example.itindr.databinding.FragmentAboutMeBinding
 class AboutMeFragment : Fragment() {
     private var _binding: FragmentAboutMeBinding? = null
     private val binding get() = _binding!!
-    private val MAX_CHARS = 500
 
     override fun onCreateView(
         inflater: LayoutInflater,

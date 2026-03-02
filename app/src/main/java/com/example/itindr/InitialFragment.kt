@@ -39,16 +39,23 @@ class InitialFragment : Fragment() {
     private fun setupEntranceAnimations() {
         binding.background.alpha = 0f
         binding.background.animate().alpha(1f).setDuration(800).start()
-        binding.heart.alpha = 0f
-        binding.heart.animate().alpha(1f).setStartDelay(800).setDuration(800).start()
 
         animateViewEntrance(binding.itindrImageText, 200)
         animateViewEntrance(binding.text, 350)
         animateViewEntrance(binding.signInButton, 500, isFromBottom = true)
-        animateViewEntrance(binding.signUpButton, 650, isFromBottom = true)
+        animateViewEntrance(binding.signUpButton, 650, isFromBottom = true) {
+            binding.root.isHapticFeedbackEnabled = true
+
+            @Suppress("DEPRECATION")
+            binding.root.performHapticFeedback(
+                android.view.HapticFeedbackConstants.VIRTUAL_KEY,
+                android.view.HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING
+            )
+        }
     }
 
-    private fun animateViewEntrance(view: View, delay: Long, isFromBottom: Boolean = false) {
+    private fun animateViewEntrance(view: View, delay: Long, isFromBottom: Boolean = false,
+                                    onEnd: (() -> Unit)? = null) {
         view.alpha = 0f
         view.translationY = if (isFromBottom) 200f else -200f
         view.animate()
@@ -57,6 +64,9 @@ class InitialFragment : Fragment() {
             .setStartDelay(delay)
             .setDuration(700)
             .setInterpolator(DecelerateInterpolator())
+            .withEndAction {
+                onEnd?.invoke()
+            }
             .start()
     }
 
@@ -83,14 +93,14 @@ class InitialFragment : Fragment() {
             animate()
                 .scaleX(0.9f)
                 .scaleY(0.9f)
-                .alpha(0.5f)
-                .setDuration(300)
+                .alpha(0.2f)
+                .setDuration(200)
                 .withEndAction {
                     animate()
                         .scaleX(1f)
                         .scaleY(1f)
                         .alpha(1f)
-                        .setDuration(400)
+                        .setDuration(200)
                         .withEndAction {
                             isClickable = true
                         }

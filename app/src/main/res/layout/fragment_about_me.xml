@@ -92,19 +92,19 @@
                 android:id="@+id/choose_photo"
                 android:layout_width="151dp"
                 android:layout_height="32dp"
+                android:layout_marginStart="16dp"
                 android:background="@drawable/white_transparent_shape_background_8r"
                 android:clickable="true"
+                android:fontFamily="@font/inter_regular"
+                android:gravity="center_vertical"
                 android:paddingStart="36dp"
                 android:paddingEnd="0dp"
-                android:gravity="center_vertical"
                 android:text="@string/choose_photo"
                 android:textColor="@color/white"
                 android:textFontWeight="600"
-                android:fontFamily="@font/inter_regular"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="48dp"
+                app:layout_constraintBottom_toBottomOf="@+id/profile_picture"
                 app:layout_constraintStart_toEndOf="@+id/profile_picture"
-                app:layout_constraintTop_toBottomOf="@+id/about_yourself_header" />
+                app:layout_constraintTop_toTopOf="@+id/profile_picture" />
 
             <ImageView
                 android:id="@+id/gallery_picture"
