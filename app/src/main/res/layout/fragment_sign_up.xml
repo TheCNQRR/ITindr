@@ -159,7 +159,7 @@
         tools:ignore="TextContrastCheck,VisualLintTextFieldSize"/>
 
     <TextView
-        android:id="@+id/sign_un_button"
+        android:id="@+id/sign_up_button"
         android:layout_width="0dp"
         android:layout_height="56dp"
         android:layout_marginStart="24dp"
@@ -189,7 +189,7 @@
         android:textColor="@color/white"
         android:textFontWeight="700"
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/background"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginBottom="48dp"
