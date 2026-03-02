@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/initialFragment">
+    app:startDestination="@id/fragmentSplash">
 
     <fragment
         android:id="@+id/initialFragment"
@@ -67,4 +67,14 @@
         android:id="@+id/mainScreenActivity"
         android:name="com.example.itindr.MainScreenActivity"
         android:label="MainScreenActivity" />
+    <fragment
+        android:id="@+id/fragmentSplash"
+        android:name="com.example.itindr.FragmentSplash"
+        android:label="FragmentSplash" >
+        <action
+            android:id="@+id/action_fragmentSplash_to_initialFragment"
+            app:destination="@id/initialFragment"
+            app:enterAnim="@anim/fade_in_scale"
+            app:exitAnim="@anim/fade_out_scale" />
+    </fragment>
 </navigation>
