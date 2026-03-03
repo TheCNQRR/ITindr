@@ -33,6 +33,8 @@ class FragmentSplash : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        findNavController().navigate(R.id.action_fragmentSplash_to_initialFragment)
+
         binding.name.alpha = ZERO_ALPHA
         binding.name.translationX = TRANSLATION_50
         binding.logo.scaleX = SCALE_SMALL
