@@ -21,6 +21,7 @@ private const val NORMAL_ALPHA = 1f
 private const val DURATION_500 = 500L
 private const val DURATION_700 = 700L
 private const val DURATION_800 = 800L
+private const val DURATION_1000 = 1000L
 private const val DELAY_200 = 200L
 private const val DELAY_350 = 350L
 private const val DELAY_500 = 500L
@@ -58,6 +59,8 @@ class InitialFragment : Fragment() {
     private fun setupEntranceAnimations() {
         binding.background.alpha = ZERO_ALPHA
         binding.background.animate().alpha(NORMAL_ALPHA).setDuration(DURATION_800).start()
+        binding.heart.alpha = ZERO_ALPHA
+        binding.heart.animate().alpha(NORMAL_ALPHA).setDuration(DURATION_1000).start()
 
         animateViewEntrance(binding.itindrImageText, DELAY_200)
         animateViewEntrance(binding.text, DELAY_350)
