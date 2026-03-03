@@ -92,6 +92,39 @@
                 app:layout_constraintTop_toBottomOf="@+id/about_yourself_header" />
 
             <TextView
+                android:id="@+id/change_photo"
+                android:layout_width="151dp"
+                android:layout_height="32dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/white_transparent_shape_background_8r"
+                android:clickable="true"
+                android:contentDescription="@string/change_photo"
+                android:visibility="invisible"
+                android:fontFamily="@font/inter_regular"
+                android:gravity="center_vertical"
+                android:paddingStart="36dp"
+                android:paddingEnd="0dp"
+                android:text="@string/change_photo"
+                android:textColor="@color/white"
+                android:textFontWeight="600"
+                app:layout_constraintBottom_toTopOf="@+id/choose_photo"
+                app:layout_constraintStart_toEndOf="@+id/profile_picture" />
+
+            <ImageView
+                android:id="@+id/gallery_picture_1"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_marginStart="12dp"
+                android:visibility="invisible"
+                android:clickable="true"
+                android:scaleType="centerCrop"
+                android:src="@drawable/gallery_picture"
+                app:layout_constraintBottom_toBottomOf="@+id/change_photo"
+                app:layout_constraintStart_toStartOf="@+id/change_photo"
+                app:layout_constraintTop_toTopOf="@+id/change_photo" />
+
+            <TextView
                 android:id="@+id/choose_photo"
                 android:layout_width="151dp"
                 android:layout_height="32dp"
