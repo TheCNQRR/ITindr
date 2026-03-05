@@ -13,7 +13,7 @@ import android.widget.EditText
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.itindr.databinding.FragmentSignInBinding
-import com.example.itindr.util.Effects
+import com.example.itindr.util.setPressEffect
 
 class SignInFragment : Fragment() {
     private var _binding: FragmentSignInBinding? = null
@@ -31,12 +31,12 @@ class SignInFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        Effects.setPressEffect(binding.signInButton) {
+        setPressEffect(binding.signInButton) {
             startActivity(Intent(requireContext(), MainScreenActivity::class.java))
             requireActivity().finish()
         }
 
-        Effects.setPressEffect(binding.back) {
+        setPressEffect(binding.back) {
             findNavController().navigateUp()
         }
 

@@ -12,14 +12,11 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import androidx.fragment.app.Fragment
 import com.example.itindr.databinding.FragmentAboutMeBinding
-import com.example.itindr.util.Effects
-import com.example.itindr.util.Functions.dp
+import com.example.itindr.util.dp
+import com.example.itindr.util.setPressEffect
 
-private const val ZERO = 0
 private const val TRANSLATION_OFFSET_NEGATIVE_VALUE = -20
 private const val TRANSLATION_OFFSET_VALUE = 20
-private const val ZERO_ALPHA = 0f
-private const val ALPHA = 1f
 private const val DURATION_50 = 50L
 private const val DURATION_200 = 200L
 
@@ -49,7 +46,7 @@ class AboutMeFragment : Fragment() {
 
         binding.aboutYourselfField.movementMethod = android.text.method.ScrollingMovementMethod.getInstance()
 
-        Effects.setPressEffect(binding.save) {
+        setPressEffect(binding.save) {
             startActivity(Intent(requireContext(), MainScreenActivity::class.java))
             requireActivity().finish()
         }
@@ -60,7 +57,7 @@ class AboutMeFragment : Fragment() {
     }
 
     private fun setupInterestsClickListeners() {
-        for (i in ZERO until binding.chipGroup.childCount) {
+        for (i in 0 until binding.chipGroup.childCount) {
             binding.chipGroup.getChildAt(i).setOnClickListener {
                 it.isSelected = !it.isSelected
             }
@@ -81,19 +78,19 @@ class AboutMeFragment : Fragment() {
     }
 
     private fun setupPhotoButtonsListeners() {
-        Effects.setPressEffect(binding.choosePhoto) {
+        setPressEffect(binding.choosePhoto) {
             setupAddPhotoButtonListener()
         }
 
-        Effects.setPressEffect(binding.galleryPicture) {
+        setPressEffect(binding.galleryPicture) {
             setupAddPhotoButtonListener()
         }
 
-        Effects.setPressEffect(binding.deletePhoto) {
+        setPressEffect(binding.deletePhoto) {
             setupDeletePhotoButtonListener()
         }
 
-        Effects.setPressEffect(binding.trashPicture) {
+        setPressEffect(binding.trashPicture) {
             setupDeletePhotoButtonListener()
         }
     }
@@ -103,12 +100,12 @@ class AboutMeFragment : Fragment() {
         val translationOffset = TRANSLATION_OFFSET_VALUE.dp.toFloat()
 
         binding.choosePhoto.animate()
-            .alpha(ZERO_ALPHA)
+            .alpha(0f)
             .setDuration(DURATION_50)
             .start()
 
         binding.galleryPicture.animate()
-            .alpha(ZERO_ALPHA)
+            .alpha(0f)
             .setDuration(DURATION_200)
             .start()
 
@@ -116,41 +113,41 @@ class AboutMeFragment : Fragment() {
         binding.galleryPicture.visibility = View.INVISIBLE
 
         binding.changePhoto.visibility = View.VISIBLE
-        binding.changePhoto.alpha = ZERO_ALPHA
+        binding.changePhoto.alpha = 0f
 
         binding.changePhoto.animate()
             .translationY(translationOffset)
-            .alpha(ALPHA)
+            .alpha(1f)
             .setDuration(DURATION_200)
             .setStartDelay(DURATION_50)
             .start()
 
         binding.galleryPicture1.visibility = View.VISIBLE
-        binding.galleryPicture1.alpha = ZERO_ALPHA
+        binding.galleryPicture1.alpha = 0f
 
         binding.galleryPicture1.animate()
             .translationY(translationOffset)
-            .alpha(ALPHA)
+            .alpha(1f)
             .setDuration(DURATION_200)
             .setStartDelay(DURATION_50)
             .start()
 
         binding.deletePhoto.visibility = View.VISIBLE
-        binding.deletePhoto.alpha = ZERO_ALPHA
+        binding.deletePhoto.alpha = 0f
 
         binding.deletePhoto.animate()
             .translationY(translationOffsetNegative)
-            .alpha(ALPHA)
+            .alpha(1f)
             .setDuration(DURATION_200)
             .setStartDelay(DURATION_50)
             .start()
 
         binding.trashPicture.visibility = View.VISIBLE
-        binding.trashPicture.alpha = ZERO_ALPHA
+        binding.trashPicture.alpha = 0f
 
         binding.trashPicture.animate()
             .translationY(translationOffsetNegative)
-            .alpha(ALPHA)
+            .alpha(1f)
             .setDuration(DURATION_200)
             .setStartDelay(DURATION_50)
             .start()
@@ -163,21 +160,21 @@ class AboutMeFragment : Fragment() {
 
         binding.deletePhoto.animate()
             .translationY(translationOffset)
-            .alpha(ZERO_ALPHA)
+            .alpha(0f)
             .setDuration(DURATION_50)
             .start()
         binding.deletePhoto.visibility = View.INVISIBLE
 
         binding.trashPicture.animate()
             .translationY(translationOffset)
-            .alpha(ZERO_ALPHA)
+            .alpha(0f)
             .setDuration(DURATION_50)
             .start()
         binding.trashPicture.visibility = View.INVISIBLE
 
         binding.changePhoto.animate()
             .translationY(translationOffsetNegative)
-            .alpha(ZERO_ALPHA)
+            .alpha(0f)
             .setDuration(DURATION_50)
             .start()
 
@@ -185,26 +182,26 @@ class AboutMeFragment : Fragment() {
 
         binding.galleryPicture1.animate()
             .translationY(translationOffsetNegative)
-            .alpha(ZERO_ALPHA)
+            .alpha(0f)
             .setDuration(DURATION_50)
             .start()
 
         binding.galleryPicture1.visibility = View.INVISIBLE
 
         binding.choosePhoto.visibility = View.VISIBLE
-        binding.choosePhoto.alpha = ZERO_ALPHA
+        binding.choosePhoto.alpha = 0f
 
         binding.galleryPicture.visibility = View.VISIBLE
-        binding.galleryPicture.alpha = ZERO_ALPHA
+        binding.galleryPicture.alpha = 0f
 
         binding.choosePhoto.animate()
-            .alpha(ALPHA)
+            .alpha(1f)
             .setDuration(DURATION_200)
             .setStartDelay(DURATION_50)
             .start()
 
         binding.galleryPicture.animate()
-            .alpha(ALPHA)
+            .alpha(1f)
             .setDuration(DURATION_200)
             .setStartDelay(DURATION_50)
             .start()

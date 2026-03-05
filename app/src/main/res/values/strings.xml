@@ -35,4 +35,7 @@
     <string name="clean_architecture">Clean Architecture</string>
     <string name="uml">UML</string>
     <string name="save">Сохранить</string>
+    <string name="background">Задний фон</string>
+    <string name="heart">Сердце</string>
+    <string name="logo">Логотип</string>
 </resources>

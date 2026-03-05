@@ -12,7 +12,7 @@ import android.widget.EditText
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.itindr.databinding.FragmentSignUpBinding
-import com.example.itindr.util.Effects
+import com.example.itindr.util.setPressEffect
 
 class SignUpFragment : Fragment() {
     private var _binding: FragmentSignUpBinding? = null
@@ -30,11 +30,11 @@ class SignUpFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        Effects.setPressEffect(binding.signUpButton) {
+        setPressEffect(binding.signUpButton) {
             findNavController().navigate(R.id.action_signUpFragment_to_aboutMeFragment)
         }
 
-        Effects.setPressEffect(binding.back) {
+        setPressEffect(binding.back) {
             findNavController().navigateUp()
         }
 

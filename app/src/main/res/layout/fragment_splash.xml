@@ -9,6 +9,7 @@
         android:id="@+id/background"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:contentDescription="@string/background"
         android:scaleType="centerCrop"
         app:srcCompat="@drawable/splash_background" />
 
@@ -16,6 +17,7 @@
         android:id="@+id/logo"
         android:layout_width="48dp"
         android:layout_height="48dp"
+        android:contentDescription="@string/logo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -27,6 +29,7 @@
         android:layout_width="164dp"
         android:layout_height="46dp"
         android:layout_marginStart="16dp"
+        android:contentDescription="@string/app_name"
         android:alpha="0"
         app:layout_constraintBottom_toBottomOf="@+id/logo"
         app:layout_constraintStart_toEndOf="@+id/logo"

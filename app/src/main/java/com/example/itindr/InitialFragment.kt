@@ -14,10 +14,8 @@ import android.view.animation.DecelerateInterpolator
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.itindr.databinding.FragmentInitialBinding
-import com.example.itindr.util.Effects
+import com.example.itindr.util.setPressEffect
 
-private const val ZERO_ALPHA = 0f
-private const val NORMAL_ALPHA = 1f
 private const val DURATION_500 = 500L
 private const val DURATION_700 = 700L
 private const val DURATION_800 = 800L
@@ -27,10 +25,8 @@ private const val DELAY_350 = 350L
 private const val DELAY_500 = 500L
 private const val DELAY_650 = 650L
 private const val DELAY_1000 = 1000L
-private const val ZERO_TRANSLATION_Y = 0f
 private const val TRANSLATION_Y = 200f
 private const val TRANSLATION_Y_NEGATIVE = -200f
-private const val NORMAL_SCALE = 1f
 private const val BIG_SCALE = 1.2f
 
 class InitialFragment : Fragment() {
@@ -57,10 +53,10 @@ class InitialFragment : Fragment() {
     }
 
     private fun setupEntranceAnimations() {
-        binding.background.alpha = ZERO_ALPHA
-        binding.background.animate().alpha(NORMAL_ALPHA).setDuration(DURATION_800).start()
-        binding.heart.alpha = ZERO_ALPHA
-        binding.heart.animate().alpha(NORMAL_ALPHA).setDuration(DURATION_1000).start()
+        binding.background.alpha = 0f
+        binding.background.animate().alpha(1f).setDuration(DURATION_800).start()
+        binding.heart.alpha = 0f
+        binding.heart.animate().alpha(1f).setDuration(DURATION_1000).start()
 
         animateViewEntrance(binding.itindrImageText, DELAY_200)
         animateViewEntrance(binding.text, DELAY_350)
@@ -82,11 +78,11 @@ class InitialFragment : Fragment() {
         isFromBottom: Boolean = false,
         onEnd: (() -> Unit)? = null
     ) {
-        view.alpha = ZERO_ALPHA
+        view.alpha = 0f
         view.translationY = if (isFromBottom) TRANSLATION_Y else TRANSLATION_Y_NEGATIVE
         view.animate()
-            .alpha(NORMAL_ALPHA)
-            .translationY(ZERO_TRANSLATION_Y)
+            .alpha(1f)
+            .translationY(0f)
             .setStartDelay(delay)
             .setDuration(DURATION_700)
             .setInterpolator(DecelerateInterpolator())
@@ -97,20 +93,18 @@ class InitialFragment : Fragment() {
     }
 
     private fun setListeners() {
-        Effects.setPressEffect(binding.signUpButton) {
+        setPressEffect(binding.signUpButton) {
             findNavController().navigate(R.id.action_initialFragment_to_signUpFragment)
         }
 
-        Effects.setPressEffect(binding.signInButton) {
+        setPressEffect(binding.signInButton) {
             findNavController().navigate(R.id.action_initialFragment_to_signInFragment)
         }
     }
 
     private fun startHeartbeatAnimation() {
-        val scaleX = PropertyValuesHolder.ofFloat(View.SCALE_X, NORMAL_SCALE, BIG_SCALE,
-            NORMAL_SCALE)
-        val scaleY = PropertyValuesHolder.ofFloat(View.SCALE_Y, NORMAL_SCALE, BIG_SCALE,
-            NORMAL_SCALE)
+        val scaleX = PropertyValuesHolder.ofFloat(View.SCALE_X, 1f, BIG_SCALE, 1f)
+        val scaleY = PropertyValuesHolder.ofFloat(View.SCALE_Y, 1f, BIG_SCALE, 1f)
 
         val beat = ObjectAnimator.ofPropertyValuesHolder(binding.heart, scaleX, scaleY).apply {
             duration = DURATION_500
