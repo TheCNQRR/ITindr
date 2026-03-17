@@ -1,4 +1,4 @@
-package com.example.itindr
+package com.example.itindr.ui
 
 import android.annotation.SuppressLint
 import android.content.Context

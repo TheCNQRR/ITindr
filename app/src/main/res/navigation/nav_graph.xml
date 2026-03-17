@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/initialFragment"
-        android:name="com.example.itindr.InitialFragment"
+        android:name="com.example.itindr.ui.InitialFragment"
         android:label="InitialFragment" >
         <action
             android:id="@+id/action_initialFragment_to_signUpFragment"
@@ -26,7 +26,7 @@
 
     <fragment
         android:id="@+id/signInFragment"
-        android:name="com.example.itindr.SignInFragment"
+        android:name="com.example.itindr.ui.SignInFragment"
         android:label="SignInFragment" >
         <action
             android:id="@+id/action_signInFragment_to_mainScreenActivity"
@@ -39,7 +39,7 @@
 
     <fragment
         android:id="@+id/signUpFragment"
-        android:name="com.example.itindr.SignUpFragment"
+        android:name="com.example.itindr.ui.SignUpFragment"
         android:label="SignUpFragment" >
         <action
             android:id="@+id/action_signUpFragment_to_aboutMeFragment"
@@ -52,7 +52,7 @@
 
     <fragment
         android:id="@+id/aboutMeFragment"
-        android:name="com.example.itindr.AboutMeFragment"
+        android:name="com.example.itindr.ui.AboutMeFragment"
         android:label="AboutMeFragment" >
         <action
             android:id="@+id/action_aboutMeFragment_to_mainScreenActivity"
@@ -65,11 +65,11 @@
 
     <activity
         android:id="@+id/mainScreenActivity"
-        android:name="com.example.itindr.MainScreenActivity"
+        android:name="com.example.itindr.ui.MainScreenActivity"
         android:label="MainScreenActivity" />
     <fragment
         android:id="@+id/fragmentSplash"
-        android:name="com.example.itindr.FragmentSplash"
+        android:name="com.example.itindr.ui.FragmentSplash"
         android:label="FragmentSplash" >
         <action
             android:id="@+id/action_fragmentSplash_to_initialFragment"

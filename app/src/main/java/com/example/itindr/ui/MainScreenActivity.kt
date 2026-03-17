@@ -1,4 +1,4 @@
-package com.example.itindr
+package com.example.itindr.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

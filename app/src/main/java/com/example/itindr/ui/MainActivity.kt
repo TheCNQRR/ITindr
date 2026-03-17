@@ -1,4 +1,4 @@
-package com.example.itindr
+package com.example.itindr.ui
 
 import android.os.Bundle
 import android.view.WindowManager
@@ -10,6 +10,7 @@ import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import androidx.navigation.findNavController
+import com.example.itindr.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

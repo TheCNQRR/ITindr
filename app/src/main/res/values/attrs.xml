@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="TagListView">
+        <attr name="selectionMode" format="enum">
+            <enum name="multi" value="0" />
+            <enum name="single" value="1" />
+        </attr>
+
+        <attr name="maxSelected" format="integer" />
+
+        <attr name="tagNormalBackground" format="color" />
+        <attr name="tagSelectedBackground" format="color" />
+
+        <attr name="tagNormalTextColor" format="color" />
+        <attr name="tagSelectedTextColor" format="color" />
+
+        <attr name="tagTextSize" format="dimension" />
+        <attr name="tagTextFontFamily" format="reference" />
+
+        <attr name="tagCornerRadius" format="dimension" />
+
+        <attr name="tagHorizontalPadding" format="dimension" />
+        <attr name="tagVerticalPadding" format="dimension" />
+
+        <attr name="tagSpacingHorizontal" format="dimension" />
+        <attr name="tagSpacingVertical" format="dimension" />
+
+        <attr name="tagWidth" format="dimension" />
+        <attr name="tagHeight" format="dimension" />
+
+        <attr name="tagEntries" format="reference" />
+    </declare-styleable>
+</resources>
