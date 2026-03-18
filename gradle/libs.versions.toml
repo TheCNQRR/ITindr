@@ -13,6 +13,7 @@ coreSplashscreen = "1.0.0"
 detekt = "1.23.8"
 detektRules = "1.4.0"
 navigation = "2.7.7"
+kaspresso = "1.6.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -28,6 +29,7 @@ detekt-formatting = { group = "io.gitlab.arturbosch.detekt", name = "detekt-form
 detekt-cli = { group = "io.gitlab.arturbosch.detekt", name = "detekt-cli", version.ref = "detekt" }
 detekt-rules-compose = { group = "ru.kode", name = "detekt-rules-compose", version.ref = "detektRules" }
 navigation-fragment = { group = "androidx.navigation", name = "navigation-fragment-ktx", version.ref = "navigation" }
+kaspresso = { module = "com.kaspersky.android-components:kaspresso", version.ref = "kaspresso" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
