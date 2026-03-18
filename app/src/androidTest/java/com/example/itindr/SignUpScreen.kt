@@ -8,4 +8,5 @@ object SignUpScreen : KScreen<SignUpScreen>() {
     override val viewClass: Class<*>? = null
 
     val backButton = KTextView { withId(R.id.back) }
+    val signUpButton = KTextView { withId(R.id.sign_up_button) }
 }

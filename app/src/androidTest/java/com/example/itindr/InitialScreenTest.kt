@@ -1,5 +1,8 @@
 package com.example.itindr
 
+import androidx.test.espresso.intent.Intents
+import androidx.test.espresso.intent.Intents.intended
+import androidx.test.espresso.intent.matcher.IntentMatchers.hasComponent
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
 import org.junit.Rule
@@ -46,6 +49,47 @@ class InitialScreenTest : TestCase() {
                     hasText(R.string.sign_in)
                 }
             }
+        }
+    }
+
+    @Test
+    fun navigationToMainScreen() = run {
+        Intents.init()
+        try {
+            step("Открытие Welcome, ожидание анимаций") {
+                flakySafely(timeoutMs = 3000) {
+                    InitialScreen.logo.isVisible()
+                }
+            }
+
+            step("Нажать кнопку 'Зарегистрироваться'") {
+                InitialScreen.signUpButton.click()
+            }
+
+            step("Проверить, что открыт экран регистрации") {
+                SignUpScreen.signUpButton.isVisible()
+            }
+
+            step("Нажать кнопку 'Зарегистрироваться' на экране регистрации") {
+                SignUpScreen.signUpButton.click()
+            }
+
+            step("Проверить, что открыт экран о себе") {
+                AboutMeScreen.saveButton.isVisible()
+            }
+
+            step("Нажать кнопку 'Сохранить'") {
+                AboutMeScreen.saveButton.click()
+            }
+
+            step("Проверить, что открыт главный экран") {
+                flakySafely(timeoutMs = 3000) {
+                    intended(hasComponent(MainScreenActivity::class.java.name))
+                }
+            }
+
+        } finally {
+            Intents.release()
         }
     }
 }
