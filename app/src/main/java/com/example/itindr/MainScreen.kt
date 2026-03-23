@@ -124,6 +124,12 @@ fun PersonCard(
         }
     }
 
+    val whiteBarProgress = animateFloatAsState(
+        targetValue = expandProgress.floatValue,
+        animationSpec = tween(durationMillis = 300)
+    )
+
+
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -318,6 +324,35 @@ fun PersonCard(
                     contentAlignment = Alignment.Center
                 )
             }
+        }
+
+        Box(
+            modifier = Modifier
+                .align(Alignment.CenterEnd)
+                .padding(end = 8.dp)
+        ) {
+            Box(
+                modifier = Modifier
+                    .width(4.dp)
+                    .height(120.dp)
+                    .background(
+                        shape = RoundedCornerShape(2.dp),
+                        color = colorResource(R.color.black).copy(alpha = 0.5f)
+                    )
+            )
+
+            Box(
+                modifier = Modifier
+                    .width(4.dp)
+                    .height(24.dp)
+                    .graphicsLayer {
+                        translationY = whiteBarProgress.value * with(density) { 96.dp.toPx() }
+                    }
+                    .background(
+                        shape = RoundedCornerShape(2.dp),
+                        color = colorResource(R.color.white)
+                    )
+            )
         }
     }
 }
