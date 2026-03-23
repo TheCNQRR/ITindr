@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -20,16 +21,21 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.mutableFloatStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
@@ -39,7 +45,10 @@ import androidx.compose.ui.input.pointer.PointerEventType
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.input.pointer.positionChange
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.layout.LayoutCoordinates
+import androidx.compose.ui.layout.boundsInRoot
 import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -65,7 +74,8 @@ fun MainScreen(person: MainScreenActivity.Person) {
 
         Column(
             modifier = Modifier
-                .fillMaxSize(),
+                .fillMaxWidth()
+                .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Icon(
@@ -82,13 +92,19 @@ fun MainScreen(person: MainScreenActivity.Person) {
                 .height(24.dp))
 
             PersonCard(person)
-        }
 
-        NavigationBar(
-            modifier = Modifier
-                .align(Alignment.BottomCenter)
-                .padding(bottom = 48.dp)
-        )
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(136.dp)
+            ) {
+                NavigationBar(
+                    modifier = Modifier
+                        .padding(bottom = 48.dp)
+                        .align(Alignment.BottomCenter)
+                )
+            }
+        }
     }
 }
 
@@ -98,31 +114,65 @@ fun PersonCard(
 ) {
     val expandProgress = remember { mutableFloatStateOf(0f) }
     val bioHeight = remember { mutableFloatStateOf(0f) }
+    val nameAreaBounds = remember { mutableStateOf(Rect.Zero) }
+    val cardLayoutCoordinates = remember { mutableStateOf<LayoutCoordinates?>(null) }
+    val buttonRowBounds = remember { mutableStateOf(Rect.Zero) }
+    val density = LocalDensity.current
+
+    val offsetPx = remember(bioHeight.floatValue) {
+        derivedStateOf {
+            bioHeight.floatValue + with(density) { 24.dp.toPx() }
+        }
+    }
 
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .fillMaxHeight()
             .padding(
                 top = 24.dp,
                 start = 24.dp,
-                end = 24.dp,
-                bottom = 136.dp)
+                end = 24.dp
+            )
+            .aspectRatio(363f / 624f)
             .clip(RoundedCornerShape(32.dp))
+            .onGloballyPositioned { coordinates ->
+                cardLayoutCoordinates.value = coordinates
+            }
             .pointerInput(Unit) {
                 awaitPointerEventScope {
+                    var isDraggingEnabled = false
+
                     while (true) {
                         val event = awaitPointerEvent()
                         when (event.type) {
+                            PointerEventType.Press -> {
+                                val change = event.changes.firstOrNull() ?: continue
+                                val localPos = change.position
+                                val layoutCoords = cardLayoutCoordinates.value
+                                val globalPos = layoutCoords?.localToRoot(localPos) ?: continue
+                                val dragZone = Rect(
+                                    left = nameAreaBounds.value.left,
+                                    top = nameAreaBounds.value.top,
+                                    right = nameAreaBounds.value.right,
+                                    bottom = buttonRowBounds.value.top
+                                )
+                                isDraggingEnabled = dragZone.contains(globalPos)
+                            }
                             PointerEventType.Move -> {
+                                if (!isDraggingEnabled) continue
                                 val change = event.changes.firstOrNull() ?: continue
                                 val delta = change.positionChange()
                                 val deltaProgress = -delta.y / 200f
-                                val newProgress = (expandProgress.floatValue + deltaProgress).coerceIn(0f, 1f)
+                                val newProgress = (expandProgress.floatValue + deltaProgress)
+                                    .coerceIn(0f, 1f)
                                 expandProgress.floatValue = newProgress
+                                change.consume()
                             }
                             PointerEventType.Release -> {
-                                expandProgress.floatValue = if (expandProgress.floatValue > 0.5f) 1f else 0f
+                                if (isDraggingEnabled) {
+                                    expandProgress.floatValue = if (expandProgress.floatValue > 0.5f) 1f else 0f
+                                }
+                                isDraggingEnabled = false
                             }
                             else -> {}
                         }
@@ -132,12 +182,11 @@ fun PersonCard(
     ) {
         val darkenProgress = animateFloatAsState(
             targetValue = expandProgress.floatValue,
-            animationSpec = tween(durationMillis = 300),
-            label = "darken"
+            animationSpec = tween(durationMillis = 300)
         )
 
         Image(
-            painter = painterResource(person.photoUrl),
+            painter = painterResource(R.drawable.vadim_1),
             contentDescription = null,
             modifier = Modifier.fillMaxSize(),
             contentScale = ContentScale.Crop
@@ -169,8 +218,7 @@ fun PersonCard(
         val animationSpec = tween<Float>(durationMillis = 300)
         val slideProgress = animateFloatAsState(
             targetValue = expandProgress.floatValue,
-            animationSpec = animationSpec,
-            label = "slide"
+            animationSpec = animationSpec
         )
 
         val inter = FontFamily(Font(R.font.inter_bold, FontWeight.Bold))
@@ -185,7 +233,10 @@ fun PersonCard(
                 modifier = Modifier
                     .fillMaxWidth()
                     .graphicsLayer {
-                        translationY =  -bioHeight.floatValue * slideProgress.value
+                        translationY = offsetPx.value * (1 - slideProgress.value)
+                    }
+                    .onGloballyPositioned { coordinates ->
+                        nameAreaBounds.value = coordinates.boundsInRoot()
                     }
             ) {
                 Text(
@@ -199,7 +250,7 @@ fun PersonCard(
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(start = 16.dp, end = 16.dp, bottom = 24.dp),
+                        .padding(start = 16.dp, end = 16.dp),
                     horizontalArrangement = Arrangement.spacedBy(8.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
@@ -207,13 +258,35 @@ fun PersonCard(
                         TagChip(tag = tag)
                     }
                 }
+
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(start = 16.dp, end = 16.dp, top = 24.dp)
+                        .onGloballyPositioned { coordinates ->
+                            bioHeight.floatValue = coordinates.size.height.toFloat()
+                        }
+                        .graphicsLayer { alpha = slideProgress.value }
+                ) {
+                    val interRegular = FontFamily(Font(R.font.inter_regular, FontWeight.Normal))
+
+                    Text(
+                        text = person.bio,
+                        fontSize = 14.sp,
+                        fontFamily = interRegular,
+                        color = Color.White,
+                    )
+                }
             }
 
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 16.dp)
-                    .height(56.dp),
+                    .padding(start = 16.dp, end = 16.dp, top = 24.dp)
+                    .height(56.dp)
+                    .onGloballyPositioned { coordinates ->
+                        buttonRowBounds.value = coordinates.boundsInRoot()
+                    },
                 horizontalArrangement = Arrangement.spacedBy(16.dp)
             ) {
                 CustomButton(
@@ -240,39 +313,6 @@ fun PersonCard(
                     backroundColor = colorResource(R.color.like_background),
                     iconTint = Color.White,
                     contentAlignment = Alignment.Center
-                )
-            }
-        }
-
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(bottom = 32.dp)
-                .graphicsLayer {
-                    translationY = -150f * slideProgress.value
-                },
-            verticalArrangement = Arrangement.Bottom
-        ) {
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 16.dp)
-                    .onGloballyPositioned { coordinates ->
-                        bioHeight.floatValue = coordinates.size.height.toFloat()
-                    }
-                    .graphicsLayer {
-                        alpha = slideProgress.value
-                        translationY = (1f - slideProgress.value) * 50f
-                    }
-            ) {
-                val interRegular = FontFamily(Font(R.font.inter_regular, FontWeight.Normal))
-
-                Text(
-                    text = person.bio,
-                    fontSize = 14.sp,
-                    fontFamily = interRegular,
-                    color = Color.White,
-                    modifier = Modifier.padding(bottom = 24.dp)
                 )
             }
         }
