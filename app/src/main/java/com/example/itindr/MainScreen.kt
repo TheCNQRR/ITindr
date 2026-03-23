@@ -4,9 +4,6 @@ import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -35,6 +32,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
@@ -159,6 +157,7 @@ fun PersonCard(
                                 )
                                 isDraggingEnabled = dragZone.contains(globalPos)
                             }
+
                             PointerEventType.Move -> {
                                 if (!isDraggingEnabled) continue
                                 val change = event.changes.firstOrNull() ?: continue
@@ -169,12 +168,15 @@ fun PersonCard(
                                 expandProgress.floatValue = newProgress
                                 change.consume()
                             }
+
                             PointerEventType.Release -> {
                                 if (isDraggingEnabled) {
-                                    expandProgress.floatValue = if (expandProgress.floatValue > 0.5f) 1f else 0f
+                                    expandProgress.floatValue =
+                                        if (expandProgress.floatValue > 0.5f) 1f else 0f
                                 }
                                 isDraggingEnabled = false
                             }
+
                             else -> {}
                         }
                     }
@@ -308,8 +310,8 @@ fun PersonCard(
                     iconSize = 24.dp,
                     onClick = {  },
                     modifier = Modifier
-                        .weight(1f).
-                        fillMaxHeight(),
+                        .weight(1f)
+                        .fillMaxHeight(),
                     shape = RoundedCornerShape(32.dp),
                     backroundColor = colorResource(R.color.like_background),
                     iconTint = Color.White,
@@ -357,7 +359,8 @@ fun NavigationBar(modifier: Modifier) {
         modifier = modifier
             .then(
                 if (canUseSidePadding) {
-                    Modifier.fillMaxWidth()
+                    Modifier
+                        .fillMaxWidth()
                         .padding(horizontal = 64.dp)
                 } else {
                     Modifier.width(283.dp)
@@ -375,7 +378,7 @@ fun NavigationBar(modifier: Modifier) {
                 .padding(
                     top = 8.dp,
                     start = 8.dp
-                    ),
+                ),
             horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             val interSemiBold = FontFamily(Font(R.font.inter_semi_bold, FontWeight.SemiBold))
@@ -454,8 +457,7 @@ fun CustomButton(
     contentAlignment: Alignment,
     horizontalArrangment: Arrangement.Horizontal = Arrangement.Start
 ) {
-    val interactionSource = remember { MutableInteractionSource() }
-    val isPressed = interactionSource.collectIsPressedAsState()
+    val isPressed = remember { mutableStateOf(false) }
 
     val backgroundAlpha = animateFloatAsState(
         targetValue = if (isPressed.value) 0.8f else 1f,
@@ -468,11 +470,42 @@ fun CustomButton(
                 color = backroundColor.copy(alpha = backgroundAlpha.value),
                 shape = shape
             )
-            .clickable(
-                onClick = onClick,
-                interactionSource = interactionSource,
-                indication = null
-            ),
+            .pointerInput(Unit) {
+                awaitPointerEventScope {
+                    while (true) {
+                        val pressEvent = awaitPointerEvent()
+                        if (pressEvent.type != PointerEventType.Press) continue
+
+                        isPressed.value = true
+                        pressEvent.changes.forEach { it.consume() }
+
+                        var isDragging = false
+
+                        while (true) {
+                            val event = awaitPointerEvent()
+                            when (event.type) {
+                                PointerEventType.Move -> {
+                                    val change = event.changes.firstOrNull() ?: continue
+                                    if (change.positionChange() != Offset.Zero) {
+                                        isDragging = true
+                                        isPressed.value = false
+                                    }
+                                    event.changes.forEach { it.consume() }
+                                }
+                                PointerEventType.Release -> {
+                                    if (!isDragging) {
+                                        onClick()
+                                    }
+                                    isPressed.value = false
+                                    event.changes.forEach { it.consume() }
+                                    break
+                                }
+                                else -> {}
+                            }
+                        }
+                    }
+                }
+            },
         contentAlignment = contentAlignment
     ) {
         Row(
