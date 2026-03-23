@@ -49,6 +49,7 @@ import androidx.compose.ui.layout.LayoutCoordinates
 import androidx.compose.ui.layout.boundsInRoot
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.LocalWindowInfo
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -346,15 +347,23 @@ fun TagChip(tag: String) {
 
 @Composable
 fun NavigationBar(modifier: Modifier) {
+    val windowSize = LocalWindowInfo.current.containerSize
+    val density = LocalDensity.current
+    val screenWidthDp = with(density) { windowSize.width.toDp() }
+
+    val canUseSidePadding = screenWidthDp - 128.dp >= 283.dp
+
     Box(
         modifier = modifier
-            .fillMaxWidth()
-            .height(64.dp)
-            .padding(
-                top = 0.dp,
-                start = 64.dp,
-                end = 64.dp
+            .then(
+                if (canUseSidePadding) {
+                    Modifier.fillMaxWidth()
+                        .padding(horizontal = 64.dp)
+                } else {
+                    Modifier.width(283.dp)
+                }
             )
+            .height(64.dp)
             .background(
                 color = colorResource(R.color.nav_bar),
                 shape = RoundedCornerShape(24.dp)
@@ -367,7 +376,7 @@ fun NavigationBar(modifier: Modifier) {
                     top = 8.dp,
                     start = 8.dp
                     ),
-            horizontalArrangement = Arrangement.spacedBy(20.dp)
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             val interSemiBold = FontFamily(Font(R.font.inter_semi_bold, FontWeight.SemiBold))
 
