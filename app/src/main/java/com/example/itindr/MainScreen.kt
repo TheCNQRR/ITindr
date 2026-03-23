@@ -5,6 +5,8 @@ import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -15,11 +17,12 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
+import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableFloatStateOf
@@ -29,7 +32,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.input.pointer.PointerEventType
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.input.pointer.positionChange
@@ -38,9 +43,11 @@ import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
@@ -76,6 +83,12 @@ fun MainScreen(person: MainScreenActivity.Person) {
 
             PersonCard(person)
         }
+
+        NavigationBar(
+            modifier = Modifier
+                .align(Alignment.BottomCenter)
+                .padding(bottom = 48.dp)
+        )
     }
 }
 
@@ -203,22 +216,30 @@ fun PersonCard(
                     .height(56.dp),
                 horizontalArrangement = Arrangement.spacedBy(16.dp)
             ) {
-                Image(
-                    painter = painterResource(R.drawable.ic_dislike),
-                    contentDescription = null,
+                CustomButton(
+                    icon = painterResource(R.drawable.ic_dislike),
+                    iconSize = 24.dp,
+                    onClick = {  },
                     modifier = Modifier
                         .weight(1f)
-                        .fillMaxHeight()
-                        .clickable { }
+                        .fillMaxHeight(),
+                    shape = RoundedCornerShape(32.dp),
+                    backroundColor = colorResource(R.color.dislike_background),
+                    iconTint = Color.White,
+                    contentAlignment = Alignment.Center
                 )
 
-                Image(
-                    painter = painterResource(R.drawable.ic_like),
-                    contentDescription = null,
+                CustomButton(
+                    icon = painterResource(R.drawable.ic_like),
+                    iconSize = 24.dp,
+                    onClick = {  },
                     modifier = Modifier
-                        .weight(1f)
-                        .fillMaxHeight()
-                        .clickable { }
+                        .weight(1f).
+                        fillMaxHeight(),
+                    shape = RoundedCornerShape(32.dp),
+                    backroundColor = colorResource(R.color.like_background),
+                    iconTint = Color.White,
+                    contentAlignment = Alignment.Center
                 )
             }
         }
@@ -280,5 +301,155 @@ fun TagChip(tag: String) {
             fontWeight = FontWeight.Medium,
             color = Color.White
         )
+    }
+}
+
+@Composable
+fun NavigationBar(modifier: Modifier) {
+    Box(
+        modifier = modifier
+            .fillMaxWidth()
+            .height(64.dp)
+            .padding(
+                top = 0.dp,
+                start = 64.dp,
+                end = 64.dp
+            )
+            .background(
+                color = colorResource(R.color.nav_bar),
+                shape = RoundedCornerShape(24.dp)
+            )
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(
+                    top = 8.dp,
+                    start = 8.dp
+                    ),
+            horizontalArrangement = Arrangement.spacedBy(20.dp)
+        ) {
+            val interSemiBold = FontFamily(Font(R.font.inter_semi_bold, FontWeight.SemiBold))
+
+            CustomButton(
+                icon = painterResource(R.drawable.ic_search),
+                iconSize = 24.dp,
+                onClick = {  },
+                modifier = Modifier
+                    .width(99.dp)
+                    .height(48.dp),
+                shape = RoundedCornerShape(32.dp),
+                backroundColor = Color.White,
+                iconTint = Color.Black,
+                text = stringResource(R.string.stream),
+                textColor = Color.Black,
+                textStyle = TextStyle(
+                    fontFamily = interSemiBold,
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight.SemiBold
+                ),
+                contentAlignment = Alignment.Center
+            )
+
+            CustomButton(
+                icon = painterResource(R.drawable.ic_people),
+                iconSize = 24.dp,
+                onClick = {  },
+                modifier = Modifier
+                    .size(48.dp),
+                shape = RoundedCornerShape(32.dp),
+                backroundColor = colorResource(R.color.nav_bar),
+                iconTint = Color.White,
+                contentAlignment = Alignment.Center
+            )
+
+            CustomButton(
+                icon = painterResource(R.drawable.ic_chats),
+                iconSize = 24.dp,
+                onClick = {  },
+                modifier = Modifier
+                    .size(48.dp),
+                shape = RoundedCornerShape(32.dp),
+                backroundColor = colorResource(R.color.nav_bar),
+                iconTint = Color.White,
+                contentAlignment = Alignment.Center
+            )
+
+            CustomButton(
+                icon = painterResource(R.drawable.ic_profile),
+                iconSize = 24.dp,
+                onClick = {  },
+                modifier = Modifier
+                    .size(48.dp),
+                shape = RoundedCornerShape(32.dp),
+                backroundColor = colorResource(R.color.nav_bar),
+                iconTint = Color.White,
+                contentAlignment = Alignment.Center
+            )
+        }
+    }
+}
+
+@Composable
+fun CustomButton(
+    icon: Painter? = null,
+    iconSize: Dp = 24.dp,
+    onClick: () -> Unit,
+    modifier: Modifier,
+    shape: Shape,
+    backroundColor: Color,
+    iconTint: Color,
+    text: String? = null,
+    textColor: Color = Color.Black,
+    textStyle: TextStyle = LocalTextStyle.current,
+    contentAlignment: Alignment,
+    horizontalArrangment: Arrangement.Horizontal = Arrangement.Start
+) {
+    val interactionSource = remember { MutableInteractionSource() }
+    val isPressed = interactionSource.collectIsPressedAsState()
+
+    val backgroundAlpha = animateFloatAsState(
+        targetValue = if (isPressed.value) 0.8f else 1f,
+        animationSpec = tween(durationMillis = 100)
+    )
+
+    Box(
+        modifier = modifier
+            .background(
+                color = backroundColor.copy(alpha = backgroundAlpha.value),
+                shape = shape
+            )
+            .clickable(
+                onClick = onClick,
+                interactionSource = interactionSource,
+                indication = null
+            ),
+        contentAlignment = contentAlignment
+    ) {
+        Row(
+            modifier = Modifier.padding(horizontal = 12.dp, vertical = 12.dp),
+            horizontalArrangement = horizontalArrangment,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            if (icon != null) {
+                Icon(
+                    painter = icon,
+                    contentDescription = null,
+                    modifier = Modifier.size(iconSize),
+                    tint = iconTint
+                )
+            }
+
+            if (text != null) {
+                Spacer(modifier = Modifier.width(4.dp))
+
+                Text(
+                    text = text,
+                    color = textColor,
+                    style = textStyle,
+                    maxLines = 1
+                )
+            }
+        }
     }
 }

@@ -38,4 +38,5 @@
     <string name="background">Задний фон</string>
     <string name="heart">Сердце</string>
     <string name="logo">Логотип</string>
+    <string name="stream">Поток</string>
 </resources>
