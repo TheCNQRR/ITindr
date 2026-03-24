@@ -34,7 +34,8 @@ import androidx.compose.ui.unit.sp
 fun ProfileScreen(
     onNavigateToStream: () -> Unit,
     onNavigateToPeople: () -> Unit,
-    onNavigateToChats: () -> Unit
+    onNavigateToChats: () -> Unit,
+    onEditClick: () -> Unit
 ) {
     Box(modifier = Modifier
         .fillMaxSize()
@@ -48,14 +49,51 @@ fun ProfileScreen(
 
         val interBold = FontFamily(Font(R.font.inter_bold, FontWeight.Bold))
 
-        Text(
+        Row(
             modifier = Modifier
-                .padding(top = 60.dp, start = 24.dp),
-            text = stringResource(R.string.profile),
-            fontSize = 40.sp,
-            fontFamily = interBold,
-            color = Color.White
-        )
+                .fillMaxWidth()
+                .padding(top = 60.dp, start = 24.dp, end = 24.dp),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                text = stringResource(R.string.profile),
+                fontSize = 40.sp,
+                fontFamily = interBold,
+                color = Color.White
+            )
+
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                CustomButton(
+                    icon = painterResource(R.drawable.ic_edit),
+                    iconSize = 24.dp,
+                    onClick =  onEditClick,
+                    modifier = Modifier
+                        .size(48.dp),
+                    shape = RoundedCornerShape(24.dp),
+                    backroundColor = Color.Black,
+                    backgroundAlpha = 0.4f,
+                    iconTint = Color.White,
+                    contentAlignment = Alignment.Center
+                )
+
+                CustomButton(
+                    icon = painterResource(R.drawable.ic_logout),
+                    iconSize = 24.dp,
+                    onClick =  { },
+                    modifier = Modifier
+                        .size(48.dp),
+                    shape = RoundedCornerShape(24.dp),
+                    backroundColor = Color.Black,
+                    backgroundAlpha = 0.4f,
+                    iconTint = Color.White,
+                    contentAlignment = Alignment.Center
+                )
+            }
+        }
 
         NavigationBarProfile(
             modifier = Modifier
@@ -112,7 +150,7 @@ fun NavigationBarProfile(
             val interSemiBold = FontFamily(Font(R.font.inter_semi_bold, FontWeight.SemiBold))
 
             CustomButton(
-                icon = painterResource(R.drawable.ic_search),
+                icon = painterResource(R.drawable.ic_stream),
                 iconSize = 24.dp,
                 onClick =  onStreamClick,
                 modifier = Modifier

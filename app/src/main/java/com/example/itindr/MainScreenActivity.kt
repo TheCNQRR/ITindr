@@ -28,7 +28,7 @@ class MainScreenActivity : AppCompatActivity() {
 
         supportActionBar?.hide()
 
-        val mockPerson = Person("Вадик", "Люблю программировать на питоне. Люблю изучать питон. Люблю всё, что угодно, связанное с питоном. А еще я люблю перл.",
+        val mockPerson = Person("Андрей Иванов", "Люблю программировать на питоне. Люблю изучать питон. Люблю всё, что угодно, связанное с питоном. А еще я люблю перл.",
             listOf("Python", "Django", "REST"), R.drawable.ic_mock_user_photo)
 
         setContent {
@@ -51,7 +51,8 @@ class MainScreenActivity : AppCompatActivity() {
                     PeopleScreen(
                         onNavigateToStream = { navController.navigate(Stream) },
                         onNavigateToChats = { navController.navigate(Chats) },
-                        onNavigateToProfile = { navController.navigate(Profile) }
+                        onNavigateToProfile = { navController.navigate(Profile) },
+                        onPersonClick = { navController.navigate(PersonInfo) }
                     )
                 }
 
@@ -59,7 +60,8 @@ class MainScreenActivity : AppCompatActivity() {
                     ChatsScreen(
                         onNavigateToStream = { navController.navigate(Stream) },
                         onNavigateToPeople = { navController.navigate(People) },
-                        onNavigateToProfile = { navController.navigate(Profile) }
+                        onNavigateToProfile = { navController.navigate(Profile) },
+                        onChatClick = { navController.navigate(Chat) }
                     )
                 }
 
@@ -67,8 +69,21 @@ class MainScreenActivity : AppCompatActivity() {
                     ProfileScreen(
                         onNavigateToStream = { navController.navigate(Stream) },
                         onNavigateToPeople = { navController.navigate(People) },
-                        onNavigateToChats = { navController.navigate(Chats) }
+                        onNavigateToChats = { navController.navigate(Chats) },
+                        onEditClick = { navController.navigate(AboutMeEdit) }
                     )
+                }
+
+                composable<AboutMeEdit> {
+                    AboutMeEditScreen(onBackClick = { navController.navigateUp() })
+                }
+
+                composable<PersonInfo> {
+                    PersonInfoScreen(onBackClick = { navController.navigateUp() })
+                }
+
+                composable<Chat> {
+                    ChatScreen(onBackClick = { navController.navigateUp() })
                 }
             }
         }

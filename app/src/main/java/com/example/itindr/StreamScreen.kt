@@ -205,7 +205,7 @@ fun PersonCard(
         )
 
         Image(
-            painter = painterResource(R.drawable.vadim_1),
+            painter = painterResource(R.drawable.ic_mock_user_photo),
             contentDescription = null,
             modifier = Modifier.fillMaxSize(),
             contentScale = ContentScale.Crop
@@ -437,7 +437,7 @@ fun NavigationBarMain(
             val interSemiBold = FontFamily(Font(R.font.inter_semi_bold, FontWeight.SemiBold))
 
             CustomButton(
-                icon = painterResource(R.drawable.ic_search),
+                icon = painterResource(R.drawable.ic_stream),
                 iconSize = 24.dp,
                 onClick =  onStreamClick,
                 modifier = Modifier
@@ -503,6 +503,7 @@ fun CustomButton(
     modifier: Modifier,
     shape: Shape,
     backroundColor: Color,
+    backgroundAlpha: Float = 1f,
     iconTint: Color,
     text: String? = null,
     textColor: Color = Color.Black,
@@ -512,15 +513,15 @@ fun CustomButton(
 ) {
     val isPressed = remember { mutableStateOf(false) }
 
-    val backgroundAlpha = animateFloatAsState(
-        targetValue = if (isPressed.value) 0.8f else 1f,
+    val backgroundAlp = animateFloatAsState(
+        targetValue = if (isPressed.value) 0.8f else backgroundAlpha,
         animationSpec = tween(durationMillis = 100)
     )
 
     Box(
         modifier = modifier
             .background(
-                color = backroundColor.copy(alpha = backgroundAlpha.value),
+                color = backroundColor.copy(alpha = backgroundAlp.value),
                 shape = shape
             )
             .pointerInput(Unit) {

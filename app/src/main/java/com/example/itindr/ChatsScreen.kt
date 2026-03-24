@@ -2,9 +2,12 @@ package com.example.itindr
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -16,6 +19,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalDensity
@@ -34,7 +38,8 @@ import androidx.compose.ui.unit.sp
 fun ChatsScreen(
     onNavigateToStream: () -> Unit,
     onNavigateToPeople: () -> Unit,
-    onNavigateToProfile: () -> Unit
+    onNavigateToProfile: () -> Unit,
+    onChatClick: () -> Unit
 ) {
     Box(modifier = Modifier
         .fillMaxSize()
@@ -47,6 +52,7 @@ fun ChatsScreen(
         )
 
         val interBold = FontFamily(Font(R.font.inter_bold, FontWeight.Bold))
+        val inter = FontFamily(Font(R.font.inter_regular, FontWeight.Normal))
 
         Text(
             modifier = Modifier
@@ -56,6 +62,54 @@ fun ChatsScreen(
             fontFamily = interBold,
             color = Color.White
         )
+
+        Box(
+            modifier = Modifier
+                .padding(top = 132.dp, start = 24.dp, end = 24.dp)
+        ) {
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(80.dp)
+                    .clickable(onClick = onChatClick)
+            ) {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(80.dp),
+                ) {
+                    Image(
+                        painter = painterResource(R.drawable.ic_mock_user_photo),
+                        contentDescription = null,
+                        modifier = Modifier
+                            .size(80.dp)
+                            .clip(RoundedCornerShape(16.dp)),
+                        contentScale = ContentScale.Crop
+                    )
+
+                    Column(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .fillMaxHeight()
+                            .padding(start = 16.dp)
+                    ) {
+                        Text(
+                            text = stringResource(R.string.Andrey),
+                            fontSize = 16.sp,
+                            fontFamily = interBold,
+                            color = Color.White
+                        )
+
+                        Text(
+                            text = stringResource(R.string.message),
+                            fontSize = 16.sp,
+                            fontFamily = inter,
+                            color = Color.White
+                        )
+                    }
+                }
+            }
+        }
 
         NavigationBarChats(
             modifier = Modifier
@@ -112,7 +166,7 @@ fun NavigationBarChats(
             val interSemiBold = FontFamily(Font(R.font.inter_semi_bold, FontWeight.SemiBold))
 
             CustomButton(
-                icon = painterResource(R.drawable.ic_search),
+                icon = painterResource(R.drawable.ic_stream),
                 iconSize = 24.dp,
                 onClick =  onStreamClick,
                 modifier = Modifier

@@ -2,6 +2,7 @@ package com.example.itindr
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
@@ -16,6 +17,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalDensity
@@ -34,7 +36,8 @@ import androidx.compose.ui.unit.sp
 fun PeopleScreen(
     onNavigateToStream: () -> Unit,
     onNavigateToChats: () -> Unit,
-    onNavigateToProfile: () -> Unit
+    onNavigateToProfile: () -> Unit,
+    onPersonClick: () -> Unit
 ) {
     Box(modifier = Modifier
         .fillMaxSize()
@@ -56,6 +59,39 @@ fun PeopleScreen(
             fontFamily = interBold,
             color = Color.White
         )
+
+        Box(
+            modifier = Modifier
+                .padding(top = 132.dp, start = 24.dp)
+        ) {
+            Box(
+                modifier = Modifier
+                    .width(174.dp)
+                    .height(200.dp)
+                    .clip(RoundedCornerShape(16.dp))
+                    .clickable(onClick = onPersonClick)
+            ) {
+                Image(
+                    painter = painterResource(R.drawable.ic_mock_user_photo),
+                    contentDescription = null,
+                    modifier = Modifier.fillMaxSize(),
+                    contentScale = ContentScale.Crop
+                )
+
+                Box(
+                    modifier = Modifier
+                        .align(Alignment.BottomStart)
+                        .padding(start = 16.dp, bottom = 16.dp)
+                ) {
+                    Text(
+                        text = stringResource(R.string.Andrey),
+                        fontSize = 20.sp,
+                        fontFamily = interBold,
+                        color = Color.White
+                    )
+                }
+            }
+        }
 
         NavigationBarPeople(
             modifier = Modifier
@@ -112,7 +148,7 @@ fun NavigationBarPeople(
             val interSemiBold = FontFamily(Font(R.font.inter_semi_bold, FontWeight.SemiBold))
 
             CustomButton(
-                icon = painterResource(R.drawable.ic_search),
+                icon = painterResource(R.drawable.ic_stream),
                 iconSize = 24.dp,
                 onClick =  onStreamClick,
                 modifier = Modifier
