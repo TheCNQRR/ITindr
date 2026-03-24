@@ -61,7 +61,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun MainScreen(person: MainScreenActivity.Person) {
+fun StreamScreen(
+    person: MainScreenActivity.Person,
+    onNavigateToPeople: () -> Unit,
+    onNavigateToChats: () -> Unit,
+    onNavigateToProfile: () -> Unit
+) {
     Box(modifier = Modifier
         .fillMaxSize()
     ) {
@@ -98,10 +103,14 @@ fun MainScreen(person: MainScreenActivity.Person) {
                     .fillMaxWidth()
                     .height(136.dp)
             ) {
-                NavigationBar(
+                NavigationBarMain(
                     modifier = Modifier
                         .padding(bottom = 48.dp)
-                        .align(Alignment.BottomCenter)
+                        .align(Alignment.BottomCenter),
+                    onStreamClick = { },
+                    onPeopleClick = onNavigateToPeople,
+                    onChatsClick = onNavigateToChats,
+                    onProfileClick = onNavigateToProfile
                 )
             }
         }
@@ -386,7 +395,13 @@ fun TagChip(tag: String) {
 }
 
 @Composable
-fun NavigationBar(modifier: Modifier) {
+fun NavigationBarMain(
+    modifier: Modifier,
+    onStreamClick: () -> Unit,
+    onPeopleClick: () -> Unit,
+    onChatsClick: () -> Unit,
+    onProfileClick: () -> Unit
+) {
     val windowSize = LocalWindowInfo.current.containerSize
     val density = LocalDensity.current
     val screenWidthDp = with(density) { windowSize.width.toDp() }
@@ -424,7 +439,7 @@ fun NavigationBar(modifier: Modifier) {
             CustomButton(
                 icon = painterResource(R.drawable.ic_search),
                 iconSize = 24.dp,
-                onClick = {  },
+                onClick =  onStreamClick,
                 modifier = Modifier
                     .width(99.dp)
                     .height(48.dp),
@@ -444,7 +459,7 @@ fun NavigationBar(modifier: Modifier) {
             CustomButton(
                 icon = painterResource(R.drawable.ic_people),
                 iconSize = 24.dp,
-                onClick = {  },
+                onClick = onPeopleClick,
                 modifier = Modifier
                     .size(48.dp),
                 shape = RoundedCornerShape(32.dp),
@@ -456,7 +471,7 @@ fun NavigationBar(modifier: Modifier) {
             CustomButton(
                 icon = painterResource(R.drawable.ic_chats),
                 iconSize = 24.dp,
-                onClick = {  },
+                onClick = onChatsClick,
                 modifier = Modifier
                     .size(48.dp),
                 shape = RoundedCornerShape(32.dp),
@@ -468,7 +483,7 @@ fun NavigationBar(modifier: Modifier) {
             CustomButton(
                 icon = painterResource(R.drawable.ic_profile),
                 iconSize = 24.dp,
-                onClick = {  },
+                onClick = onProfileClick,
                 modifier = Modifier
                     .size(48.dp),
                 shape = RoundedCornerShape(32.dp),

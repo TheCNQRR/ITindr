@@ -7,6 +7,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 
 class MainScreenActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,7 +32,45 @@ class MainScreenActivity : AppCompatActivity() {
             listOf("Python", "Django", "REST"), R.drawable.ic_mock_user_photo)
 
         setContent {
-            MainScreen(mockPerson)
+            val navController = rememberNavController()
+
+            NavHost(
+                navController = navController,
+                startDestination = Stream::class
+            ) {
+                composable<Stream> {
+                    StreamScreen(
+                        mockPerson,
+                        onNavigateToPeople = { navController.navigate(People) },
+                        onNavigateToChats = { navController.navigate(Chats) },
+                        onNavigateToProfile = { navController.navigate(Profile) }
+                    )
+                }
+
+                composable<People> {
+                    PeopleScreen(
+                        onNavigateToStream = { navController.navigate(Stream) },
+                        onNavigateToChats = { navController.navigate(Chats) },
+                        onNavigateToProfile = { navController.navigate(Profile) }
+                    )
+                }
+
+                composable<Chats> {
+                    ChatsScreen(
+                        onNavigateToStream = { navController.navigate(Stream) },
+                        onNavigateToPeople = { navController.navigate(People) },
+                        onNavigateToProfile = { navController.navigate(Profile) }
+                    )
+                }
+
+                composable<Profile> {
+                    ProfileScreen(
+                        onNavigateToStream = { navController.navigate(Stream) },
+                        onNavigateToPeople = { navController.navigate(People) },
+                        onNavigateToChats = { navController.navigate(Chats) }
+                    )
+                }
+            }
         }
     }
 

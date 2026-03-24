@@ -39,4 +39,7 @@
     <string name="heart">Сердце</string>
     <string name="logo">Логотип</string>
     <string name="stream">Поток</string>
+    <string name="people">Люди</string>
+    <string name="chats">Чаты</string>
+    <string name="profile">Профиль</string>
 </resources>
