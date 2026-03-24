@@ -159,9 +159,10 @@ fun NavigationBarChats(
                 .fillMaxSize()
                 .padding(
                     top = 8.dp,
-                    start = 8.dp
+                    start = 8.dp,
+                    end = 8.dp
                 ),
-            horizontalArrangement = Arrangement.spacedBy(8.dp)
+            horizontalArrangement = Arrangement.SpaceBetween
         ) {
             val interSemiBold = FontFamily(Font(R.font.inter_semi_bold, FontWeight.SemiBold))
 
