@@ -42,7 +42,7 @@ fun ProfileScreen(
     ) {
         Image(
             painter = painterResource(R.drawable.gradient_background),
-            contentDescription = null,
+            contentDescription = stringResource(R.string.background),
             modifier = Modifier.fillMaxSize(),
             contentScale = ContentScale.Crop
         )
@@ -70,7 +70,7 @@ fun ProfileScreen(
                 CustomButton(
                     icon = painterResource(R.drawable.ic_edit),
                     iconSize = 24.dp,
-                    onClick =  onEditClick,
+                    onClick = onEditClick,
                     modifier = Modifier
                         .size(48.dp),
                     shape = RoundedCornerShape(24.dp),
@@ -83,7 +83,7 @@ fun ProfileScreen(
                 CustomButton(
                     icon = painterResource(R.drawable.ic_logout),
                     iconSize = 24.dp,
-                    onClick =  { },
+                    onClick = { },
                     modifier = Modifier
                         .size(48.dp),
                     shape = RoundedCornerShape(24.dp),
@@ -109,7 +109,7 @@ fun ProfileScreen(
 
 @Composable
 fun NavigationBarProfile(
-    modifier: Modifier,
+    modifier: Modifier = Modifier,
     onStreamClick: () -> Unit,
     onPeopleClick: () -> Unit,
     onChatsClick: () -> Unit,
@@ -153,7 +153,7 @@ fun NavigationBarProfile(
             CustomButton(
                 icon = painterResource(R.drawable.ic_stream),
                 iconSize = 24.dp,
-                onClick =  onStreamClick,
+                onClick = onStreamClick,
                 modifier = Modifier
                     .size(48.dp),
                 shape = RoundedCornerShape(32.dp),

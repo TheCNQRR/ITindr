@@ -7,4 +7,6 @@
     <color name="nav_bar">#35373B</color>
     <color name="dislike_background">#D4023A</color>
     <color name="like_background">#00C493</color>
+    <color name="gradient_start">#00000000</color>
+    <color name="gradient_end">#80000000</color>
 </resources>

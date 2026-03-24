@@ -28,7 +28,9 @@ class MainScreenActivity : AppCompatActivity() {
 
         supportActionBar?.hide()
 
-        val mockPerson = Person("Андрей Иванов", "Люблю программировать на питоне. Люблю изучать питон. Люблю всё, что угодно, связанное с питоном. А еще я люблю перл.",
+        val mockPerson = Person("Андрей Иванов",
+            "Люблю программировать на питоне. Люблю изучать питон. Люблю всё, что угодно," +
+                " связанное с питоном. А еще я люблю перл.",
             listOf("Python", "Django", "REST"), R.drawable.ic_mock_user_photo)
 
         setContent {

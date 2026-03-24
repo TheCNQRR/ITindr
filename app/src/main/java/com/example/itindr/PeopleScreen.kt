@@ -44,7 +44,7 @@ fun PeopleScreen(
     ) {
         Image(
             painter = painterResource(R.drawable.gradient_background),
-            contentDescription = null,
+            contentDescription = stringResource(R.string.background),
             modifier = Modifier.fillMaxSize(),
             contentScale = ContentScale.Crop
         )
@@ -73,7 +73,7 @@ fun PeopleScreen(
             ) {
                 Image(
                     painter = painterResource(R.drawable.ic_mock_user_photo),
-                    contentDescription = null,
+                    contentDescription = stringResource(R.string.background),
                     modifier = Modifier.fillMaxSize(),
                     contentScale = ContentScale.Crop
                 )
@@ -107,7 +107,7 @@ fun PeopleScreen(
 
 @Composable
 fun NavigationBarPeople(
-    modifier: Modifier,
+    modifier: Modifier = Modifier,
     onStreamClick: () -> Unit,
     onPeopleClick: () -> Unit,
     onChatsClick: () -> Unit,
@@ -151,7 +151,7 @@ fun NavigationBarPeople(
             CustomButton(
                 icon = painterResource(R.drawable.ic_stream),
                 iconSize = 24.dp,
-                onClick =  onStreamClick,
+                onClick = onStreamClick,
                 modifier = Modifier
                     .size(48.dp),
                 shape = RoundedCornerShape(32.dp),

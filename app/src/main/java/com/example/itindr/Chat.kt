@@ -3,5 +3,4 @@ package com.example.itindr
 import kotlinx.serialization.Serializable
 
 @Serializable
-object Chat {
-}
+object Chat

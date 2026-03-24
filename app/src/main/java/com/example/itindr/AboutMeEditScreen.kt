@@ -29,7 +29,7 @@ fun AboutMeEditScreen(
     ) {
         Image(
             painter = painterResource(R.drawable.gradient_background),
-            contentDescription = null,
+            contentDescription = stringResource(R.string.background),
             modifier = Modifier.fillMaxSize(),
             contentScale = ContentScale.Crop
         )
@@ -50,7 +50,6 @@ fun AboutMeEditScreen(
                 iconTint = Color.White,
                 contentAlignment = Alignment.Center
             )
-
         }
 
         val interBold = FontFamily(Font(R.font.inter_bold, FontWeight.Bold))

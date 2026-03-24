@@ -46,7 +46,7 @@ fun ChatsScreen(
     ) {
         Image(
             painter = painterResource(R.drawable.gradient_background),
-            contentDescription = null,
+            contentDescription = stringResource(R.string.background),
             modifier = Modifier.fillMaxSize(),
             contentScale = ContentScale.Crop
         )
@@ -80,7 +80,7 @@ fun ChatsScreen(
                 ) {
                     Image(
                         painter = painterResource(R.drawable.ic_mock_user_photo),
-                        contentDescription = null,
+                        contentDescription = stringResource(R.string.Andrey),
                         modifier = Modifier
                             .size(80.dp)
                             .clip(RoundedCornerShape(16.dp)),
@@ -125,7 +125,7 @@ fun ChatsScreen(
 
 @Composable
 fun NavigationBarChats(
-    modifier: Modifier,
+    modifier: Modifier = Modifier,
     onStreamClick: () -> Unit,
     onPeopleClick: () -> Unit,
     onChatsClick: () -> Unit,
@@ -169,7 +169,7 @@ fun NavigationBarChats(
             CustomButton(
                 icon = painterResource(R.drawable.ic_stream),
                 iconSize = 24.dp,
-                onClick =  onStreamClick,
+                onClick = onStreamClick,
                 modifier = Modifier
                     .size(48.dp),
                 shape = RoundedCornerShape(32.dp),
