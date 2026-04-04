@@ -24,13 +24,12 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.Font
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.itindr.R
 import com.example.itindr.ui.common.CustomButton
+import com.example.itindr.ui.theme.InterFontFamily
 
 @Composable
 fun ProfileScreen(
@@ -49,8 +48,6 @@ fun ProfileScreen(
             contentScale = ContentScale.Crop
         )
 
-        val interBold = FontFamily(Font(R.font.inter_bold, FontWeight.Bold))
-
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -61,7 +58,8 @@ fun ProfileScreen(
             Text(
                 text = stringResource(R.string.profile),
                 fontSize = 40.sp,
-                fontFamily = interBold,
+                fontFamily = InterFontFamily,
+                fontWeight = FontWeight.Bold,
                 color = Color.White
             )
 
@@ -150,8 +148,6 @@ fun NavigationBarProfile(
                 ),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            val interSemiBold = FontFamily(Font(R.font.inter_semi_bold, FontWeight.SemiBold))
-
             CustomButton(
                 icon = painterResource(R.drawable.ic_stream),
                 iconSize = 24.dp,
@@ -201,9 +197,9 @@ fun NavigationBarProfile(
                 text = stringResource(R.string.profile),
                 textColor = Color.Black,
                 textStyle = TextStyle(
-                    fontFamily = interSemiBold,
+                    fontFamily = InterFontFamily,
+                    fontWeight = FontWeight.SemiBold,
                     fontSize = 14.sp,
-                    fontWeight = FontWeight.SemiBold
                 ),
                 contentAlignment = Alignment.Center
             )

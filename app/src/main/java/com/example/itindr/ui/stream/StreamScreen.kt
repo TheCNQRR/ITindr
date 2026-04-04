@@ -49,8 +49,6 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.Font
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -58,6 +56,7 @@ import androidx.compose.ui.unit.sp
 import com.example.itindr.R
 import com.example.itindr.ui.MainScreenActivity
 import com.example.itindr.ui.common.CustomButton
+import com.example.itindr.ui.theme.InterFontFamily
 
 private const val ASPECT_RATIO_WIDTH = 363f
 private const val ASPECT_RATIO_HEIGHT = 624f
@@ -244,8 +243,6 @@ fun PersonCard(
             animationSpec = animationSpec
         )
 
-        val inter = FontFamily(Font(R.font.inter_bold, FontWeight.Bold))
-
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -270,7 +267,8 @@ fun PersonCard(
                         ),
                     text = person.name,
                     fontSize = 24.sp,
-                    fontFamily = inter,
+                    fontFamily = InterFontFamily,
+                    fontWeight = FontWeight.Bold,
                     color = Color.White
                 )
 
@@ -299,12 +297,12 @@ fun PersonCard(
                         }
                         .graphicsLayer { alpha = slideProgress.value }
                 ) {
-                    val interRegular = FontFamily(Font(R.font.inter_regular, FontWeight.Normal))
 
                     Text(
                         text = person.bio,
                         fontSize = 14.sp,
-                        fontFamily = interRegular,
+                        fontFamily = InterFontFamily,
+                        fontWeight = FontWeight.Normal,
                         color = Color.White,
                         maxLines = MAX_LINES,
                         overflow = TextOverflow.Ellipsis
@@ -387,8 +385,6 @@ fun PersonCard(
 
 @Composable
 fun TagChip(tag: String) {
-    val inter = FontFamily(Font(R.font.inter_bold, FontWeight.Bold))
-
     Box(
         modifier = Modifier
             .wrapContentWidth()
@@ -403,8 +399,8 @@ fun TagChip(tag: String) {
         Text(
             text = tag,
             fontSize = 12.sp,
-            fontFamily = inter,
-            fontWeight = FontWeight.Medium,
+            fontFamily = InterFontFamily,
+            fontWeight = FontWeight.Bold,
             color = Color.White
         )
     }
@@ -451,8 +447,6 @@ fun NavigationBarMain(
                 ),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            val interSemiBold = FontFamily(Font(R.font.inter_semi_bold, FontWeight.SemiBold))
-
             CustomButton(
                 icon = painterResource(R.drawable.ic_stream),
                 iconSize = 24.dp,
@@ -466,9 +460,9 @@ fun NavigationBarMain(
                 text = stringResource(R.string.stream),
                 textColor = Color.Black,
                 textStyle = TextStyle(
-                    fontFamily = interSemiBold,
-                    fontSize = 14.sp,
-                    fontWeight = FontWeight.SemiBold
+                    fontFamily = InterFontFamily,
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 14.sp
                 ),
                 contentAlignment = Alignment.Center
             )

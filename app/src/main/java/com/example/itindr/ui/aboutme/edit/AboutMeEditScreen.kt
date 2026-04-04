@@ -14,13 +14,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.Font
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.itindr.R
 import com.example.itindr.ui.common.CustomButton
+import com.example.itindr.ui.theme.InterFontFamily
 
 @Composable
 fun AboutMeEditScreen(
@@ -54,15 +53,14 @@ fun AboutMeEditScreen(
             )
         }
 
-        val interBold = FontFamily(Font(R.font.inter_bold, FontWeight.Bold))
-
         Text(
             modifier = Modifier
                 .align(Alignment.TopCenter)
                 .padding(top = 75.dp),
             text = stringResource(R.string.about_yourself),
             fontSize = 16.sp,
-            fontFamily = interBold,
+            fontFamily = InterFontFamily,
+            fontWeight = FontWeight.Bold,
             color = Color.White
         )
     }

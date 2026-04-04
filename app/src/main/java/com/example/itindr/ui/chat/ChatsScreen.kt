@@ -28,13 +28,12 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.Font
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.itindr.R
 import com.example.itindr.ui.common.CustomButton
+import com.example.itindr.ui.theme.InterFontFamily
 
 @Composable
 fun ChatsScreen(
@@ -53,15 +52,13 @@ fun ChatsScreen(
             contentScale = ContentScale.Crop
         )
 
-        val interBold = FontFamily(Font(R.font.inter_bold, FontWeight.Bold))
-        val inter = FontFamily(Font(R.font.inter_regular, FontWeight.Normal))
-
         Text(
             modifier = Modifier
                 .padding(top = 60.dp, start = 24.dp),
             text = stringResource(R.string.chats),
             fontSize = 40.sp,
-            fontFamily = interBold,
+            fontFamily = InterFontFamily,
+            fontWeight = FontWeight.Bold,
             color = Color.White
         )
 
@@ -98,14 +95,16 @@ fun ChatsScreen(
                         Text(
                             text = stringResource(R.string.Andrey),
                             fontSize = 16.sp,
-                            fontFamily = interBold,
+                            fontFamily = InterFontFamily,
+                            fontWeight = FontWeight.Bold,
                             color = Color.White
                         )
 
                         Text(
                             text = stringResource(R.string.message),
                             fontSize = 16.sp,
-                            fontFamily = inter,
+                            fontFamily = InterFontFamily,
+                            fontWeight = FontWeight.Normal,
                             color = Color.White
                         )
                     }
@@ -166,8 +165,6 @@ fun NavigationBarChats(
                 ),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            val interSemiBold = FontFamily(Font(R.font.inter_semi_bold, FontWeight.SemiBold))
-
             CustomButton(
                 icon = painterResource(R.drawable.ic_stream),
                 iconSize = 24.dp,
@@ -205,9 +202,9 @@ fun NavigationBarChats(
                 text = stringResource(R.string.chats),
                 textColor = Color.Black,
                 textStyle = TextStyle(
-                    fontFamily = interSemiBold,
+                    fontFamily = InterFontFamily,
+                    fontWeight = FontWeight.SemiBold,
                     fontSize = 14.sp,
-                    fontWeight = FontWeight.SemiBold
                 ),
                 contentAlignment = Alignment.Center
             )
