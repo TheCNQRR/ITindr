@@ -1,4 +1,4 @@
-package com.example.itindr
+package com.example.itindr.ui.profile
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -29,6 +29,8 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.itindr.R
+import com.example.itindr.ui.stream.CustomButton
 
 @Composable
 fun ProfileScreen(

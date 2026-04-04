@@ -1,6 +1,6 @@
-package com.example.itindr
+package com.example.itindr.ui.people
 
 import kotlinx.serialization.Serializable
 
 @Serializable
-object Chats
+object People

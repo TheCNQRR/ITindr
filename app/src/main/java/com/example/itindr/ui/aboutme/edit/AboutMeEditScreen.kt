@@ -1,4 +1,4 @@
-package com.example.itindr
+package com.example.itindr.ui.aboutme.edit
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
@@ -19,6 +19,8 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.itindr.ui.stream.CustomButton
+import com.example.itindr.R
 
 @Composable
 fun AboutMeEditScreen(

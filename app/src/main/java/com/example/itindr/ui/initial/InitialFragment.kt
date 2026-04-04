@@ -1,4 +1,4 @@
-package com.example.itindr
+package com.example.itindr.ui.initial
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
@@ -13,6 +13,7 @@ import android.view.animation.AccelerateDecelerateInterpolator
 import android.view.animation.DecelerateInterpolator
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.example.itindr.R
 import com.example.itindr.databinding.FragmentInitialBinding
 import com.example.itindr.util.setPressEffect
 

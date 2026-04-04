@@ -1,6 +1,6 @@
-package com.example.itindr
+package com.example.itindr.ui.stream
 
 import kotlinx.serialization.Serializable
 
 @Serializable
-object Profile
+object Stream

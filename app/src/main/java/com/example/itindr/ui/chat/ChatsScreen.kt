@@ -1,11 +1,13 @@
-package com.example.itindr
+package com.example.itindr.ui.chat
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -31,13 +33,15 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.itindr.ui.stream.CustomButton
+import com.example.itindr.R
 
 @Composable
-fun PeopleScreen(
+fun ChatsScreen(
     onNavigateToStream: () -> Unit,
-    onNavigateToChats: () -> Unit,
+    onNavigateToPeople: () -> Unit,
     onNavigateToProfile: () -> Unit,
-    onPersonClick: () -> Unit
+    onChatClick: () -> Unit
 ) {
     Box(modifier = Modifier
         .fillMaxSize()
@@ -50,11 +54,12 @@ fun PeopleScreen(
         )
 
         val interBold = FontFamily(Font(R.font.inter_bold, FontWeight.Bold))
+        val inter = FontFamily(Font(R.font.inter_regular, FontWeight.Normal))
 
         Text(
             modifier = Modifier
                 .padding(top = 60.dp, start = 24.dp),
-            text = stringResource(R.string.people),
+            text = stringResource(R.string.chats),
             fontSize = 40.sp,
             fontFamily = interBold,
             color = Color.White
@@ -62,51 +67,66 @@ fun PeopleScreen(
 
         Box(
             modifier = Modifier
-                .padding(top = 132.dp, start = 24.dp)
+                .padding(top = 132.dp, start = 24.dp, end = 24.dp)
         ) {
             Box(
                 modifier = Modifier
-                    .width(174.dp)
-                    .height(200.dp)
-                    .clip(RoundedCornerShape(16.dp))
-                    .clickable(onClick = onPersonClick)
+                    .fillMaxWidth()
+                    .height(80.dp)
+                    .clickable(onClick = onChatClick)
             ) {
-                Image(
-                    painter = painterResource(R.drawable.ic_mock_user_photo),
-                    contentDescription = stringResource(R.string.background),
-                    modifier = Modifier.fillMaxSize(),
-                    contentScale = ContentScale.Crop
-                )
-
-                Box(
+                Row(
                     modifier = Modifier
-                        .align(Alignment.BottomStart)
-                        .padding(start = 16.dp, bottom = 16.dp)
+                        .fillMaxWidth()
+                        .height(80.dp),
                 ) {
-                    Text(
-                        text = stringResource(R.string.Andrey),
-                        fontSize = 20.sp,
-                        fontFamily = interBold,
-                        color = Color.White
+                    Image(
+                        painter = painterResource(R.drawable.ic_mock_user_photo),
+                        contentDescription = stringResource(R.string.Andrey),
+                        modifier = Modifier
+                            .size(80.dp)
+                            .clip(RoundedCornerShape(16.dp)),
+                        contentScale = ContentScale.Crop
                     )
+
+                    Column(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .fillMaxHeight()
+                            .padding(start = 16.dp)
+                    ) {
+                        Text(
+                            text = stringResource(R.string.Andrey),
+                            fontSize = 16.sp,
+                            fontFamily = interBold,
+                            color = Color.White
+                        )
+
+                        Text(
+                            text = stringResource(R.string.message),
+                            fontSize = 16.sp,
+                            fontFamily = inter,
+                            color = Color.White
+                        )
+                    }
                 }
             }
         }
 
-        NavigationBarPeople(
+        NavigationBarChats(
             modifier = Modifier
                 .padding(bottom = 48.dp)
                 .align(Alignment.BottomCenter),
             onStreamClick = onNavigateToStream,
-            onPeopleClick = { },
-            onChatsClick = onNavigateToChats,
+            onPeopleClick = onNavigateToPeople,
+            onChatsClick = { },
             onProfileClick = onNavigateToProfile
         )
     }
 }
 
 @Composable
-fun NavigationBarPeople(
+fun NavigationBarChats(
     modifier: Modifier = Modifier,
     onStreamClick: () -> Unit,
     onPeopleClick: () -> Unit,
@@ -117,7 +137,7 @@ fun NavigationBarPeople(
     val density = LocalDensity.current
     val screenWidthDp = with(density) { windowSize.width.toDp() }
 
-    val canUseSidePadding = screenWidthDp - 84.dp >= 280.dp
+    val canUseSidePadding = screenWidthDp - 136.dp >= 277.dp
 
     Box(
         modifier = modifier
@@ -127,7 +147,7 @@ fun NavigationBarPeople(
                         .fillMaxWidth()
                         .padding(horizontal = 64.dp)
                 } else {
-                    Modifier.width(280.dp)
+                    Modifier.width(277.dp)
                 }
             )
             .height(64.dp)
@@ -165,18 +185,10 @@ fun NavigationBarPeople(
                 iconSize = 24.dp,
                 onClick = onPeopleClick,
                 modifier = Modifier
-                    .width(96.dp)
-                    .height(48.dp),
+                    .size(48.dp),
                 shape = RoundedCornerShape(32.dp),
-                backroundColor = colorResource(R.color.white),
-                iconTint = Color.Black,
-                text = stringResource(R.string.people),
-                textColor = Color.Black,
-                textStyle = TextStyle(
-                    fontFamily = interSemiBold,
-                    fontSize = 14.sp,
-                    fontWeight = FontWeight.SemiBold
-                ),
+                backroundColor = colorResource(R.color.nav_bar),
+                iconTint = Color.White,
                 contentAlignment = Alignment.Center
             )
 
@@ -185,10 +197,18 @@ fun NavigationBarPeople(
                 iconSize = 24.dp,
                 onClick = onChatsClick,
                 modifier = Modifier
-                    .size(48.dp),
+                    .width(93.dp)
+                    .height(48.dp),
                 shape = RoundedCornerShape(32.dp),
-                backroundColor = colorResource(R.color.nav_bar),
-                iconTint = Color.White,
+                backroundColor = colorResource(R.color.white),
+                iconTint = Color.Black,
+                text = stringResource(R.string.chats),
+                textColor = Color.Black,
+                textStyle = TextStyle(
+                    fontFamily = interSemiBold,
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight.SemiBold
+                ),
                 contentAlignment = Alignment.Center
             )
 

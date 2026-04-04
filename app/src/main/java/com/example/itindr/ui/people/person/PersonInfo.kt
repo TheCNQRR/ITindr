@@ -1,4 +1,4 @@
-package com.example.itindr
+package com.example.itindr.ui.people.person
 
 import kotlinx.serialization.Serializable
 

@@ -1,4 +1,4 @@
-package com.example.itindr
+package com.example.itindr.ui.stream
 
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
@@ -61,6 +61,8 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.itindr.ui.MainScreenActivity
+import com.example.itindr.R
 
 private const val ASPECT_RATIO_WIDTH = 363f
 private const val ASPECT_RATIO_HEIGHT = 624f
@@ -115,22 +117,19 @@ fun StreamScreen(
 
             PersonCard(person)
 
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(dimensionResource(R.dimen.navbar_zone))
-            ) {
-                NavigationBarMain(
-                    modifier = Modifier
-                        .padding(bottom = dimensionResource(R.dimen.size_xxmedium))
-                        .align(Alignment.BottomCenter),
-                    onStreamClick = { },
-                    onPeopleClick = onNavigateToPeople,
-                    onChatsClick = onNavigateToChats,
-                    onProfileClick = onNavigateToProfile
-                )
-            }
+            Spacer(modifier = Modifier
+                .height(136.dp))
         }
+
+        NavigationBarMain(
+            modifier = Modifier
+                .padding(bottom = dimensionResource(R.dimen.size_xxmedium))
+                .align(Alignment.BottomCenter),
+            onStreamClick = { },
+            onPeopleClick = onNavigateToPeople,
+            onChatsClick = onNavigateToChats,
+            onProfileClick = onNavigateToProfile
+        )
     }
 }
 
@@ -287,7 +286,9 @@ fun PersonCard(
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(start = dimensionResource(R.dimen.size_xsmall), end = dimensionResource(R.dimen.size_xsmall)),
+                        .padding(start = dimensionResource(R.dimen.size_xsmall), end = dimensionResource(
+                            R.dimen.size_xsmall
+                        )),
                     horizontalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.size_small)),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
