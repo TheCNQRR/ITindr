@@ -1,28 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="app_name_padding_top">60dp</dimen>
-    <dimen name="app_name_width">114dp</dimen>
-    <dimen name="app_name_height">32dp</dimen>
-    <dimen name="spacer_24">24dp</dimen>
-    <dimen name="navbar_zone">136dp</dimen>
-    <dimen name="scrollbar_widht">4dp</dimen>
-    <dimen name="scrollbar_height">120dp</dimen>
-    <dimen name="size_2">2dp</dimen>
-    <dimen name="size_4">4dp</dimen>
-    <dimen name="size_small">8dp</dimen>
-    <dimen name="size_12">12dp</dimen>
-    <dimen name="size_xsmall">16dp</dimen>
-    <dimen name="size_xxsmall">24dp</dimen>
-    <dimen name="size_medium">32dp</dimen>
-    <dimen name="size_xmedium">40dp</dimen>
-    <dimen name="size_xxmedium">48dp</dimen>
-    <dimen name="size_64">64dp</dimen>
-    <dimen name="font_12">12sp</dimen>
-    <dimen name="font_14">14sp</dimen>
-    <dimen name="font_16">16sp</dimen>
-    <dimen name="font_20">20sp</dimen>
-    <dimen name="font_24">24sp</dimen>
-    <dimen name="font_40">40sp</dimen>
-    <dimen name="navbar_280">280dp</dimen>
-    <dimen name="navbar_283">283dp</dimen>
+
 </resources>

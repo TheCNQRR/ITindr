@@ -46,7 +46,6 @@ import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalWindowInfo
 import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
@@ -62,15 +61,11 @@ import com.example.itindr.ui.common.CustomButton
 
 private const val ASPECT_RATIO_WIDTH = 363f
 private const val ASPECT_RATIO_HEIGHT = 624f
-private val BIO_SPACING = 24.dp
 private const val DURATION_300 = 300
 private const val THRESHOLD = 0.5f
 private const val ALPHA_60 = 0.6f
 private const val MAX_LINES = 20
-private val BUTTONS_HEIGHT = 56.dp
 private const val DELTA = 200f
-private val TRANSLATION_Y = 96.dp
-private val PADDING_128 = 128.dp
 
 @Composable
 fun StreamScreen(
@@ -97,16 +92,16 @@ fun StreamScreen(
         ) {
             Icon(
                 modifier = Modifier
-                    .padding(top = dimensionResource(R.dimen.app_name_padding_top))
-                    .width(dimensionResource(R.dimen.app_name_width))
-                    .height(dimensionResource(R.dimen.app_name_height)),
+                    .padding(top = 60.dp)
+                    .width(114.dp)
+                    .height(32.dp),
                 painter = painterResource(R.drawable.itindr_text),
                 contentDescription = stringResource(R.string.app_name),
                 tint = colorResource(R.color.white)
             )
 
             Spacer(modifier = Modifier
-                .height(dimensionResource(R.dimen.spacer_24)))
+                .height(24.dp))
 
             PersonCard(person)
 
@@ -116,7 +111,7 @@ fun StreamScreen(
 
         NavigationBarMain(
             modifier = Modifier
-                .padding(bottom = dimensionResource(R.dimen.size_xxmedium))
+                .padding(bottom = 48.dp)
                 .align(Alignment.BottomCenter),
             onStreamClick = { },
             onPeopleClick = onNavigateToPeople,
@@ -140,7 +135,7 @@ fun PersonCard(
 
     val offsetPx = remember(bioHeight.floatValue) {
         derivedStateOf {
-            bioHeight.floatValue + with(density) { BIO_SPACING.toPx() }
+            bioHeight.floatValue + with(density) { 24.dp.toPx() }
         }
     }
 
@@ -153,12 +148,12 @@ fun PersonCard(
         modifier = Modifier
             .fillMaxWidth()
             .padding(
-                top = dimensionResource(R.dimen.size_xxsmall),
-                start = dimensionResource(R.dimen.size_xxsmall),
-                end = dimensionResource(R.dimen.size_xxsmall)
+                top = 24.dp,
+                start = 24.dp,
+                end = 24.dp
             )
             .aspectRatio(ASPECT_RATIO_WIDTH / ASPECT_RATIO_HEIGHT)
-            .clip(RoundedCornerShape(dimensionResource(R.dimen.size_medium)))
+            .clip(RoundedCornerShape(32.dp))
             .onGloballyPositioned { coordinates ->
                 cardLayoutCoordinates.value = coordinates
             }
@@ -254,7 +249,7 @@ fun PersonCard(
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(bottom = dimensionResource(R.dimen.size_xsmall)),
+                .padding(bottom = 16.dp),
             verticalArrangement = Arrangement.Bottom
         ) {
             Column(
@@ -268,10 +263,13 @@ fun PersonCard(
                     }
             ) {
                 Text(
-                    modifier = Modifier.padding(start = dimensionResource(R.dimen.size_xsmall),
-                        bottom = dimensionResource(R.dimen.size_12)),
+                    modifier = Modifier
+                        .padding(
+                            start = 16.dp,
+                            bottom = 12.dp
+                        ),
                     text = person.name,
-                    fontSize = dimensionResource(R.dimen.font_24).value.sp,
+                    fontSize = 24.sp,
                     fontFamily = inter,
                     color = Color.White
                 )
@@ -279,10 +277,8 @@ fun PersonCard(
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(start = dimensionResource(R.dimen.size_xsmall), end = dimensionResource(
-                            R.dimen.size_xsmall
-                        )),
-                    horizontalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.size_small)),
+                        .padding(start = 16.dp, end = 16.dp),
+                    horizontalArrangement = Arrangement.spacedBy(8.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     person.tags.forEach { tag ->
@@ -294,9 +290,10 @@ fun PersonCard(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(
-                            start = dimensionResource(R.dimen.size_xsmall),
-                            end = dimensionResource(R.dimen.size_xsmall),
-                            top = dimensionResource(R.dimen.size_xxsmall))
+                            start = 16.dp,
+                            end = 16.dp,
+                            top = 24.dp
+                        )
                         .onGloballyPositioned { coordinates ->
                             bioHeight.floatValue = coordinates.size.height.toFloat()
                         }
@@ -306,7 +303,7 @@ fun PersonCard(
 
                     Text(
                         text = person.bio,
-                        fontSize = dimensionResource(R.dimen.font_14).value.sp,
+                        fontSize = 14.sp,
                         fontFamily = interRegular,
                         color = Color.White,
                         maxLines = MAX_LINES,
@@ -319,24 +316,24 @@ fun PersonCard(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(
-                        start = dimensionResource(R.dimen.size_xsmall),
-                        end = dimensionResource(R.dimen.size_xsmall),
-                        top = dimensionResource(R.dimen.size_xxsmall)
+                        start = 16.dp,
+                        end = 16.dp,
+                        top = 24.dp
                     )
-                    .height(BUTTONS_HEIGHT)
+                    .height(56.dp)
                     .onGloballyPositioned { coordinates ->
                         buttonRowBounds.value = coordinates.boundsInRoot()
                     },
-                horizontalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.size_xsmall))
+                horizontalArrangement = Arrangement.spacedBy(16.dp)
             ) {
                 CustomButton(
                     icon = painterResource(R.drawable.ic_dislike),
-                    iconSize = dimensionResource(R.dimen.size_xxsmall),
+                    iconSize = 24.dp,
                     onClick = { },
                     modifier = Modifier
                         .weight(1f)
                         .fillMaxHeight(),
-                    shape = RoundedCornerShape(dimensionResource(R.dimen.size_medium)),
+                    shape = RoundedCornerShape(32.dp),
                     backroundColor = colorResource(R.color.dislike_background),
                     iconTint = Color.White,
                     contentAlignment = Alignment.Center
@@ -344,12 +341,12 @@ fun PersonCard(
 
                 CustomButton(
                     icon = painterResource(R.drawable.ic_like),
-                    iconSize = dimensionResource(R.dimen.size_xxsmall),
+                    iconSize = 24.dp,
                     onClick = { },
                     modifier = Modifier
                         .weight(1f)
                         .fillMaxHeight(),
-                    shape = RoundedCornerShape(dimensionResource(R.dimen.size_medium)),
+                    shape = RoundedCornerShape(32.dp),
                     backroundColor = colorResource(R.color.like_background),
                     iconTint = Color.White,
                     contentAlignment = Alignment.Center
@@ -360,27 +357,27 @@ fun PersonCard(
         Box(
             modifier = Modifier
                 .align(Alignment.CenterEnd)
-                .padding(end = dimensionResource(R.dimen.size_small))
+                .padding(end = 8.dp)
         ) {
             Box(
                 modifier = Modifier
-                    .width(dimensionResource(R.dimen.scrollbar_widht))
-                    .height(dimensionResource(R.dimen.scrollbar_height))
+                    .width(4.dp)
+                    .height(120.dp)
                     .background(
-                        shape = RoundedCornerShape(dimensionResource(R.dimen.size_2)),
+                        shape = RoundedCornerShape(2.dp),
                         color = colorResource(R.color.black).copy(alpha = THRESHOLD)
                     )
             )
 
             Box(
                 modifier = Modifier
-                    .width(dimensionResource(R.dimen.scrollbar_widht))
-                    .height(dimensionResource(R.dimen.size_xxsmall))
+                    .width(4.dp)
+                    .height(24.dp)
                     .graphicsLayer {
-                        translationY = whiteBarProgress.value * with(density) { TRANSLATION_Y.toPx() }
+                        translationY = whiteBarProgress.value * with(density) { 96.dp.toPx() }
                     }
                     .background(
-                        shape = RoundedCornerShape(dimensionResource(R.dimen.size_2)),
+                        shape = RoundedCornerShape(2.dp),
                         color = colorResource(R.color.white)
                     )
             )
@@ -395,17 +392,17 @@ fun TagChip(tag: String) {
     Box(
         modifier = Modifier
             .wrapContentWidth()
-            .heightIn(min = dimensionResource(R.dimen.size_xxsmall))
+            .heightIn(min = 24.dp)
             .background(
                 color = Color.Black.copy(alpha = THRESHOLD),
-                shape = RoundedCornerShape(dimensionResource(R.dimen.size_xsmall))
+                shape = RoundedCornerShape(16.dp)
             )
-            .padding(horizontal = dimensionResource(R.dimen.size_12)),
+            .padding(horizontal = 12.dp),
         contentAlignment = Alignment.Center
     ) {
         Text(
             text = tag,
-            fontSize = dimensionResource(R.dimen.font_12).value.sp,
+            fontSize = 12.sp,
             fontFamily = inter,
             fontWeight = FontWeight.Medium,
             color = Color.White
@@ -425,7 +422,7 @@ fun NavigationBarMain(
     val density = LocalDensity.current
     val screenWidthDp = with(density) { windowSize.width.toDp() }
 
-    val canUseSidePadding = screenWidthDp - PADDING_128 >= dimensionResource(R.dimen.navbar_283)
+    val canUseSidePadding = screenWidthDp - 128.dp >= 283.dp
 
     Box(
         modifier = modifier
@@ -433,24 +430,24 @@ fun NavigationBarMain(
                 if (canUseSidePadding) {
                     Modifier
                         .fillMaxWidth()
-                        .padding(horizontal = dimensionResource(R.dimen.size_64))
+                        .padding(horizontal = 64.dp)
                 } else {
-                    Modifier.width(dimensionResource(R.dimen.navbar_283))
+                    Modifier.width(283.dp)
                 }
             )
-            .height(dimensionResource(R.dimen.size_64))
+            .height(64.dp)
             .background(
                 color = colorResource(R.color.nav_bar),
-                shape = RoundedCornerShape(dimensionResource(R.dimen.size_xxsmall))
+                shape = RoundedCornerShape(24.dp)
             )
     ) {
         Row(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(
-                    top = dimensionResource(R.dimen.size_small),
-                    start = dimensionResource(R.dimen.size_small),
-                    end = dimensionResource(R.dimen.size_small)
+                    top = 8.dp,
+                    start = 8.dp,
+                    end = 8.dp
                 ),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
@@ -458,19 +455,19 @@ fun NavigationBarMain(
 
             CustomButton(
                 icon = painterResource(R.drawable.ic_stream),
-                iconSize = dimensionResource(R.dimen.size_xxsmall),
+                iconSize = 24.dp,
                 onClick = onStreamClick,
                 modifier = Modifier
                     .width(99.dp)
-                    .height(dimensionResource(R.dimen.size_xxmedium)),
-                shape = RoundedCornerShape(dimensionResource(R.dimen.size_medium)),
+                    .height(48.dp),
+                shape = RoundedCornerShape(32.dp),
                 backroundColor = Color.White,
                 iconTint = Color.Black,
                 text = stringResource(R.string.stream),
                 textColor = Color.Black,
                 textStyle = TextStyle(
                     fontFamily = interSemiBold,
-                    fontSize = dimensionResource(R.dimen.font_14).value.sp,
+                    fontSize = 14.sp,
                     fontWeight = FontWeight.SemiBold
                 ),
                 contentAlignment = Alignment.Center
@@ -478,11 +475,11 @@ fun NavigationBarMain(
 
             CustomButton(
                 icon = painterResource(R.drawable.ic_people),
-                iconSize = dimensionResource(R.dimen.size_xxsmall),
+                iconSize = 24.dp,
                 onClick = onPeopleClick,
                 modifier = Modifier
-                    .size(dimensionResource(R.dimen.size_xxmedium)),
-                shape = RoundedCornerShape(dimensionResource(R.dimen.size_medium)),
+                    .size(48.dp),
+                shape = RoundedCornerShape(32.dp),
                 backroundColor = colorResource(R.color.nav_bar),
                 iconTint = Color.White,
                 contentAlignment = Alignment.Center
@@ -490,11 +487,11 @@ fun NavigationBarMain(
 
             CustomButton(
                 icon = painterResource(R.drawable.ic_chats),
-                iconSize = dimensionResource(R.dimen.size_xxsmall),
+                iconSize = 24.dp,
                 onClick = onChatsClick,
                 modifier = Modifier
-                    .size(dimensionResource(R.dimen.size_xxmedium)),
-                shape = RoundedCornerShape(dimensionResource(R.dimen.size_medium)),
+                    .size(48.dp),
+                shape = RoundedCornerShape(32.dp),
                 backroundColor = colorResource(R.color.nav_bar),
                 iconTint = Color.White,
                 contentAlignment = Alignment.Center
@@ -502,11 +499,11 @@ fun NavigationBarMain(
 
             CustomButton(
                 icon = painterResource(R.drawable.ic_profile),
-                iconSize = dimensionResource(R.dimen.size_xxsmall),
+                iconSize = 24.dp,
                 onClick = onProfileClick,
                 modifier = Modifier
-                    .size(dimensionResource(R.dimen.size_xxmedium)),
-                shape = RoundedCornerShape(dimensionResource(R.dimen.size_medium)),
+                    .size(48.dp),
+                shape = RoundedCornerShape(32.dp),
                 backroundColor = colorResource(R.color.nav_bar),
                 iconTint = Color.White,
                 contentAlignment = Alignment.Center

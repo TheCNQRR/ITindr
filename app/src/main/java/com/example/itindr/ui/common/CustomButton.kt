@@ -25,7 +25,6 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.input.pointer.PointerEventType
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.input.pointer.positionChange
-import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.Dp
@@ -107,8 +106,8 @@ fun CustomButton(
         Row(
             modifier = Modifier
                 .padding(
-                    horizontal = dimensionResource(R.dimen.size_12),
-                    vertical = dimensionResource(R.dimen.size_12)
+                    horizontal = 12.dp,
+                    vertical = 12.dp
                 ),
             horizontalArrangement = horizontalArrangment,
             verticalAlignment = Alignment.CenterVertically
@@ -123,7 +122,7 @@ fun CustomButton(
             }
 
             if (text != null) {
-                Spacer(modifier = Modifier.width(dimensionResource(R.dimen.size_4)))
+                Spacer(modifier = Modifier.width(4.dp))
 
                 Text(
                     text = text,
