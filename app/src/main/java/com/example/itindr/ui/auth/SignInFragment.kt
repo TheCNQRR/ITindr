@@ -12,8 +12,8 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.example.itindr.ui.MainScreenActivity
 import com.example.itindr.databinding.FragmentSignInBinding
+import com.example.itindr.ui.MainScreenActivity
 import com.example.itindr.util.setPressEffect
 
 class SignInFragment : Fragment() {

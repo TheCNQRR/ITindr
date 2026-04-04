@@ -11,8 +11,8 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import androidx.fragment.app.Fragment
-import com.example.itindr.ui.MainScreenActivity
 import com.example.itindr.databinding.FragmentAboutMeBinding
+import com.example.itindr.ui.MainScreenActivity
 import com.example.itindr.util.dp
 import com.example.itindr.util.setPressEffect
 

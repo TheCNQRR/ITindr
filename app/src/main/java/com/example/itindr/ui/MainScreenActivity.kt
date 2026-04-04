@@ -13,10 +13,10 @@ import androidx.navigation.compose.rememberNavController
 import com.example.itindr.R
 import com.example.itindr.ui.aboutme.edit.AboutMeEdit
 import com.example.itindr.ui.aboutme.edit.AboutMeEditScreen
-import com.example.itindr.ui.chat.signlechat.Chat
-import com.example.itindr.ui.chat.signlechat.ChatScreen
 import com.example.itindr.ui.chat.Chats
 import com.example.itindr.ui.chat.ChatsScreen
+import com.example.itindr.ui.chat.signlechat.Chat
+import com.example.itindr.ui.chat.signlechat.ChatScreen
 import com.example.itindr.ui.people.People
 import com.example.itindr.ui.people.PeopleScreen
 import com.example.itindr.ui.people.person.PersonInfo

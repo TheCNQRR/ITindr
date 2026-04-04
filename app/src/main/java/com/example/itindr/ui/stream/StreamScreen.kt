@@ -120,7 +120,7 @@ fun StreamScreen(
     }
 }
 
-@Suppress("LoopWithTooManyJumpStatements")
+@Suppress("LoopWithTooManyJumpStatements", "CyclomaticComplexMethod")
 @Composable
 fun PersonCard(
     person: MainScreenActivity.Person
@@ -297,7 +297,6 @@ fun PersonCard(
                         }
                         .graphicsLayer { alpha = slideProgress.value }
                 ) {
-
                     Text(
                         text = person.bio,
                         fontSize = 14.sp,
