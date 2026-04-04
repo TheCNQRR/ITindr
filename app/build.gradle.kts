@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 android {
@@ -19,6 +21,7 @@ android {
 
     buildFeatures {
         viewBinding = true
+        compose = true
     }
 
     buildTypes {
@@ -37,6 +40,10 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+
+    lint {
+        disable.add("ComposeMagicNumber")
+    }
 }
 
 dependencies {
@@ -47,6 +54,12 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.core.splashscreen)
     implementation(libs.navigation.fragment)
+    implementation(libs.androidx.material3.android)
+    implementation(libs.androidx.activity.compose)
+    implementation(libs.picasso)
+    implementation(libs.androidx.navigation.compose)
+    implementation(libs.kotlin.serializationJson)
+    implementation(libs.kotlin.serializationCore)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
