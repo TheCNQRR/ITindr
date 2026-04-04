@@ -30,7 +30,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.itindr.R
-import com.example.itindr.ui.stream.CustomButton
+import com.example.itindr.ui.common.CustomButton
 
 @Composable
 fun ProfileScreen(

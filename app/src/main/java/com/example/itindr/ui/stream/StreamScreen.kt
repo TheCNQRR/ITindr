@@ -23,7 +23,6 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Icon
-import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
@@ -33,13 +32,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.input.pointer.PointerEventType
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.input.pointer.positionChange
@@ -58,26 +54,23 @@ import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.itindr.ui.MainScreenActivity
 import com.example.itindr.R
+import com.example.itindr.ui.MainScreenActivity
+import com.example.itindr.ui.common.CustomButton
 
 private const val ASPECT_RATIO_WIDTH = 363f
 private const val ASPECT_RATIO_HEIGHT = 624f
 private val BIO_SPACING = 24.dp
-private const val DURATION_100 = 100
 private const val DURATION_300 = 300
 private const val THRESHOLD = 0.5f
 private const val ALPHA_60 = 0.6f
-private const val ALPHA_80 = 0.8f
 private const val MAX_LINES = 20
 private val BUTTONS_HEIGHT = 56.dp
 private const val DELTA = 200f
 private val TRANSLATION_Y = 96.dp
 private val PADDING_128 = 128.dp
-private val DEFAULT_ICON_SIZE = 24.dp
 
 @Composable
 fun StreamScreen(
@@ -518,106 +511,6 @@ fun NavigationBarMain(
                 iconTint = Color.White,
                 contentAlignment = Alignment.Center
             )
-        }
-    }
-}
-
-@Suppress("LoopWithTooManyJumpStatements")
-@Composable
-fun CustomButton(
-    shape: Shape,
-    backroundColor: Color,
-    iconTint: Color,
-    contentAlignment: Alignment,
-    onClick: () -> Unit,
-    modifier: Modifier = Modifier,
-    icon: Painter? = null,
-    iconSize: Dp = DEFAULT_ICON_SIZE,
-    backgroundAlpha: Float = 1f,
-    text: String? = null,
-    textColor: Color = Color.Black,
-    textStyle: TextStyle = LocalTextStyle.current,
-    horizontalArrangment: Arrangement.Horizontal = Arrangement.Start
-) {
-    val isPressed = remember { mutableStateOf(false) }
-
-    val backgroundAlp = animateFloatAsState(
-        targetValue = if (isPressed.value) ALPHA_80 else backgroundAlpha,
-        animationSpec = tween(durationMillis = DURATION_100)
-    )
-
-    Box(
-        modifier = modifier
-            .background(
-                color = backroundColor.copy(alpha = backgroundAlp.value),
-                shape = shape
-            )
-            .pointerInput(Unit) {
-                awaitPointerEventScope {
-                    while (true) {
-                        val pressEvent = awaitPointerEvent()
-                        if (pressEvent.type != PointerEventType.Press) continue
-
-                        isPressed.value = true
-                        pressEvent.changes.forEach { it.consume() }
-
-                        var isDragging = false
-
-                        while (true) {
-                            val event = awaitPointerEvent()
-                            when (event.type) {
-                                PointerEventType.Move -> {
-                                    val change = event.changes.firstOrNull() ?: continue
-                                    if (change.positionChange() != Offset.Zero) {
-                                        isDragging = true
-                                        isPressed.value = false
-                                    }
-                                    event.changes.forEach { it.consume() }
-                                }
-                                PointerEventType.Release -> {
-                                    if (!isDragging) {
-                                        onClick()
-                                    }
-                                    isPressed.value = false
-                                    event.changes.forEach { it.consume() }
-                                    break
-                                }
-                                else -> {}
-                            }
-                        }
-                    }
-                }
-            },
-        contentAlignment = contentAlignment
-    ) {
-        Row(
-            modifier = Modifier
-                .padding(
-                    horizontal = dimensionResource(R.dimen.size_12),
-                    vertical = dimensionResource(R.dimen.size_12)
-                ),
-            horizontalArrangement = horizontalArrangment,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            if (icon != null) {
-                Icon(
-                    painter = icon,
-                    contentDescription = stringResource(R.string.background),
-                    modifier = Modifier.size(iconSize),
-                    tint = iconTint
-                )
-            }
-
-            if (text != null) {
-                Spacer(modifier = Modifier.width(dimensionResource(R.dimen.size_4)))
-
-                Text(
-                    text = text,
-                    color = textColor,
-                    style = textStyle,
-                    maxLines = 1
-                )
-            }
         }
     }
 }
