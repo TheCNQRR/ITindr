@@ -10,7 +10,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.itindr.databinding.FragmentSignInBinding
 import com.example.itindr.ui.MainScreenActivity
@@ -19,6 +21,8 @@ import com.example.itindr.ui.common.setPressEffect
 class SignInFragment : Fragment() {
     private var _binding: FragmentSignInBinding? = null
     private val binding get() = _binding!!
+
+    private val viewModel: SignInViewModel by viewModels { SignInViewModel.Factory }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,7 +36,17 @@ class SignInFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.email.doAfterTextChanged { text ->
+            viewModel.updateEmail(text.toString())
+        }
+
+        binding.password.doAfterTextChanged { text ->
+            viewModel.updatePassword(text.toString())
+        }
+
         setPressEffect(binding.signInButton) {
+            viewModel.signIn()
+
             startActivity(Intent(requireContext(), MainScreenActivity::class.java))
             requireActivity().finish()
         }

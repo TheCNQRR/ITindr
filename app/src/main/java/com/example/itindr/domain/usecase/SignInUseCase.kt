@@ -10,11 +10,10 @@ class SignInUseCase(
     private val checkEmailExistsUseCase: CheckEmailExistsUseCase,
     private val signInRepository: SignInRepository
 ) {
-    suspend fun execute(signInCredentials: SignInCredentials) : SignInResult {
+    suspend fun execute(signInCredentials: SignInCredentials): SignInResult {
         val checkEmptyFieldsResult = checkEmptyFieldsUseCase.execute(signInCredentials)
         if (checkEmptyFieldsResult) {
             return SignInResult.Error("Credentials contains empty fields")
-
         }
 
         val emailValidationResult = validateEmailUseCase.execute(signInCredentials.email!!)

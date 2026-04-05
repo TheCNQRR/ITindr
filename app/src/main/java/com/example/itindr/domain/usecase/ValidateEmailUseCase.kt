@@ -4,7 +4,7 @@ import com.example.itindr.domain.model.EmailValidationResult
 import com.example.itindr.util.isValidEmail
 
 class ValidateEmailUseCase {
-    fun execute(email: String) : EmailValidationResult {
+    fun execute(email: String): EmailValidationResult {
         val isValid = email.isValidEmail()
 
         return if (isValid) {
