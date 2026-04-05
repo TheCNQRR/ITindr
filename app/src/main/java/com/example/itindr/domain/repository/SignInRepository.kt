@@ -4,6 +4,6 @@ import com.example.itindr.domain.model.SignInResult
 import com.example.itindr.domain.model.SignInCredentials
 
 interface SignInRepository {
-    fun signIn(signInCredentials: SignInCredentials) : SignInResult
+    suspend fun signIn(signInCredentials: SignInCredentials) : SignInResult
     fun checkEmailExists(email: String) : Boolean
 }
