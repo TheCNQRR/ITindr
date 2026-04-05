@@ -6,14 +6,10 @@ import com.example.itindr.domain.repository.SignInRepository
 
 class SignInRepositoryImpl : SignInRepository {
     override suspend fun signIn(signInCredentials: SignInCredentials): SignInResult {
-        return if (signInCredentials.email!!.contains("successTestEmail")) {
+        return if (signInCredentials.email!!.contains("successTestEmailSign")) {
             SignInResult.Success("auth-token-1111")
         } else {
             SignInResult.Error("Invalid credentials")
         }
-    }
-
-    override fun checkEmailExists(email: String): Boolean {
-        return email.contains("successTestEmail")
     }
 }

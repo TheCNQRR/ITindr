@@ -53,6 +53,13 @@ class SignInViewModel(
         }
     }
 
+    fun clearSignInState() {
+        _uiState.update { it.copy(
+            isSuccess = null,
+            errorMessage = null
+        ) }
+    }
+
     companion object {
         val Factory = viewModelFactory {
             initializer {

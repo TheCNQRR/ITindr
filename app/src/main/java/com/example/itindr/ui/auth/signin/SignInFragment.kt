@@ -10,13 +10,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import android.widget.Toast
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.example.itindr.databinding.FragmentSignInBinding
 import com.example.itindr.ui.MainScreenActivity
 import com.example.itindr.ui.common.setPressEffect
+import kotlinx.coroutines.launch
 
 class SignInFragment : Fragment() {
     private var _binding: FragmentSignInBinding? = null
@@ -36,19 +41,31 @@ class SignInFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.email.doAfterTextChanged { text ->
+        binding.yourEmail.doAfterTextChanged { text ->
             viewModel.updateEmail(text.toString())
         }
 
-        binding.password.doAfterTextChanged { text ->
+        binding.yourPassword.doAfterTextChanged { text ->
             viewModel.updatePassword(text.toString())
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.uiState.collect { state ->
+                    if (state.isSuccess != null && state.isSuccess) {
+                        startActivity(Intent(requireContext(), MainScreenActivity::class.java))
+                        requireActivity().finish()
+                    }
+                    state.errorMessage?.let {
+                        Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+                        viewModel.clearSignInState()
+                    }
+                }
+            }
         }
 
         setPressEffect(binding.signInButton) {
             viewModel.signIn()
-
-            startActivity(Intent(requireContext(), MainScreenActivity::class.java))
-            requireActivity().finish()
         }
 
         setPressEffect(binding.back) {
