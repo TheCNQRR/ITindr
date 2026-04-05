@@ -1,4 +1,4 @@
-package com.example.itindr.util
+package com.example.itindr.ui.common
 
 import android.annotation.SuppressLint
 import android.view.MotionEvent

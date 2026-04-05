@@ -15,7 +15,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.itindr.R
 import com.example.itindr.databinding.FragmentInitialBinding
-import com.example.itindr.util.setPressEffect
+import com.example.itindr.ui.common.setPressEffect
 
 private const val DURATION_500 = 500L
 private const val DURATION_700 = 700L

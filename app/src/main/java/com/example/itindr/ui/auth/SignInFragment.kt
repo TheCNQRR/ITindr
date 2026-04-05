@@ -14,7 +14,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.itindr.databinding.FragmentSignInBinding
 import com.example.itindr.ui.MainScreenActivity
-import com.example.itindr.util.setPressEffect
+import com.example.itindr.ui.common.setPressEffect
 
 class SignInFragment : Fragment() {
     private var _binding: FragmentSignInBinding? = null
