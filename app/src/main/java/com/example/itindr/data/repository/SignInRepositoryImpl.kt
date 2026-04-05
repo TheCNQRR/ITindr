@@ -12,4 +12,8 @@ class SignInRepositoryImpl : SignInRepository {
             SignInResult.Error("Invalid credentials")
         }
     }
+
+    override fun checkEmailExists(email: String): Boolean {
+        return email.contains("successTestEmail")
+    }
 }
