@@ -12,4 +12,5 @@ internal object MainScreenTestTag {
     const val NavBarPeopleButtonTag = "NavBarPeopleButtonTag"
     const val NavBarChatsButtonTag = "NavBarChatsButtonTag"
     const val NavBarProfileButtonTag = "NavBarProfileButtonTag"
+    const val PeopleScreenHeaderTag = "PeopleScreenHeaderTag"
 }

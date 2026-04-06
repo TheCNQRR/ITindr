@@ -22,6 +22,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalWindowInfo
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -31,6 +32,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.itindr.R
 import com.example.itindr.ui.common.CustomButton
+import com.example.itindr.ui.test.MainScreenTestTag
 import com.example.itindr.ui.theme.InterFontFamily
 
 @Composable
@@ -52,7 +54,8 @@ fun PeopleScreen(
 
         Text(
             modifier = Modifier
-                .padding(top = 60.dp, start = 24.dp),
+                .padding(top = 60.dp, start = 24.dp)
+                .testTag(MainScreenTestTag.PeopleScreenHeaderTag),
             text = stringResource(R.string.people),
             fontSize = 40.sp,
             fontFamily = InterFontFamily,
