@@ -22,15 +22,15 @@ internal class MainScreenAndroidTest {
     @get:Rule
     val composeTestRule = createAndroidComposeRule<MainScreenActivity>()
 
-    private val python = composeTestRule.activity.getString(R.string.python)
-    private val django = composeTestRule.activity.getString(R.string.django)
-    private val rest = composeTestRule.activity.getString(R.string.rest)
-
-    private val tags = listOf(python, django, rest)
-
     @Test
     fun testDisplayingMainElements() {
         with(composeTestRule) {
+            val python = composeTestRule.activity.getString(R.string.python)
+            val django = composeTestRule.activity.getString(R.string.django)
+            val rest = composeTestRule.activity.getString(R.string.rest)
+
+            val tags = listOf(python, django, rest)
+
             onNodeWithTag(MainScreenTestTag.PersonCardPhotoTag).assertIsDisplayed()
             onNodeWithTag(MainScreenTestTag.PersonCardNameTag).assertIsDisplayed()
             onNodeWithTag(MainScreenTestTag.PersonCardInterestsTag).assertIsDisplayed()
