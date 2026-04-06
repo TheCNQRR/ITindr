@@ -45,6 +45,7 @@ import androidx.compose.ui.layout.boundsInRoot
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalWindowInfo
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -56,6 +57,7 @@ import androidx.compose.ui.unit.sp
 import com.example.itindr.R
 import com.example.itindr.ui.MainScreenActivity
 import com.example.itindr.ui.common.CustomButton
+import com.example.itindr.ui.test.MainScreenTestTag
 import com.example.itindr.ui.theme.InterFontFamily
 
 private const val ASPECT_RATIO_WIDTH = 363f
@@ -111,7 +113,8 @@ fun StreamScreen(
         NavigationBarMain(
             modifier = Modifier
                 .padding(bottom = 48.dp)
-                .align(Alignment.BottomCenter),
+                .align(Alignment.BottomCenter)
+                .testTag(MainScreenTestTag.NavBarTag),
             onStreamClick = { },
             onPeopleClick = onNavigateToPeople,
             onChatsClick = onNavigateToChats,
@@ -210,7 +213,9 @@ fun PersonCard(
         Image(
             painter = painterResource(R.drawable.ic_mock_user_photo),
             contentDescription = stringResource(R.string.Andrey),
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier
+                .fillMaxSize()
+                .testTag(MainScreenTestTag.PersonCardPhotoTag),
             contentScale = ContentScale.Crop
         )
 
@@ -264,7 +269,8 @@ fun PersonCard(
                         .padding(
                             start = 16.dp,
                             bottom = 12.dp
-                        ),
+                        )
+                        .testTag(MainScreenTestTag.PersonCardNameTag),
                     text = person.name,
                     fontSize = 24.sp,
                     fontFamily = InterFontFamily,
@@ -275,7 +281,8 @@ fun PersonCard(
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(start = 16.dp, end = 16.dp),
+                        .padding(start = 16.dp, end = 16.dp)
+                        .testTag(MainScreenTestTag.PersonCardInterestsTag),
                     horizontalArrangement = Arrangement.spacedBy(8.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
@@ -329,7 +336,8 @@ fun PersonCard(
                     onClick = { },
                     modifier = Modifier
                         .weight(1f)
-                        .fillMaxHeight(),
+                        .fillMaxHeight()
+                        .testTag(MainScreenTestTag.PersonCardDislikeButtonTag),
                     shape = RoundedCornerShape(32.dp),
                     backroundColor = colorResource(R.color.dislike_background),
                     iconTint = Color.White,
@@ -342,7 +350,8 @@ fun PersonCard(
                     onClick = { },
                     modifier = Modifier
                         .weight(1f)
-                        .fillMaxHeight(),
+                        .fillMaxHeight()
+                        .testTag(MainScreenTestTag.PersonCardLikeButtonTag),
                     shape = RoundedCornerShape(32.dp),
                     backroundColor = colorResource(R.color.like_background),
                     iconTint = Color.White,
@@ -396,6 +405,8 @@ fun TagChip(tag: String) {
         contentAlignment = Alignment.Center
     ) {
         Text(
+            modifier = Modifier
+                .testTag(MainScreenTestTag.PersonCardInterestTag),
             text = tag,
             fontSize = 12.sp,
             fontFamily = InterFontFamily,
@@ -452,7 +463,8 @@ fun NavigationBarMain(
                 onClick = onStreamClick,
                 modifier = Modifier
                     .width(99.dp)
-                    .height(48.dp),
+                    .height(48.dp)
+                    .testTag(MainScreenTestTag.NavBarStreamButtonTag),
                 shape = RoundedCornerShape(32.dp),
                 backroundColor = Color.White,
                 iconTint = Color.Black,
@@ -471,7 +483,8 @@ fun NavigationBarMain(
                 iconSize = 24.dp,
                 onClick = onPeopleClick,
                 modifier = Modifier
-                    .size(48.dp),
+                    .size(48.dp)
+                    .testTag(MainScreenTestTag.NavBarPeopleButtonTag),
                 shape = RoundedCornerShape(32.dp),
                 backroundColor = colorResource(R.color.nav_bar),
                 iconTint = Color.White,
@@ -483,7 +496,8 @@ fun NavigationBarMain(
                 iconSize = 24.dp,
                 onClick = onChatsClick,
                 modifier = Modifier
-                    .size(48.dp),
+                    .size(48.dp)
+                    .testTag(MainScreenTestTag.NavBarChatsButtonTag),
                 shape = RoundedCornerShape(32.dp),
                 backroundColor = colorResource(R.color.nav_bar),
                 iconTint = Color.White,
@@ -495,7 +509,8 @@ fun NavigationBarMain(
                 iconSize = 24.dp,
                 onClick = onProfileClick,
                 modifier = Modifier
-                    .size(48.dp),
+                    .size(48.dp)
+                    .testTag(MainScreenTestTag.NavBarProfileButtonTag),
                 shape = RoundedCornerShape(32.dp),
                 backroundColor = colorResource(R.color.nav_bar),
                 iconTint = Color.White,
