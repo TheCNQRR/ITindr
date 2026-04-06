@@ -1,8 +1,7 @@
 package com.example.itindr
 
-import android.util.Log
 import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.semantics.SemanticsProperties
+
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.assertTextEquals
 import androidx.compose.ui.test.filterToOne
@@ -14,10 +13,10 @@ import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performTouchInput
 import androidx.compose.ui.test.swipe
-import androidx.compose.ui.test.swipeUp
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.example.itindr.ui.MainScreenActivity
 import com.example.itindr.ui.stream.DarknessAlphaKey
+import com.example.itindr.ui.stream.PhotoResourceKey
 import com.example.itindr.ui.test.MainScreenTestTag
 import org.junit.Assert.assertTrue
 import org.junit.Rule
@@ -86,6 +85,40 @@ internal class MainScreenAndroidTest {
             val finalAlpha = onNodeWithTag(MainScreenTestTag.DarknessOverlayTag)
                 .fetchSemanticsNode().config[DarknessAlphaKey]
             assertTrue("Затемнение не применилось! Alpha: $finalAlpha", finalAlpha > 0f)
+        }
+    }
+
+    @Test
+    fun testDislikeUpdatePersonInfo() {
+        with(composeTestRule) {
+            val persons = composeTestRule.activity.getMockPersons()
+            val firstPerson = persons[0]
+            val secondPerson = persons[1]
+
+            fun getPhotoResource(): Int {
+                return onNodeWithTag(MainScreenTestTag.PersonCardPhotoTag)
+                    .fetchSemanticsNode()
+                    .config[PhotoResourceKey]
+            }
+
+            onNodeWithTag(MainScreenTestTag.PersonCardNameTag)
+                .assertTextEquals(firstPerson.name)
+            onNodeWithTag(MainScreenTestTag.BioTextTag)
+                .assertTextEquals(firstPerson.bio)
+            val firstPhoto = getPhotoResource()
+            assertTrue(firstPhoto == firstPerson.photoUrl)
+
+            onNodeWithTag(MainScreenTestTag.PersonCardDislikeButtonTag).performClick()
+            composeTestRule.waitForIdle()
+
+            onNodeWithTag(MainScreenTestTag.PersonCardNameTag)
+                .assertTextEquals(secondPerson.name)
+            onNodeWithTag(MainScreenTestTag.BioTextTag)
+                .assertTextEquals(secondPerson.bio)
+            val secondPhoto = getPhotoResource()
+            assertTrue(secondPhoto == secondPerson.photoUrl)
+
+            assertTrue("Фото не изменилось", firstPhoto != secondPhoto)
         }
     }
 }

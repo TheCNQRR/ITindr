@@ -27,6 +27,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.mutableFloatStateOf
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -75,11 +76,19 @@ private const val DELTA = 200f
 
 @Composable
 fun StreamScreen(
-    person: MainScreenActivity.Person,
+    person: List<MainScreenActivity.Person>,
     onNavigateToPeople: () -> Unit,
     onNavigateToChats: () -> Unit,
     onNavigateToProfile: () -> Unit
 ) {
+    val currentIndex = remember { mutableIntStateOf(0) }
+
+    fun nextPerson() {
+        if (currentIndex.intValue + 1 < person.size) {
+            currentIndex.intValue++
+        }
+    }
+
     Box(modifier = Modifier
         .fillMaxSize()
     ) {
@@ -109,7 +118,11 @@ fun StreamScreen(
             Spacer(modifier = Modifier
                 .height(24.dp))
 
-            PersonCard(person)
+            PersonCard(
+                person = person[currentIndex.intValue],
+                onLike = { nextPerson() },
+                onDislike = { nextPerson() }
+                )
 
             Spacer(modifier = Modifier
                 .height(136.dp))
@@ -131,10 +144,15 @@ fun StreamScreen(
 val DarknessAlphaKey = SemanticsPropertyKey<Float>("DarknessAlpha")
 var SemanticsPropertyReceiver.darknessAlpha by DarknessAlphaKey
 
+val PhotoResourceKey = SemanticsPropertyKey<Int>("PhotoResource")
+var SemanticsPropertyReceiver.photoResource by PhotoResourceKey
+
 @Suppress("LoopWithTooManyJumpStatements", "CyclomaticComplexMethod")
 @Composable
 fun PersonCard(
-    person: MainScreenActivity.Person
+    person: MainScreenActivity.Person,
+    onLike: () -> Unit,
+    onDislike: () -> Unit
 ) {
     val expandProgress = remember { mutableFloatStateOf(0f) }
     val bioHeight = remember { mutableFloatStateOf(0f) }
@@ -219,11 +237,14 @@ fun PersonCard(
         )
 
         Image(
-            painter = painterResource(R.drawable.ic_mock_user_photo),
-            contentDescription = stringResource(R.string.Andrey),
+            painter = painterResource(person.photoUrl),
+            contentDescription = person.name,
             modifier = Modifier
                 .fillMaxSize()
-                .testTag(MainScreenTestTag.PersonCardPhotoTag),
+                .testTag(MainScreenTestTag.PersonCardPhotoTag)
+                .semantics {
+                    photoResource = person.photoUrl
+                },
             contentScale = ContentScale.Crop
         )
 
@@ -347,7 +368,7 @@ fun PersonCard(
                 CustomButton(
                     icon = painterResource(R.drawable.ic_dislike),
                     iconSize = 24.dp,
-                    onClick = { },
+                    onClick = onDislike,
                     modifier = Modifier
                         .weight(1f)
                         .fillMaxHeight()
@@ -361,7 +382,7 @@ fun PersonCard(
                 CustomButton(
                     icon = painterResource(R.drawable.ic_like),
                     iconSize = 24.dp,
-                    onClick = { },
+                    onClick = onLike,
                     modifier = Modifier
                         .weight(1f)
                         .fillMaxHeight()

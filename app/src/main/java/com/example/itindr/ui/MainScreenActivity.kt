@@ -27,6 +27,17 @@ import com.example.itindr.ui.stream.Stream
 import com.example.itindr.ui.stream.StreamScreen
 
 class MainScreenActivity : AppCompatActivity() {
+    private val mockPersons = listOf(
+        Person("Андрей Иванов",
+            "Люблю программировать на питоне. Люблю изучать питон. Люблю всё, что угодно," +
+                    " связанное с питоном. А еще я люблю перл.",
+            listOf("Python", "Django", "REST"), R.drawable.ic_mock_user_photo),
+        Person("Ольга", "Твой бэкенд не устоит перед моими запросами и плюнет в меня пятисотой",
+            listOf("Python", "Django", "REST"), R.drawable.ic_mock_user2_photo)
+    )
+
+    fun getMockPersons(): List<Person> = mockPersons
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -43,12 +54,6 @@ class MainScreenActivity : AppCompatActivity() {
 
         supportActionBar?.hide()
 
-        val mockPerson = Person("Андрей Иванов",
-            "Люблю программировать на питоне. Люблю изучать питон. Люблю всё, что угодно," +
-                " связанное с питоном. А еще я люблю перл.",
-            listOf("Python", "Django", "REST"), R.drawable.ic_mock_user_photo
-        )
-
         setContent {
             val navController = rememberNavController()
 
@@ -58,7 +63,7 @@ class MainScreenActivity : AppCompatActivity() {
             ) {
                 composable<Stream> {
                     StreamScreen(
-                        mockPerson,
+                        mockPersons,
                         onNavigateToPeople = { navController.navigate(People) },
                         onNavigateToChats = { navController.navigate(Chats) },
                         onNavigateToProfile = { navController.navigate(Profile) }
