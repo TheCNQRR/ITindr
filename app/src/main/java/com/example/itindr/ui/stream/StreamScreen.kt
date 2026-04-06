@@ -49,6 +49,11 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.ScrollAxisRange
+import androidx.compose.ui.semantics.SemanticsPropertyKey
+import androidx.compose.ui.semantics.SemanticsPropertyReceiver
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.verticalScrollAxisRange
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
@@ -122,6 +127,9 @@ fun StreamScreen(
         )
     }
 }
+
+val DarknessAlphaKey = SemanticsPropertyKey<Float>("DarknessAlpha")
+var SemanticsPropertyReceiver.darknessAlpha by DarknessAlphaKey
 
 @Suppress("LoopWithTooManyJumpStatements", "CyclomaticComplexMethod")
 @Composable
@@ -222,6 +230,10 @@ fun PersonCard(
         Box(
             modifier = Modifier
                 .fillMaxSize()
+                .testTag(MainScreenTestTag.DarknessOverlayTag)
+                .semantics {
+                    darknessAlpha = ALPHA_60 * darkenProgress.value
+                }
                 .background(
                     Color.Black.copy(alpha = ALPHA_60 * darkenProgress.value)
                 )
@@ -305,6 +317,8 @@ fun PersonCard(
                         .graphicsLayer { alpha = slideProgress.value }
                 ) {
                     Text(
+                        modifier = Modifier
+                            .testTag(MainScreenTestTag.BioTextTag),
                         text = person.bio,
                         fontSize = 14.sp,
                         fontFamily = InterFontFamily,
@@ -386,6 +400,12 @@ fun PersonCard(
                         shape = RoundedCornerShape(2.dp),
                         color = colorResource(R.color.white)
                     )
+                    .semantics {
+                        this.verticalScrollAxisRange = ScrollAxisRange(
+                            value = { whiteBarProgress.value },
+                            maxValue = { 1f }
+                        )
+                    }
             )
         }
     }

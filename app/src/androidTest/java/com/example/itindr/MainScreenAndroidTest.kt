@@ -1,5 +1,8 @@
 package com.example.itindr
 
+import android.util.Log
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.semantics.SemanticsProperties
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.assertTextEquals
 import androidx.compose.ui.test.filterToOne
@@ -9,9 +12,14 @@ import androidx.compose.ui.test.onAllNodesWithTag
 import androidx.compose.ui.test.onChildren
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.performTouchInput
+import androidx.compose.ui.test.swipe
+import androidx.compose.ui.test.swipeUp
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.example.itindr.ui.MainScreenActivity
+import com.example.itindr.ui.stream.DarknessAlphaKey
 import com.example.itindr.ui.test.MainScreenTestTag
+import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -60,6 +68,24 @@ internal class MainScreenAndroidTest {
         with(composeTestRule) {
             onNodeWithTag(MainScreenTestTag.NavBarPeopleButtonTag).performClick()
             onNodeWithTag(MainScreenTestTag.PeopleScreenHeaderTag).assertIsDisplayed()
+        }
+    }
+
+    @Test
+    fun testUserPhotoDarkensOnScroll() {
+        with(composeTestRule) {
+            val initialAlpha = onNodeWithTag(MainScreenTestTag.DarknessOverlayTag)
+                .fetchSemanticsNode().config[DarknessAlphaKey]
+            assertTrue("Начальное затемнение должно быть 0", initialAlpha == 0f)
+
+            onNodeWithTag(MainScreenTestTag.PersonCardNameTag)
+                .performTouchInput { swipe(Offset(centerX, centerY), Offset(centerX, centerY - 500)) }
+
+            composeTestRule.waitForIdle()
+
+            val finalAlpha = onNodeWithTag(MainScreenTestTag.DarknessOverlayTag)
+                .fetchSemanticsNode().config[DarknessAlphaKey]
+            assertTrue("Затемнение не применилось! Alpha: $finalAlpha", finalAlpha > 0f)
         }
     }
 }
