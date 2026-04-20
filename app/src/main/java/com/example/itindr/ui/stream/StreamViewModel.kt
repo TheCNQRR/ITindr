@@ -2,6 +2,8 @@ package com.example.itindr.ui.stream
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.itindr.R
+import com.example.itindr.ui.MainScreenActivity
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

@@ -58,7 +58,6 @@ class MainScreenActivity : AppCompatActivity() {
             ) {
                 composable<Stream> {
                     StreamScreen(
-                        mockPerson,
                         onNavigateToPeople = { navController.navigate(People) },
                         onNavigateToChats = { navController.navigate(Chats) },
                         onNavigateToProfile = { navController.navigate(Profile) }

@@ -25,7 +25,9 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -53,9 +55,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.itindr.R
 import com.example.itindr.ui.MainScreenActivity
 import com.example.itindr.ui.common.CustomButton
+import com.example.itindr.ui.common.shimmerEffect
 import com.example.itindr.ui.theme.InterFontFamily
 
 private const val ASPECT_RATIO_WIDTH = 363f
@@ -68,11 +73,23 @@ private const val DELTA = 200f
 
 @Composable
 fun StreamScreen(
-    person: MainScreenActivity.Person,
+    viewModel: StreamViewModel = viewModel(),
     onNavigateToPeople: () -> Unit,
     onNavigateToChats: () -> Unit,
     onNavigateToProfile: () -> Unit
 ) {
+    val state by viewModel.state.collectAsStateWithLifecycle()
+
+    LaunchedEffect(Unit) {
+        viewModel.effect.collect { effect ->
+            when (effect) {
+                is StreamContract.StreamEffect.NavigateToPeople -> onNavigateToPeople()
+                is StreamContract.StreamEffect.NavigateToChats -> onNavigateToChats()
+                is StreamContract.StreamEffect.NavigateToProfile -> onNavigateToProfile()
+            }
+        }
+    }
+
     Box(modifier = Modifier
         .fillMaxSize()
     ) {
@@ -102,7 +119,34 @@ fun StreamScreen(
             Spacer(modifier = Modifier
                 .height(24.dp))
 
-            PersonCard(person)
+            when (val currentState = state) {
+                is StreamContract.StreamState.Loading -> {
+                    PersonCardSkeleton()
+                }
+                is StreamContract.StreamState.Content -> {
+                    PersonCard(
+                        person = currentState.person,
+                        onLikeClick =
+                            { viewModel.dispatchEvent(StreamContract.StreamEvent.OnLikeClick) },
+                        onDislikeClick =
+                            { viewModel.dispatchEvent(StreamContract.StreamEvent.OnDislikeClick) }
+                    )
+                }
+                is StreamContract.StreamState.Error -> {
+                    Box(
+                        modifier = Modifier
+                            .padding(top = 300.dp)
+                    ) {
+                        Text(
+                            text = currentState.message,
+                            color = Color.Red,
+                            fontSize = 24.sp,
+                            fontFamily = InterFontFamily,
+                            fontWeight = FontWeight.Bold
+                        )
+                    }
+                }
+            }
 
             Spacer(modifier = Modifier
                 .height(136.dp))
@@ -113,9 +157,12 @@ fun StreamScreen(
                 .padding(bottom = 48.dp)
                 .align(Alignment.BottomCenter),
             onStreamClick = { },
-            onPeopleClick = onNavigateToPeople,
-            onChatsClick = onNavigateToChats,
-            onProfileClick = onNavigateToProfile
+            onPeopleClick =
+                { viewModel.dispatchEvent(StreamContract.StreamEvent.OnPeopleNavigationClick) },
+            onChatsClick =
+                { viewModel.dispatchEvent(StreamContract.StreamEvent.OnChatsNavigationClick) },
+            onProfileClick =
+                { viewModel.dispatchEvent(StreamContract.StreamEvent.OnProfileNavigationClick) }
         )
     }
 }
@@ -123,7 +170,9 @@ fun StreamScreen(
 @Suppress("LoopWithTooManyJumpStatements", "CyclomaticComplexMethod")
 @Composable
 fun PersonCard(
-    person: MainScreenActivity.Person
+    person: MainScreenActivity.Person,
+    onLikeClick: () -> Unit,
+    onDislikeClick: () -> Unit
 ) {
     val expandProgress = remember { mutableFloatStateOf(0f) }
     val bioHeight = remember { mutableFloatStateOf(0f) }
@@ -326,7 +375,7 @@ fun PersonCard(
                 CustomButton(
                     icon = painterResource(R.drawable.ic_dislike),
                     iconSize = 24.dp,
-                    onClick = { },
+                    onClick = onDislikeClick,
                     modifier = Modifier
                         .weight(1f)
                         .fillMaxHeight(),
@@ -339,7 +388,7 @@ fun PersonCard(
                 CustomButton(
                     icon = painterResource(R.drawable.ic_like),
                     iconSize = 24.dp,
-                    onClick = { },
+                    onClick = onLikeClick,
                     modifier = Modifier
                         .weight(1f)
                         .fillMaxHeight(),
@@ -379,6 +428,78 @@ fun PersonCard(
                     )
             )
         }
+    }
+}
+
+@Composable
+fun PersonCardSkeleton() {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(
+                top = 24.dp,
+                start = 24.dp,
+                end = 24.dp
+            )
+            .aspectRatio(ASPECT_RATIO_WIDTH / ASPECT_RATIO_HEIGHT)
+            .clip(RoundedCornerShape(32.dp))
+            .background(Color.White.copy(alpha = 0.1f))
+    ) {
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .shimmerEffect()
+        )
+
+        Column(
+            modifier =
+                Modifier
+                    .fillMaxSize()
+                    .padding(16.dp),
+            verticalArrangement = Arrangement.Bottom
+        ) {
+            Box(
+                Modifier
+                    .width(150.dp)
+                    .height(28.dp)
+                    .clip(RoundedCornerShape(8.dp))
+                    .background(Color.Gray.copy(0.3f))
+            )
+
+            Spacer(Modifier.height(12.dp))
+
+            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                repeat(3) {
+                    Box(
+                        Modifier
+                            .width(60.dp)
+                            .height(24.dp)
+                            .clip(RoundedCornerShape(12.dp))
+                            .background(Color.Gray.copy(0.3f))
+                    )
+                }
+            }
+
+            Spacer(Modifier.height(24.dp))
+
+            Row(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
+                Box(
+                    Modifier
+                        .weight(1f)
+                        .height(56.dp)
+                        .clip(RoundedCornerShape(32.dp))
+                        .background(Color.Gray.copy(0.3f))
+                )
+                Box(
+                    Modifier
+                        .weight(1f)
+                        .height(56.dp)
+                        .clip(RoundedCornerShape(32.dp))
+                        .background(Color.Gray.copy(0.3f))
+                )
+            }
+        }
+
     }
 }
 
