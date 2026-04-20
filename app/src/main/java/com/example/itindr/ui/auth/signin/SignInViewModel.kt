@@ -64,7 +64,8 @@ class SignInViewModel(
         val Factory = viewModelFactory {
             initializer {
                 val application = checkNotNull(this[APPLICATION_KEY]) as MyApplication
-                SignInViewModel(application.signInUseCase)
+                val container = application.appContainer
+                SignInViewModel(container.signInUseCase)
             }
         }
     }

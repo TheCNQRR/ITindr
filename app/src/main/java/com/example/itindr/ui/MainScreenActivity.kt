@@ -10,7 +10,6 @@ import androidx.core.view.WindowInsetsControllerCompat
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.itindr.R
 import com.example.itindr.ui.aboutme.edit.AboutMeEdit
 import com.example.itindr.ui.aboutme.edit.AboutMeEditScreen
 import com.example.itindr.ui.chat.Chats
@@ -42,12 +41,6 @@ class MainScreenActivity : AppCompatActivity() {
         }
 
         supportActionBar?.hide()
-
-        val mockPerson = Person("Андрей Иванов",
-            "Люблю программировать на питоне. Люблю изучать питон. Люблю всё, что угодно," +
-                " связанное с питоном. А еще я люблю перл.",
-            listOf("Python", "Django", "REST"), R.drawable.ic_mock_user_photo
-        )
 
         setContent {
             val navController = rememberNavController()

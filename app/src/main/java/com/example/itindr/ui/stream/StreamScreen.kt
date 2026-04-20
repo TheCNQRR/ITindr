@@ -70,10 +70,12 @@ private const val THRESHOLD = 0.5f
 private const val ALPHA_60 = 0.6f
 private const val MAX_LINES = 20
 private const val DELTA = 200f
+private const val ALPHA_03 = 0.3f
+private const val REPEAT_TIMES = 3
 
 @Composable
 fun StreamScreen(
-    viewModel: StreamViewModel = viewModel(),
+    viewModel: StreamViewModel = viewModel(factory = StreamViewModel.Factory),
     onNavigateToPeople: () -> Unit,
     onNavigateToChats: () -> Unit,
     onNavigateToProfile: () -> Unit
@@ -127,9 +129,9 @@ fun StreamScreen(
                     PersonCard(
                         person = currentState.person,
                         onLikeClick =
-                            { viewModel.dispatchEvent(StreamContract.StreamEvent.OnLikeClick) },
+                        { viewModel.dispatchEvent(StreamContract.StreamEvent.OnLikeClick) },
                         onDislikeClick =
-                            { viewModel.dispatchEvent(StreamContract.StreamEvent.OnDislikeClick) }
+                        { viewModel.dispatchEvent(StreamContract.StreamEvent.OnDislikeClick) }
                     )
                 }
                 is StreamContract.StreamState.Error -> {
@@ -158,11 +160,11 @@ fun StreamScreen(
                 .align(Alignment.BottomCenter),
             onStreamClick = { },
             onPeopleClick =
-                { viewModel.dispatchEvent(StreamContract.StreamEvent.OnPeopleNavigationClick) },
+            { viewModel.dispatchEvent(StreamContract.StreamEvent.OnPeopleNavigationClick) },
             onChatsClick =
-                { viewModel.dispatchEvent(StreamContract.StreamEvent.OnChatsNavigationClick) },
+            { viewModel.dispatchEvent(StreamContract.StreamEvent.OnChatsNavigationClick) },
             onProfileClick =
-                { viewModel.dispatchEvent(StreamContract.StreamEvent.OnProfileNavigationClick) }
+            { viewModel.dispatchEvent(StreamContract.StreamEvent.OnProfileNavigationClick) }
         )
     }
 }
@@ -257,7 +259,7 @@ fun PersonCard(
         )
 
         Image(
-            painter = painterResource(R.drawable.ic_mock_user_photo),
+            painter = painterResource(person.photoUrl),
             contentDescription = stringResource(R.string.Andrey),
             modifier = Modifier.fillMaxSize(),
             contentScale = ContentScale.Crop
@@ -348,7 +350,7 @@ fun PersonCard(
                 ) {
                     Text(
                         text = person.bio,
-                        fontSize = 14.sp,
+                        fontSize = 16.sp,
                         fontFamily = InterFontFamily,
                         fontWeight = FontWeight.Normal,
                         color = Color.White,
@@ -453,9 +455,9 @@ fun PersonCardSkeleton() {
 
         Column(
             modifier =
-                Modifier
-                    .fillMaxSize()
-                    .padding(16.dp),
+            Modifier
+                .fillMaxSize()
+                .padding(16.dp),
             verticalArrangement = Arrangement.Bottom
         ) {
             Box(
@@ -463,19 +465,19 @@ fun PersonCardSkeleton() {
                     .width(150.dp)
                     .height(28.dp)
                     .clip(RoundedCornerShape(8.dp))
-                    .background(Color.Gray.copy(0.3f))
+                    .background(Color.Gray.copy(ALPHA_03))
             )
 
             Spacer(Modifier.height(12.dp))
 
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                repeat(3) {
+                repeat(REPEAT_TIMES) {
                     Box(
                         Modifier
                             .width(60.dp)
                             .height(24.dp)
                             .clip(RoundedCornerShape(12.dp))
-                            .background(Color.Gray.copy(0.3f))
+                            .background(Color.Gray.copy(ALPHA_03))
                     )
                 }
             }
@@ -488,18 +490,17 @@ fun PersonCardSkeleton() {
                         .weight(1f)
                         .height(56.dp)
                         .clip(RoundedCornerShape(32.dp))
-                        .background(Color.Gray.copy(0.3f))
+                        .background(Color.Gray.copy(ALPHA_03))
                 )
                 Box(
                     Modifier
                         .weight(1f)
                         .height(56.dp)
                         .clip(RoundedCornerShape(32.dp))
-                        .background(Color.Gray.copy(0.3f))
+                        .background(Color.Gray.copy(ALPHA_03))
                 )
             }
         }
-
     }
 }
 

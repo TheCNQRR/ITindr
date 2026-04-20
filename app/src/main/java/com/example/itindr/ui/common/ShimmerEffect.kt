@@ -14,13 +14,18 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 
+private const val ANIMATION_DURATION = 2500
+private const val OFFSET = 500f
+private const val INITIAL_VALUE = -1000f
+private const val TARGET_VALUE = 2000f
+
 fun Modifier.shimmerEffect(): Modifier = composed {
     val transition = rememberInfiniteTransition(label = "shimmer")
     val translateAnimation by transition.animateFloat(
-        initialValue = -1000f,
-        targetValue = 2000f,
+        initialValue = INITIAL_VALUE,
+        targetValue = TARGET_VALUE,
         animationSpec = infiniteRepeatable(
-            animation = tween(2500, easing = LinearEasing),
+            animation = tween(ANIMATION_DURATION, easing = LinearEasing),
             repeatMode = RepeatMode.Restart
         ),
         label = "shimmer_offset"
@@ -35,7 +40,7 @@ fun Modifier.shimmerEffect(): Modifier = composed {
     val brush = Brush.linearGradient(
         colors = shimmerColors,
         start = Offset(translateAnimation, translateAnimation),
-        end = Offset(translateAnimation + 500f, translateAnimation + 500f)
+        end = Offset(translateAnimation + OFFSET, translateAnimation + OFFSET)
     )
 
     this.background(brush)
