@@ -1,4 +1,4 @@
-package com.example.itindr.ui.chat.signlechat
+package com.example.chat.ui.signlechat
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
@@ -14,8 +14,8 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.example.itindr.R
-import com.example.itindr.ui.common.CustomButton
+import com.example.chat.R
+import com.example.chat.ui.common.CustomButton
 
 @Composable
 fun ChatScreen(

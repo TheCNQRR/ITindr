@@ -1,4 +1,4 @@
-package com.example.itindr.ui.chat.signlechat
+package com.example.chat.ui.signlechat
 
 import kotlinx.serialization.Serializable
 
