@@ -10,13 +10,12 @@ import androidx.core.view.WindowInsetsControllerCompat
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.itindr.R
+import com.example.chat.ui.Chats
+import com.example.chat.ui.ChatsScreen
+import com.example.chat.ui.signlechat.Chat
+import com.example.chat.ui.signlechat.ChatScreen
 import com.example.itindr.ui.aboutme.edit.AboutMeEdit
 import com.example.itindr.ui.aboutme.edit.AboutMeEditScreen
-import com.example.itindr.ui.chat.Chats
-import com.example.itindr.ui.chat.ChatsScreen
-import com.example.itindr.ui.chat.signlechat.Chat
-import com.example.itindr.ui.chat.signlechat.ChatScreen
 import com.example.itindr.ui.people.People
 import com.example.itindr.ui.people.PeopleScreen
 import com.example.itindr.ui.people.person.PersonInfo
@@ -27,17 +26,6 @@ import com.example.itindr.ui.stream.Stream
 import com.example.itindr.ui.stream.StreamScreen
 
 class MainScreenActivity : AppCompatActivity() {
-    private val mockPersons = listOf(
-        Person("Андрей Иванов",
-            "Люблю программировать на питоне. Люблю изучать питон. Люблю всё, что угодно," +
-                    " связанное с питоном. А еще я люблю перл.",
-            listOf("Python", "Django", "REST"), R.drawable.ic_mock_user_photo),
-        Person("Ольга", "Твой бэкенд не устоит перед моими запросами и плюнет в меня пятисотой",
-            listOf("Python", "Django", "REST"), R.drawable.ic_mock_user2_photo)
-    )
-
-    fun getMockPersons(): List<Person> = mockPersons
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -63,7 +51,6 @@ class MainScreenActivity : AppCompatActivity() {
             ) {
                 composable<Stream> {
                     StreamScreen(
-                        mockPersons,
                         onNavigateToPeople = { navController.navigate(People) },
                         onNavigateToChats = { navController.navigate(Chats) },
                         onNavigateToProfile = { navController.navigate(Profile) }

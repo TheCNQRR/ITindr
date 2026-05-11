@@ -1,4 +1,4 @@
-package com.example.itindr.ui.chat
+package com.example.chat.ui
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -31,9 +31,9 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.itindr.R
-import com.example.itindr.ui.common.CustomButton
-import com.example.itindr.ui.theme.InterFontFamily
+import com.example.chat.R
+import com.example.chat.ui.common.CustomButton
+import com.example.chat.ui.theme.InterFontFamily
 
 @Composable
 fun ChatsScreen(
