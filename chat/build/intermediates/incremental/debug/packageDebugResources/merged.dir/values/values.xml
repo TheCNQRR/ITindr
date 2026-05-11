@@ -5,8 +5,6 @@
     <color name="gradient_end">#80000000</color>
     <color name="gradient_start">#00000000</color>
     <color name="like_background">#00C493</color>
-    <color name="message_background">0xFF35373B</color>
-    <color name="my_message_background">0xFF5A1FCC</color>
     <color name="nav_bar">#35373B</color>
     <color name="white">#FFFFFFFF</color>
     <color name="white_light_transparent">#80FFFFFF</color>
@@ -16,6 +14,5 @@
     <string name="background">Задний фон</string>
     <string name="chats">Чаты</string>
     <string name="message">И обидно вам должно быть за себя раз вы не видите как Яго…</string>
-    <string name="photo">Фото</string>
     <style name="Theme.ITindr" parent="android:Theme.Material.Light.NoActionBar"/>
 </resources>
