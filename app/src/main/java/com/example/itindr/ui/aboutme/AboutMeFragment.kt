@@ -11,8 +11,10 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import androidx.fragment.app.Fragment
+import com.example.itindr.R
 import com.example.itindr.databinding.FragmentAboutMeBinding
 import com.example.itindr.ui.MainScreenActivity
+import com.example.itindr.ui.customView.TagListView
 import com.example.itindr.util.dp
 import com.example.itindr.util.setPressEffect
 
@@ -52,17 +54,27 @@ class AboutMeFragment : Fragment() {
             requireActivity().finish()
         }
 
-        setupInterestsClickListeners()
         setupTouchListener()
         setupPhotoButtonsListeners()
-    }
 
-    private fun setupInterestsClickListeners() {
-        for (i in 0 until binding.chipGroup.childCount) {
-            binding.chipGroup.getChildAt(i).setOnClickListener {
-                it.isSelected = !it.isSelected
-            }
-        }
+        val tagListView = binding.tagListView
+        tagListView.setTags(
+            listOf(
+                TagListView.Tag(getString(R.string.python), getString(R.string.python)),
+                TagListView.Tag(getString(R.string.django), getString(R.string.django)),
+                TagListView.Tag(getString(R.string.rest), getString(R.string.rest)),
+                TagListView.Tag(getString(R.string.swift), getString(R.string.swift)),
+                TagListView.Tag(getString(R.string.obj_c), getString(R.string.obj_c)),
+                TagListView.Tag(getString(R.string.react_js), getString(R.string.react_js)),
+                TagListView.Tag(getString(R.string.kotlin), getString(R.string.kotlin)),
+                TagListView.Tag(getString(R.string.git), getString(R.string.git)),
+                TagListView.Tag(getString(R.string.unity), getString(R.string.unity)),
+                TagListView.Tag(getString(R.string.net), getString(R.string.net)),
+                TagListView.Tag(getString(R.string.sql), getString(R.string.sql)),
+                TagListView.Tag(getString(R.string.clean_architecture), getString(R.string.clean_architecture)),
+                TagListView.Tag(getString(R.string.uml), getString(R.string.uml))
+            )
+        )
     }
 
     @SuppressLint("ClickableViewAccessibility")

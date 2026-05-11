@@ -1,0 +1,30 @@
+-- Merging decision tree log ---
+manifest
+ADDED from C:\Users\Alexander\AndroidStudioProjects\ITindr\chat\src\main\AndroidManifest.xml:2:1-13:12
+INJECTED from C:\Users\Alexander\AndroidStudioProjects\ITindr\chat\src\main\AndroidManifest.xml:2:1-13:12
+	package
+		INJECTED from C:\Users\Alexander\AndroidStudioProjects\ITindr\chat\src\main\AndroidManifest.xml
+	xmlns:android
+		ADDED from C:\Users\Alexander\AndroidStudioProjects\ITindr\chat\src\main\AndroidManifest.xml:2:11-69
+application
+ADDED from C:\Users\Alexander\AndroidStudioProjects\ITindr\chat\src\main\AndroidManifest.xml:4:5-11:19
+	android:supportsRtl
+		ADDED from C:\Users\Alexander\AndroidStudioProjects\ITindr\chat\src\main\AndroidManifest.xml:9:9-35
+	android:label
+		ADDED from C:\Users\Alexander\AndroidStudioProjects\ITindr\chat\src\main\AndroidManifest.xml:7:9-41
+	android:roundIcon
+		ADDED from C:\Users\Alexander\AndroidStudioProjects\ITindr\chat\src\main\AndroidManifest.xml:8:9-54
+	android:icon
+		ADDED from C:\Users\Alexander\AndroidStudioProjects\ITindr\chat\src\main\AndroidManifest.xml:6:9-43
+	android:allowBackup
+		ADDED from C:\Users\Alexander\AndroidStudioProjects\ITindr\chat\src\main\AndroidManifest.xml:5:9-35
+	android:theme
+		ADDED from C:\Users\Alexander\AndroidStudioProjects\ITindr\chat\src\main\AndroidManifest.xml:10:9-44
+uses-sdk
+INJECTED from C:\Users\Alexander\AndroidStudioProjects\ITindr\chat\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from C:\Users\Alexander\AndroidStudioProjects\ITindr\chat\src\main\AndroidManifest.xml
+INJECTED from C:\Users\Alexander\AndroidStudioProjects\ITindr\chat\src\main\AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from C:\Users\Alexander\AndroidStudioProjects\ITindr\chat\src\main\AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from C:\Users\Alexander\AndroidStudioProjects\ITindr\chat\src\main\AndroidManifest.xml
