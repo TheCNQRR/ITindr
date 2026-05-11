@@ -1,8 +1,4 @@
-<<<<<<<< HEAD:app/src/main/java/com/example/itindr/ui/initial/FragmentSplash.kt
 package com.example.itindr.ui.initial
-========
-package com.example.itindr.ui
->>>>>>>> feature/custom_view_tags:app/src/main/java/com/example/itindr/ui/FragmentSplash.kt
 
 import android.os.Bundle
 import android.view.LayoutInflater

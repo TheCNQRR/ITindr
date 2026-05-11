@@ -1,8 +1,4 @@
-<<<<<<<< HEAD:app/src/main/java/com/example/itindr/ui/initial/InitialFragment.kt
 package com.example.itindr.ui.initial
-========
-package com.example.itindr.ui
->>>>>>>> feature/custom_view_tags:app/src/main/java/com/example/itindr/ui/InitialFragment.kt
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter

@@ -1,8 +1,4 @@
-<<<<<<<< HEAD:app/src/main/java/com/example/itindr/ui/auth/SignUpFragment.kt
 package com.example.itindr.ui.auth
-========
-package com.example.itindr.ui
->>>>>>>> feature/custom_view_tags:app/src/main/java/com/example/itindr/ui/SignUpFragment.kt
 
 import android.annotation.SuppressLint
 import android.content.Context
