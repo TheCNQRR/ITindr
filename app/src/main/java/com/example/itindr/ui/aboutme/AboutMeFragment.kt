@@ -15,8 +15,8 @@ import com.example.itindr.R
 import com.example.itindr.databinding.FragmentAboutMeBinding
 import com.example.itindr.ui.MainScreenActivity
 import com.example.itindr.ui.customView.TagListView
+import com.example.itindr.ui.common.setPressEffect
 import com.example.itindr.util.dp
-import com.example.itindr.util.setPressEffect
 
 private const val TRANSLATION_OFFSET_NEGATIVE_VALUE = -20
 private const val TRANSLATION_OFFSET_VALUE = 20

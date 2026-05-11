@@ -1,7 +1,8 @@
-package com.example.itindr.ui.auth
+package com.example.itindr.ui.auth.signin
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.MotionEvent
@@ -9,30 +10,62 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import android.widget.Toast
+import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
-import com.example.itindr.R
-import com.example.itindr.databinding.FragmentSignUpBinding
-import com.example.itindr.util.setPressEffect
+import com.example.itindr.databinding.FragmentSignInBinding
+import com.example.itindr.ui.MainScreenActivity
+import com.example.itindr.ui.common.setPressEffect
+import kotlinx.coroutines.launch
 
-class SignUpFragment : Fragment() {
-    private var _binding: FragmentSignUpBinding? = null
+class SignInFragment : Fragment() {
+    private var _binding: FragmentSignInBinding? = null
     private val binding get() = _binding!!
+
+    private val viewModel: SignInViewModel by viewModels { SignInViewModel.Factory }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentSignUpBinding.inflate(inflater, container, false)
+        _binding = FragmentSignInBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setPressEffect(binding.signUpButton) {
-            findNavController().navigate(R.id.action_signUpFragment_to_aboutMeFragment)
+        binding.yourEmail.doAfterTextChanged { text ->
+            viewModel.updateEmail(text.toString())
+        }
+
+        binding.yourPassword.doAfterTextChanged { text ->
+            viewModel.updatePassword(text.toString())
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.uiState.collect { state ->
+                    if (state.isSuccess != null && state.isSuccess) {
+                        startActivity(Intent(requireContext(), MainScreenActivity::class.java))
+                        requireActivity().finish()
+                    }
+                    state.errorMessage?.let {
+                        Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+                        viewModel.clearSignInState()
+                    }
+                }
+            }
+        }
+
+        setPressEffect(binding.signInButton) {
+            viewModel.signIn()
         }
 
         setPressEffect(binding.back) {
@@ -64,8 +97,7 @@ class SignUpFragment : Fragment() {
         binding.root.requestFocus()
 
         binding.yourEmail.clearFocus()
-        binding.inventPassword.clearFocus()
-        binding.repeatPassword.clearFocus()
+        binding.yourPassword.clearFocus()
     }
 
     override fun onDestroyView() {

@@ -1,8 +1,7 @@
-package com.example.itindr.ui.auth
+package com.example.itindr.ui.auth.signup
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.MotionEvent
@@ -12,12 +11,12 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.example.itindr.databinding.FragmentSignInBinding
-import com.example.itindr.ui.MainScreenActivity
-import com.example.itindr.util.setPressEffect
+import com.example.itindr.R
+import com.example.itindr.databinding.FragmentSignUpBinding
+import com.example.itindr.ui.common.setPressEffect
 
-class SignInFragment : Fragment() {
-    private var _binding: FragmentSignInBinding? = null
+class SignUpFragment : Fragment() {
+    private var _binding: FragmentSignUpBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -25,16 +24,15 @@ class SignInFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentSignInBinding.inflate(inflater, container, false)
+        _binding = FragmentSignUpBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setPressEffect(binding.signInButton) {
-            startActivity(Intent(requireContext(), MainScreenActivity::class.java))
-            requireActivity().finish()
+        setPressEffect(binding.signUpButton) {
+            findNavController().navigate(R.id.action_signUpFragment_to_aboutMeFragment)
         }
 
         setPressEffect(binding.back) {
@@ -66,7 +64,8 @@ class SignInFragment : Fragment() {
         binding.root.requestFocus()
 
         binding.yourEmail.clearFocus()
-        binding.yourPassword.clearFocus()
+        binding.inventPassword.clearFocus()
+        binding.repeatPassword.clearFocus()
     }
 
     override fun onDestroyView() {

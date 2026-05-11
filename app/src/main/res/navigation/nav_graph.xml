@@ -26,7 +26,7 @@
 
     <fragment
         android:id="@+id/signInFragment"
-        android:name="com.example.itindr.ui.auth.SignInFragment"
+        android:name="com.example.itindr.ui.auth.signin.SignInFragment"
         android:label="SignInFragment" >
         <action
             android:id="@+id/action_signInFragment_to_mainScreenActivity"
@@ -39,7 +39,7 @@
 
     <fragment
         android:id="@+id/signUpFragment"
-        android:name="com.example.itindr.ui.auth.SignUpFragment"
+        android:name="com.example.itindr.ui.auth.signup.SignUpFragment"
         android:label="SignUpFragment" >
         <action
             android:id="@+id/action_signUpFragment_to_aboutMeFragment"
