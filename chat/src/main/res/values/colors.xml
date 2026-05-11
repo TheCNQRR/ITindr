@@ -9,4 +9,6 @@
     <color name="like_background">#00C493</color>
     <color name="gradient_start">#00000000</color>
     <color name="gradient_end">#80000000</color>
+    <color name="my_message_background">0xFF5A1FCC</color>
+    <color name="message_background">0xFF35373B</color>
 </resources>

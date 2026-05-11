@@ -2,10 +2,13 @@ package com.example.chat.ui.signlechat
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -44,5 +47,26 @@ fun ChatScreen(
             iconTint = Color.White,
             contentAlignment = Alignment.Center
         )
+
+        val myMessage = MessageBuilder()
+            .setIsMine(true)
+            .addText("Привет! Как тебе дизайн?")
+            .addTimestamp("12:53 • 23 августа 2021")
+            .build()
+
+        val otherMessage = MessageBuilder()
+            .setIsMine(false)
+            .addImages(listOf(R.drawable.ic_mock_user_photo, R.drawable.ic_mock_user_photo_2))
+            .addText("Круто выглядит!")
+            .addTimestamp("12:55 • 23 августа 2021")
+            .build()
+
+        Column(
+            modifier = Modifier.padding(top = 60.dp)
+                .verticalScroll(rememberScrollState())
+        ) {
+            myMessage()
+            otherMessage()
+        }
     }
 }
