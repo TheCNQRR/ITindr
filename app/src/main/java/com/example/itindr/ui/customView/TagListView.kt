@@ -12,8 +12,8 @@ import android.view.MotionEvent
 import android.view.View
 import androidx.core.content.res.ResourcesCompat
 import com.example.itindr.R
-import com.example.itindr.util.shake
-import com.example.itindr.util.vibrate
+import com.example.itindr.ui.common.shake
+import com.example.itindr.ui.common.vibrate
 import kotlin.math.min
 
 fun View.dpToPx(dp: Float): Float = dp * resources.displayMetrics.density
