@@ -1,16 +1,10 @@
 R_DEF: Internal format may change without notice
 local
 color black
-color dislike_background
-color gradient_end
-color gradient_start
-color like_background
 color message_background
 color my_message_background
 color nav_bar
 color white
-color white_light_transparent
-color white_transparent
 drawable gradient_background
 drawable ic_back
 drawable ic_chats
@@ -26,7 +20,7 @@ font inter_regular
 font inter_semi_bold
 mipmap ic_launcher
 mipmap ic_launcher_round
-string Andrey
+string andrey
 string app_name
 string background
 string chats

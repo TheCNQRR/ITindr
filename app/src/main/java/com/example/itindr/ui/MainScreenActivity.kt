@@ -10,7 +10,6 @@ import androidx.core.view.WindowInsetsControllerCompat
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import androidx.navigation.toRoute
 import com.example.chat.ui.Chats
 import com.example.chat.ui.ChatsScreen
 import com.example.chat.ui.signlechat.Chat
@@ -25,8 +24,10 @@ import com.example.itindr.ui.profile.Profile
 import com.example.itindr.ui.profile.ProfileScreen
 import com.example.itindr.ui.stream.Stream
 import com.example.itindr.ui.stream.StreamScreen
+import dagger.hilt.android.AndroidEntryPoint
 import java.util.UUID
 
+@AndroidEntryPoint
 class MainScreenActivity : AppCompatActivity() {
 
     private val currentUserId: UUID = UUID.fromString("00000000-0000-0000-0000-000000000001")
@@ -58,7 +59,7 @@ class MainScreenActivity : AppCompatActivity() {
                     StreamScreen(
                         onNavigateToPeople = { navController.navigate(People) },
                         onNavigateToChats =
-                            { navController.navigate(Chats(userId = currentUserId.toString())) },
+                        { navController.navigate(Chats(userId = currentUserId.toString())) },
                         onNavigateToProfile = { navController.navigate(Profile) }
                     )
                 }
@@ -67,7 +68,7 @@ class MainScreenActivity : AppCompatActivity() {
                     PeopleScreen(
                         onNavigateToStream = { navController.navigate(Stream) },
                         onNavigateToChats =
-                            { navController.navigate(Chats(userId = currentUserId.toString())) },
+                        { navController.navigate(Chats(userId = currentUserId.toString())) },
                         onNavigateToProfile = { navController.navigate(Profile) },
                         onPersonClick = { navController.navigate(PersonInfo) }
                     )
@@ -89,7 +90,7 @@ class MainScreenActivity : AppCompatActivity() {
                         onNavigateToStream = { navController.navigate(Stream) },
                         onNavigateToPeople = { navController.navigate(People) },
                         onNavigateToChats =
-                            { navController.navigate(Chats(userId = currentUserId.toString())) },
+                        { navController.navigate(Chats(userId = currentUserId.toString())) },
                         onEditClick = { navController.navigate(AboutMeEdit) }
                     )
                 }
@@ -102,10 +103,8 @@ class MainScreenActivity : AppCompatActivity() {
                     PersonInfoScreen(onBackClick = { navController.navigateUp() })
                 }
 
-                composable<Chat> { backStackEntry ->
-                    val chatId = backStackEntry.toRoute<Chat>().chatId
+                composable<Chat> {
                     ChatScreen(
-                        chatId = chatId,
                         onBackClick = { navController.navigateUp() }
                     )
                 }

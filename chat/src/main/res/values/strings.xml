@@ -1,8 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">chat</string>
     <string name="background">Задний фон</string>
     <string name="chats">Чаты</string>
-    <string name="Andrey">Андрей</string>
+    <string name="andrey">Андрей</string>
     <string name="message">И обидно вам должно быть за себя раз вы не видите как Яго…</string>
     <string name="photo">Фото</string>
     <string name="unknown_error">Unknown error</string>

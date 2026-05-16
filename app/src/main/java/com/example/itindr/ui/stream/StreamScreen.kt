@@ -274,7 +274,7 @@ fun PersonCard(
 
         Image(
             painter = painterResource(person.photoUrl),
-            contentDescription = stringResource(R.string.Andrey),
+            contentDescription = stringResource(R.string.andrey),
             modifier = Modifier
                 .fillMaxSize()
                 .testTag(MainScreenTestTag.PersonCardPhotoTag)

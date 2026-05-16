@@ -1,5 +1,6 @@
 package com.example.chat.ui.signlechat
 
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -16,6 +17,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -26,10 +28,11 @@ import com.example.chat.ui.common.CustomButton
 
 @Composable
 fun ChatScreen(
-    chatId: String,
     onBackClick: () -> Unit,
     viewModel: SingleChatViewModel = hiltViewModel()
 ) {
+    val context = LocalContext.current
+
     val state by viewModel.state.collectAsStateWithLifecycle()
     val effect = viewModel.effect
 
@@ -90,6 +93,10 @@ fun ChatScreen(
                 }
                 is ChatContract.State.Error -> {
                     val error = (state as ChatContract.State.Error).message
+
+                    LaunchedEffect(error) {
+                        Toast.makeText(context, error, Toast.LENGTH_SHORT).show()
+                    }
                 }
             }
         }

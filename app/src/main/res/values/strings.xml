@@ -1,8 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">ITindr</string>
     <string name="initial_screen_text">Ты найдешь того,\nкто поревьюит твой код</string>
     <string name="sign_up">Зарегистрироваться</string>
-    <string name="sign_in">Войти</string>>
+    <string name="sign_in">Войти</string>
     <string name="register">Регистрация</string>
     <string name="login">Вход</string>
     <string name="back">Назад</string>
@@ -42,7 +43,7 @@
     <string name="people">Люди</string>
     <string name="chats">Чаты</string>
     <string name="profile">Профиль</string>
-    <string name="Andrey">Андрей</string>
-    <string name="message">И обидно вам должно быть за себя раз вы не видите как Яго…</string>
+    <string name="andrey">Андрей</string>
+    <string name="message">И обидно вам должно быть за себя раз вы не видите как Яго</string>
     <string name="person_load_error">Ошибка загрузки пользователя</string>
 </resources>

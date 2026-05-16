@@ -6,7 +6,7 @@ interface ChatContract {
 
     sealed interface State {
         data object Loading : State
-        data class  Content(val messages: List<Message>) : State
+        data class Content(val messages: List<Message>) : State
         data class Error(val message: String) : State
     }
 

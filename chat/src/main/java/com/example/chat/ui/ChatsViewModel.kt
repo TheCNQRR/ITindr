@@ -30,7 +30,6 @@ class ChatsViewModel @Inject constructor(
     private val _effect = Channel<ChatsContract.Effect>()
     val effect = _effect.receiveAsFlow()
 
-
     init {
         dispatchEvent(ChatsContract.Event.LoadChats)
     }

@@ -87,7 +87,7 @@ fun PeopleScreen(
                         .padding(start = 16.dp, bottom = 16.dp)
                 ) {
                     Text(
-                        text = stringResource(R.string.Andrey),
+                        text = stringResource(R.string.andrey),
                         fontSize = 20.sp,
                         fontFamily = InterFontFamily,
                         fontWeight = FontWeight.Bold,

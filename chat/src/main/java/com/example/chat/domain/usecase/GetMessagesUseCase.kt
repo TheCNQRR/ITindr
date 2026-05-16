@@ -5,11 +5,12 @@ import com.example.chat.domain.repository.ChatsRepository
 import java.util.UUID
 import javax.inject.Inject
 
+@Suppress("TooGenericExceptionCaught")
 class GetMessagesUseCase @Inject constructor(
     private val repository: ChatsRepository
 ) {
 
-    suspend fun execute(chatId: UUID) : Result<List<Message>> = try {
+    suspend fun execute(chatId: UUID): Result<List<Message>> = try {
         Result.success(repository.getMessages(chatId))
     } catch (e: Exception) {
         Result.failure(e)
