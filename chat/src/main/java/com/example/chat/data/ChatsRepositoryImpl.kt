@@ -15,13 +15,15 @@ class ChatsRepositoryImpl @Inject constructor() : ChatsRepository {
                 id = UUID.fromString("00000000-0000-0000-0000-000000000002"),
                 name = "Андрей",
                 lastName = "Иванов",
-                avatarResId = R.drawable.ic_mock_user_photo
+                avatarResId = R.drawable.ic_mock_user_photo,
+                lastMessage = "Сообщение 2"
             ),
             Chat(
                 id = UUID.fromString("00000000-0000-0000-0000-000000000003"),
                 name = "Иван",
                 lastName = "Сидоров",
-                avatarResId = R.drawable.ic_mock_user_photo_2
+                avatarResId = R.drawable.ic_mock_user_photo_2,
+                lastMessage = "Сообщение 2"
             ),
         )
     }

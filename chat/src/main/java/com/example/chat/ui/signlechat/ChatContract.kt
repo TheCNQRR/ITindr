@@ -12,10 +12,10 @@ interface ChatContract {
 
     sealed interface Event {
         data object LoadMessages : Event
-        data class OnBackClick(val chatId: String) : Event
+        data object OnBackClick : Event
     }
 
     sealed interface Effect {
-        data class NavigateBack(val chatId: String) : Effect
+        data object NavigateBack : Effect
     }
 }

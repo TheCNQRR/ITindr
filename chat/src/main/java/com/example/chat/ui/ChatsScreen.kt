@@ -7,16 +7,19 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -31,7 +34,10 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.chat.R
+import com.example.chat.domain.model.Chat
 import com.example.chat.ui.common.CustomButton
 import com.example.chat.ui.theme.InterFontFamily
 
@@ -40,8 +46,20 @@ fun ChatsScreen(
     onNavigateToStream: () -> Unit,
     onNavigateToPeople: () -> Unit,
     onNavigateToProfile: () -> Unit,
-    onChatClick: () -> Unit
+    onChatClick: (String) -> Unit,
+    viewModel: ChatsViewModel = hiltViewModel()
 ) {
+    val state by viewModel.state.collectAsStateWithLifecycle()
+    val effect = viewModel.effect
+
+    LaunchedEffect(Unit) {
+        effect.collect { effect ->
+            when (effect) {
+                is ChatsContract.Effect.NavigateToChat -> onChatClick(effect.chatId)
+            }
+        }
+    }
+
     Box(modifier = Modifier
         .fillMaxSize()
     ) {
@@ -70,43 +88,24 @@ fun ChatsScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(80.dp)
-                    .clickable(onClick = onChatClick)
             ) {
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(80.dp),
-                ) {
-                    Image(
-                        painter = painterResource(R.drawable.ic_mock_user_photo),
-                        contentDescription = stringResource(R.string.Andrey),
-                        modifier = Modifier
-                            .size(80.dp)
-                            .clip(RoundedCornerShape(16.dp)),
-                        contentScale = ContentScale.Crop
-                    )
-
-                    Column(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .fillMaxHeight()
-                            .padding(start = 16.dp)
-                    ) {
-                        Text(
-                            text = stringResource(R.string.Andrey),
-                            fontSize = 16.sp,
-                            fontFamily = InterFontFamily,
-                            fontWeight = FontWeight.Bold,
-                            color = Color.White
-                        )
-
-                        Text(
-                            text = stringResource(R.string.message),
-                            fontSize = 16.sp,
-                            fontFamily = InterFontFamily,
-                            fontWeight = FontWeight.Normal,
-                            color = Color.White
-                        )
+                when (state) {
+                    is ChatsContract.State.Loading -> {
+                        Text("Загрузка...", color = Color.White)
+                    }
+                    is ChatsContract.State.Content -> {
+                        val chats = (state as ChatsContract.State.Content).chats
+                        LazyColumn {
+                            items(chats) { chat ->
+                                ChatItem(chat = chat) {
+                                    viewModel.dispatchEvent(ChatsContract.Event.OnChatClick(chat.id.toString()))
+                                }
+                            }
+                        }
+                    }
+                    is ChatsContract.State.Error -> {
+                        val message = (state as ChatsContract.State.Error).message
+                        Text("Ошибка: $message", color = Color.Red)
                     }
                 }
             }
@@ -121,6 +120,45 @@ fun ChatsScreen(
             onChatsClick = { },
             onProfileClick = onNavigateToProfile
         )
+    }
+}
+
+@Composable
+fun ChatItem(chat: Chat, onClick: () -> Unit) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(80.dp)
+            .clickable(onClick = onClick)
+    ) {
+        Image(
+            painter = painterResource(chat.avatarResId),
+            contentDescription = chat.name,
+            modifier = Modifier
+                .size(80.dp)
+                .clip(RoundedCornerShape(16.dp)),
+            contentScale = ContentScale.Crop
+        )
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = 16.dp)
+        ) {
+            Text(
+                text = chat.name,
+                fontSize = 16.sp,
+                fontFamily = InterFontFamily,
+                fontWeight = FontWeight.Bold,
+                color = Color.White
+            )
+            Text(
+                text = chat.lastMessage,
+                fontSize = 16.sp,
+                fontFamily = InterFontFamily,
+                fontWeight = FontWeight.Normal,
+                color = Color.White
+            )
+        }
     }
 }
 

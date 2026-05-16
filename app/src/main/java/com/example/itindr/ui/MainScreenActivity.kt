@@ -10,6 +10,7 @@ import androidx.core.view.WindowInsetsControllerCompat
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.toRoute
 import com.example.chat.ui.Chats
 import com.example.chat.ui.ChatsScreen
 import com.example.chat.ui.signlechat.Chat
@@ -77,7 +78,9 @@ class MainScreenActivity : AppCompatActivity() {
                         onNavigateToStream = { navController.navigate(Stream) },
                         onNavigateToPeople = { navController.navigate(People) },
                         onNavigateToProfile = { navController.navigate(Profile) },
-                        onChatClick = { navController.navigate(Chat) }
+                        onChatClick = { chatId: String ->
+                            navController.navigate(Chat(chatId = chatId))
+                        }
                     )
                 }
 
@@ -99,8 +102,12 @@ class MainScreenActivity : AppCompatActivity() {
                     PersonInfoScreen(onBackClick = { navController.navigateUp() })
                 }
 
-                composable<Chat> {
-                    ChatScreen(onBackClick = { navController.navigateUp() })
+                composable<Chat> { backStackEntry ->
+                    val chatId = backStackEntry.toRoute<Chat>().chatId
+                    ChatScreen(
+                        chatId = chatId,
+                        onBackClick = { navController.navigateUp() }
+                    )
                 }
             }
         }

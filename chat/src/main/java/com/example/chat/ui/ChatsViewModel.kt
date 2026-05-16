@@ -34,7 +34,7 @@ class ChatsViewModel(
         dispatchEvent(ChatsContract.Event.LoadChats)
     }
 
-    private fun dispatchEvent(event: ChatsContract.Event) {
+    fun dispatchEvent(event: ChatsContract.Event) {
         when (event) {
             ChatsContract.Event.LoadChats -> loadChats()
             is ChatsContract.Event.OnChatClick ->

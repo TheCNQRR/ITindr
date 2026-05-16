@@ -14,6 +14,7 @@ import kotlinx.coroutines.launch
 import java.util.UUID
 
 @HiltViewModel
+@Suppress("Unused")
 class SingleChatViewModel(
     private val getMessagesUseCase: GetMessagesUseCase,
     savedStateHandle: SavedStateHandle
@@ -33,11 +34,11 @@ class SingleChatViewModel(
         dispatchEvent(ChatContract.Event.LoadMessages)
     }
 
-    private fun dispatchEvent(event: ChatContract.Event) {
+    fun dispatchEvent(event: ChatContract.Event) {
         when (event) {
             ChatContract.Event.LoadMessages -> loadMessages()
             is ChatContract.Event.OnBackClick ->
-                sendEffect(ChatContract.Effect.NavigateBack(event.chatId))
+                sendEffect(ChatContract.Effect.NavigateBack)
         }
     }
 

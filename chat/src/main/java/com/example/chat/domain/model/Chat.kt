@@ -6,5 +6,6 @@ data class Chat(
     val id: UUID,
     val name: String,
     val lastName: String,
-    val avatarResId: Int
+    val avatarResId: Int,
+    val lastMessage: String
 )
