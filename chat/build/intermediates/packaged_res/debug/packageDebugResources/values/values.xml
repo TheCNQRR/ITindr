@@ -17,5 +17,6 @@
     <string name="chats">Чаты</string>
     <string name="message">И обидно вам должно быть за себя раз вы не видите как Яго…</string>
     <string name="photo">Фото</string>
+    <string name="unknown_error">Unknown error</string>
     <style name="Theme.ITindr" parent="android:Theme.Material.Light.NoActionBar"/>
 </resources>

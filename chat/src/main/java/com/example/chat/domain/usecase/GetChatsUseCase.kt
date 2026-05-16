@@ -12,6 +12,6 @@ class GetChatsUseCase @Inject constructor(
     suspend fun execute(userId: UUID) : Result<List<Chat>> = try {
         Result.success(repository.getChats(userId))
     } catch (e: Exception) {
-        Result.failure(e);
+        Result.failure(e)
     }
 }

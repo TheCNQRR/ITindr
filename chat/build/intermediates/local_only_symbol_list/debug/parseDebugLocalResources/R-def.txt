@@ -32,4 +32,5 @@ string background
 string chats
 string message
 string photo
+string unknown_error
 style Theme.ITindr

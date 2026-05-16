@@ -12,10 +12,11 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import java.util.UUID
+import javax.inject.Inject
 
 @HiltViewModel
 @Suppress("Unused")
-class ChatsViewModel(
+class ChatsViewModel @Inject constructor(
     private val getChatsUseCase: GetChatsUseCase,
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
