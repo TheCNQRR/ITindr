@@ -12,13 +12,13 @@ class ChatsRepositoryImpl @Inject constructor() : ChatsRepository {
     override suspend fun getChats(userId: UUID): List<Chat> {
         return listOf(
             Chat(
-                id = UUID.fromString("aaaa-aaaa-aaaa-aaaa"),
+                id = UUID.fromString("00000000-0000-0000-0000-000000000002"),
                 name = "Андрей",
                 lastName = "Иванов",
                 avatarResId = R.drawable.ic_mock_user_photo
             ),
             Chat(
-                id = UUID.fromString("bbbb-bbbb-bbbb-bbbb"),
+                id = UUID.fromString("00000000-0000-0000-0000-000000000003"),
                 name = "Иван",
                 lastName = "Сидоров",
                 avatarResId = R.drawable.ic_mock_user_photo_2

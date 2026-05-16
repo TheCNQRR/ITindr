@@ -24,8 +24,12 @@ import com.example.itindr.ui.profile.Profile
 import com.example.itindr.ui.profile.ProfileScreen
 import com.example.itindr.ui.stream.Stream
 import com.example.itindr.ui.stream.StreamScreen
+import java.util.UUID
 
 class MainScreenActivity : AppCompatActivity() {
+
+    private val currentUserId: UUID = UUID.fromString("00000000-0000-0000-0000-000000000001")
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -52,7 +56,8 @@ class MainScreenActivity : AppCompatActivity() {
                 composable<Stream> {
                     StreamScreen(
                         onNavigateToPeople = { navController.navigate(People) },
-                        onNavigateToChats = { navController.navigate(Chats) },
+                        onNavigateToChats =
+                            { navController.navigate(Chats(userId = currentUserId.toString())) },
                         onNavigateToProfile = { navController.navigate(Profile) }
                     )
                 }
@@ -60,7 +65,8 @@ class MainScreenActivity : AppCompatActivity() {
                 composable<People> {
                     PeopleScreen(
                         onNavigateToStream = { navController.navigate(Stream) },
-                        onNavigateToChats = { navController.navigate(Chats) },
+                        onNavigateToChats =
+                            { navController.navigate(Chats(userId = currentUserId.toString())) },
                         onNavigateToProfile = { navController.navigate(Profile) },
                         onPersonClick = { navController.navigate(PersonInfo) }
                     )
@@ -79,7 +85,8 @@ class MainScreenActivity : AppCompatActivity() {
                     ProfileScreen(
                         onNavigateToStream = { navController.navigate(Stream) },
                         onNavigateToPeople = { navController.navigate(People) },
-                        onNavigateToChats = { navController.navigate(Chats) },
+                        onNavigateToChats =
+                            { navController.navigate(Chats(userId = currentUserId.toString())) },
                         onEditClick = { navController.navigate(AboutMeEdit) }
                     )
                 }
