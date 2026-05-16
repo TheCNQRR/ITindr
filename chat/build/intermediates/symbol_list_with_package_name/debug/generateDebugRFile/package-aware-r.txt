@@ -4,6 +4,8 @@ color dislike_background
 color gradient_end
 color gradient_start
 color like_background
+color message_background
+color my_message_background
 color nav_bar
 color white
 color white_light_transparent
@@ -14,6 +16,7 @@ drawable ic_chats
 drawable ic_launcher_background
 drawable ic_launcher_foreground
 drawable ic_mock_user_photo
+drawable ic_mock_user_photo_2
 drawable ic_people
 drawable ic_profile
 drawable ic_stream
@@ -27,4 +30,5 @@ string app_name
 string background
 string chats
 string message
+string photo
 style Theme_ITindr
